@@ -28,6 +28,7 @@ import java.util.Map;
  * This interface defines callbacks methods that will be notified
  * for all registered BasicPlayerListener of BasicPlayer.
  */
+@SuppressWarnings({ "rawtypes" })
 public interface BasicPlayerListener {
 
     /**

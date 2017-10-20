@@ -54,6 +54,7 @@ import org.tritonus.share.sampled.file.TAudioFileFormat;
  * BasicPlayer is a threaded simple player class based on JavaSound API. It has
  * been successfully tested under J2SE from version 1.3.x, to 1.7.x
  */
+@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 public class BasicPlayer implements BasicController, Runnable {
 
     public static int EXTERNAL_BUFFER_SIZE = 4000 * 4;
@@ -243,7 +244,7 @@ public class BasicPlayer implements BasicController, Runnable {
      *
      * @throws BasicPlayerException
      */
-    protected void initAudioInputStream() throws BasicPlayerException {
+	protected void initAudioInputStream() throws BasicPlayerException {
         try {
             reset();
             notifyEvent(BasicPlayerEvent.OPENING, getEncodedStreamPosition(), -1, m_dataSource);
@@ -561,7 +562,7 @@ public class BasicPlayer implements BasicController, Runnable {
      * Player Status == PLAYING => Audio stream data sent to Audio line.<br>
      * Player Status == PAUSED => Waiting for another status.
      */
-    @Override
+	@Override
     public void run() {
         log.info("Thread Running");
         int nBytesRead = 1;

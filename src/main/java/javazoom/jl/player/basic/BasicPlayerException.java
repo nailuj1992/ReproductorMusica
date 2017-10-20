@@ -28,6 +28,7 @@ import java.io.PrintWriter;
 /**
  * This class implements custom exception for basicplayer.
  */
+@SuppressWarnings({ "serial" })
 public class BasicPlayerException extends Exception {
 
     public static final String GAINCONTROLNOTSUPPORTED = "Gain control not supported";

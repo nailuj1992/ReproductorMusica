@@ -28,6 +28,7 @@ import java.util.Iterator;
 /**
  * This class implements a threaded events launcher.
  */
+@SuppressWarnings({ "rawtypes" })
 public class BasicPlayerEventLauncher extends Thread {
 
     private int code = -1;
