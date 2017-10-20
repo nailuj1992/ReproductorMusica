@@ -1,5 +1,6 @@
 package avuuna.player;
 
+import avuuna.player.controller.*;
 import avuuna.player.exception.*;
 import avuuna.player.gui.*;
 import avuuna.player.model.*;
@@ -7,7 +8,7 @@ import avuuna.player.utils.*;
 
 import java.awt.*;
 import javax.swing.*;
-import javazoom.jl.player.basic.BasicPlayer;
+import javazoom.jl.player.basic.*;
 
 /**
  *
@@ -21,13 +22,16 @@ public class MainPlayer {
 			Utils.setLookAndFeel("Nimbus");
 			BasicPlayer basicPlayer = new BasicPlayer();
 			Player player = Player.getInstance(basicPlayer);
-			PlayerPanel playerPanel = new PlayerPanel(player);
-			PlaylistPanel playlistPanel = new PlaylistPanel(player);
-
-			PlayerFrame playerFrame = new PlayerFrame(player, playerPanel, playlistPanel);
-			drawFrame(playerFrame);
-			player.addObserver(playerFrame.getPlayerPanel());
-			player.addObserver(playerFrame.getPlaylistPanel());
+			
+			PlayerController controller = new PlayerController(basicPlayer);
+			player.addObserver(controller);
+//			PlayerPanel playerPanel = new PlayerPanel(player);
+//			PlaylistPanel playlistPanel = new PlaylistPanel(player);
+//
+//			PlayerFrame playerFrame = new PlayerFrame(player, playerPanel, playlistPanel);
+//			drawFrame(playerFrame);
+//			player.addObserver(playerFrame.getPlayerPanel());
+//			player.addObserver(playerFrame.getPlaylistPanel());
 		} catch (LookAndFeelException ex) {
 			Utils.display(ex.getClass().getName() + ": " + ex.getMessage());
 			Utils.log(MainPlayer.class.getName(), ex);
