@@ -1,5 +1,6 @@
 package avuuna.player.gui;
 
+import avuuna.player.exception.PlayerException;
 import avuuna.player.model.*;
 import avuuna.player.utils.*;
 
@@ -8,11 +9,22 @@ import javazoom.jl.player.basic.*;
 
 /**
  *
- * @author pegasusmax
+ * @author Avuuna, la Luz del Alba
+ * 
  */
 public class PlayerPanel extends JPanel implements Observador {
-
-    private final Player player;
+	private static final long serialVersionUID = -1546047517929221938L;
+	
+	public static final String panelReproduccion = "Panel de Reproducción";
+	public static final String panelVolumen = "Panel de Volumen";
+	public static final String cancionActual = "Canción actual: ";
+	public static final String play = "Play";
+	public static final String pause = "Pause";
+	public static final String stop = "Stop";
+	public static final String next = "Next";
+	public static final String prev = "Prev";
+	
+	private final Player player;
     private boolean running = false;
     private final Thread progressThread;
 
@@ -48,7 +60,7 @@ public class PlayerPanel extends JPanel implements Observador {
         try {
             player.play();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error found while playing song", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_PLAYING_SONG, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -56,7 +68,7 @@ public class PlayerPanel extends JPanel implements Observador {
         try {
             player.pause();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error found while pausing song", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_PAUSING_SONG, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -64,7 +76,7 @@ public class PlayerPanel extends JPanel implements Observador {
         try {
             player.resume();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error found while resuming song", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_RESUMING_SONG, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -72,7 +84,7 @@ public class PlayerPanel extends JPanel implements Observador {
         try {
             player.stop();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error found while stopping song", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_STOPPING_SONG, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -80,7 +92,7 @@ public class PlayerPanel extends JPanel implements Observador {
         try {
             player.next();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error found while setting next song", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_NEXT_SONG, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -88,7 +100,7 @@ public class PlayerPanel extends JPanel implements Observador {
         try {
             player.previous();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error found while setting previous song", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_PREV_SONG, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -96,7 +108,7 @@ public class PlayerPanel extends JPanel implements Observador {
         try {
             player.getPlayer().setGain((double) volumeControl.getValue() / 100);
         } catch (BasicPlayerException ex) {
-            //JOptionPane.showMessageDialog(null, ex.getMessage(), "Error found while setting volume", JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_VOLUME_SONG, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -105,21 +117,21 @@ public class PlayerPanel extends JPanel implements Observador {
         if (player.getActual() != null) {
             switch (player.getActualEvent()) {
                 case BasicPlayerEvent.RESUMED:
-                    playButton.setText("Pause");
+                    playButton.setText(pause);
                     break;
                 case BasicPlayerEvent.PAUSED:
-                    playButton.setText("Play");
+                    playButton.setText(play);
                     break;
                 case BasicPlayerEvent.PLAYING:
-                    playButton.setText("Pause");
+                    playButton.setText(pause);
                     running = true;
                     break;
                 case BasicPlayerEvent.STOPPED:
-                    playButton.setText("Play");
+                    playButton.setText(play);
                     running = false;
                     break;
                 case BasicPlayerEvent.OPENED:
-                    actualSong.setText("Current song: " + player.getActual().getName());
+                    actualSong.setText(cancionActual + player.getActual().getName());
                     progressBar.setMaximum((int) player.getActual().getBytesLength());
                     progressBar.setString("00:00 of " + Utils.formatTime(player.getActual().getDuration()));
                     if (!running && player.getActual() != null) {
@@ -129,7 +141,7 @@ public class PlayerPanel extends JPanel implements Observador {
                     break;
             }
         } else {
-            actualSong.setText("Current song:");
+            actualSong.setText(cancionActual);
             progressBar.setMaximum(0);
         }
     }
@@ -139,7 +151,6 @@ public class PlayerPanel extends JPanel implements Observador {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -155,25 +166,25 @@ public class PlayerPanel extends JPanel implements Observador {
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        detailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Panel"));
+        detailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(panelReproduccion));
 
-        actualSong.setText("Current song:");
+        actualSong.setText(cancionActual);
 
-        playButton.setText("Play");
+        playButton.setText(play);
         playButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playButtonActionPerformed(evt);
             }
         });
 
-        stopButton.setText("Stop");
+        stopButton.setText(stop);
         stopButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stopButtonActionPerformed(evt);
             }
         });
 
-        nextButton.setText("Next");
+        nextButton.setText(next);
         nextButton.setActionCommand("");
         nextButton.setMaximumSize(new java.awt.Dimension(44, 29));
         nextButton.setMinimumSize(new java.awt.Dimension(44, 29));
@@ -183,7 +194,7 @@ public class PlayerPanel extends JPanel implements Observador {
             }
         });
 
-        previousButton.setText("Previous");
+        previousButton.setText(prev);
         previousButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 previousButtonActionPerformed(evt);
@@ -219,13 +230,13 @@ public class PlayerPanel extends JPanel implements Observador {
                         .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(playButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(previousButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(previousButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        volumePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Volume Panel"));
+        volumePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(panelVolumen));
 
         volumeControl.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -261,20 +272,18 @@ public class PlayerPanel extends JPanel implements Observador {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-        switch (playButton.getText()) {
-            case "Play": {
-                if (!running && player.getActual() != null) {
-                    playSong();
-                } else if (running) {
-                    resumeSong();
-                }
-            }
-            break;
-            case "Pause": {
-                pauseSong();
-            }
-            break;
-        }
+		switch (playButton.getText()) {
+		case play:
+			if (!running && player.getActual() != null) {
+				playSong();
+			} else if (running) {
+				resumeSong();
+			}
+			break;
+		case pause:
+			pauseSong();
+			break;
+		}
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed

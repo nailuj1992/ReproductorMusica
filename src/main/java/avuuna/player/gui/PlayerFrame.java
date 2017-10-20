@@ -11,11 +11,16 @@ import javazoom.jl.player.basic.*;
 
 /**
  *
- * @author pegasusmax
+ * @author Avuuna, la Luz del Alba
+ * 
  */
 public class PlayerFrame extends JFrame {
-
-    private JFileChooser fc;
+	private static final long serialVersionUID = -3889099293916412543L;
+	
+	public static final String archivo = "Archivo";
+	public static final String abrir = "Abrir";
+	
+	private JFileChooser fc;
     private JMenu fileMenu;
     private JMenuBar menuBar;
     private JMenuItem openItem;
@@ -62,9 +67,9 @@ public class PlayerFrame extends JFrame {
         openItem = new JMenuItem();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        fileMenu.setText("File");
+        fileMenu.setText(archivo);
         openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        openItem.setText("Open");
+        openItem.setText(abrir);
         openItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -89,7 +94,7 @@ public class PlayerFrame extends JFrame {
                 player.open(player.getActual());
             }
         } catch (BasicPlayerException | PlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error found while opening song", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_OPENING_SONG, JOptionPane.ERROR_MESSAGE);
         }
     }
 
