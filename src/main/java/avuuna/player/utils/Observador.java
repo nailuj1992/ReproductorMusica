@@ -2,7 +2,8 @@ package avuuna.player.utils;
 
 /**
  *
- * @author pegasusmax
+ * @author Avuuna, la Luz del Alba
+ * 
  */
 public interface Observador {
 

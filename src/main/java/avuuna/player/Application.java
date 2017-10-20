@@ -11,7 +11,8 @@ import javazoom.jl.player.basic.BasicPlayer;
 
 /**
  *
- * @author pegasusmax
+ * @author Avuuna, la Luz del Alba
+ * 
  */
 public class Application {
 
@@ -19,7 +20,7 @@ public class Application {
         try {
             Utils.setLookAndFeel("Nimbus");
             BasicPlayer basicPlayer = new BasicPlayer();
-            Player player = new Player(basicPlayer);
+			Player player = Player.getInstance(basicPlayer);
             PlayerPanel playerPanel = new PlayerPanel(player);
             PlaylistPanel playlistPanel = new PlaylistPanel(player);
             

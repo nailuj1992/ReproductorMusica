@@ -6,6 +6,7 @@ import java.net.*;
 /**
  *
  * @author Avuuna, la Luz del Alba
+ * 
  */
 public class Song extends File {
 	private static final long serialVersionUID = 8353266338494775220L;

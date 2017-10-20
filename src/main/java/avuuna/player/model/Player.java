@@ -3,14 +3,19 @@ package avuuna.player.model;
 import avuuna.player.exception.*;
 import avuuna.player.utils.*;
 
+import java.io.*;
 import java.util.*;
 import javazoom.jl.player.basic.*;
 
 /**
  *
  * @author Avuuna, la Luz del Alba
+ * 
  */
-public class Player extends Sujeto implements BasicPlayerListener {
+public class Player extends Sujeto implements BasicPlayerListener, Serializable {
+	private static final long serialVersionUID = -6648685344329730558L;
+
+	public static Player reproductor = null;
 
 	private int actualEvent;
 	private long progressTime;
@@ -19,7 +24,14 @@ public class Player extends Sujeto implements BasicPlayerListener {
 	private Song actual;
 	private List<Song> songs;
 
-	public Player(BasicPlayer player) {
+	public static Player getInstance(BasicPlayer player) {
+		if (reproductor == null) {
+			reproductor = new Player(player);
+		}
+		return reproductor;
+	}
+
+	private Player(BasicPlayer player) {
 		this.player = player;
 		setSongs(new ArrayList<Song>());
 	}
