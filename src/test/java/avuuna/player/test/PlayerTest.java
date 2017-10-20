@@ -21,7 +21,6 @@ public class PlayerTest {
 	public void setUp() {
 		BasicPlayer basicPlayer = new BasicPlayer();
 		player = Player.getInstance(basicPlayer);
-		player.getPlayer().addBasicPlayerListener(player);
 		song1 = new Song("src/main/resources/music/14 - Vale Healing.mp3");
 		song2 = new Song("src/main/resources/music/06 - Nemesis.mp3");
 		song3 = new Song("src/main/resources/music/03 - Times Change.mp3");

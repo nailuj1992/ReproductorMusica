@@ -34,6 +34,7 @@ public class Player extends Sujeto implements BasicPlayerListener, Serializable 
 	private Player(BasicPlayer player) {
 		this.player = player;
 		setSongs(new ArrayList<Song>());
+		player.addBasicPlayerListener(this);
 	}
 
 	public BasicPlayer getPlayer() {

@@ -26,7 +26,6 @@ public class Application {
             
             PlayerFrame playerFrame = new PlayerFrame(player, playerPanel, playlistPanel);
             drawFrame(playerFrame);
-            player.getPlayer().addBasicPlayerListener(player);
             player.addObserver(playerFrame.getPlayerPanel());
             player.addObserver(playerFrame.getPlaylistPanel());
         } catch (LookAndFeelException ex) {
