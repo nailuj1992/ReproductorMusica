@@ -1,7 +1,7 @@
 package avuuna.player.test;
 
 import avuuna.player.exception.*;
-import avuuna.player.logic.*;
+import avuuna.player.model.*;
 import javazoom.jl.player.basic.*;
 import org.junit.*;
 import static org.junit.Assert.*;

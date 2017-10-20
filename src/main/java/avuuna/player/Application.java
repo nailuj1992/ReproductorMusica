@@ -1,9 +1,10 @@
 package avuuna.player;
 
-import avuuna.player.utils.*;
 import avuuna.player.exception.*;
 import avuuna.player.gui.*;
-import avuuna.player.logic.*;
+import avuuna.player.model.*;
+import avuuna.player.utils.*;
+
 import java.awt.*;
 import javax.swing.*;
 import javazoom.jl.player.basic.BasicPlayer;

@@ -1,8 +1,9 @@
 package avuuna.player.utils;
 
-import avuuna.player.exception.*;
 import java.util.logging.*;
 import javax.swing.*;
+
+import avuuna.player.exception.*;
 
 /**
  *

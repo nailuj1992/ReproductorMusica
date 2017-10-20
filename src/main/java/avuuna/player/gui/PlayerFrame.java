@@ -1,7 +1,8 @@
 package avuuna.player.gui;
 
 import avuuna.player.exception.*;
-import avuuna.player.logic.*;
+import avuuna.player.model.*;
+
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;

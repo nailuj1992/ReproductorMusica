@@ -1,7 +1,8 @@
 package avuuna.player.gui;
 
-import avuuna.player.logic.*;
+import avuuna.player.model.*;
 import avuuna.player.utils.*;
+
 import javax.swing.*;
 import javazoom.jl.player.basic.*;
 
