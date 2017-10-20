@@ -78,7 +78,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>avuuna.player.Application</mainClass>
+                            <mainClass>avuuna.player.MainPlayer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
