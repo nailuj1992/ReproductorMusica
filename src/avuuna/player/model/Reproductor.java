@@ -121,7 +121,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Quita una cancion del reproductor.
+	 * Quita una cancion del reproductor y notifica a los observadores del cambio.
 	 * @param song Archivo de la cancion a quitar.
 	 * @throws PlayerException Cuando la cancion a quitar no existe en la lista.
 	 */
@@ -149,7 +149,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Detiene la musica y purga toda la lista de reproduccion.
+	 * Detiene la musica, limpia toda la lista de reproduccion y notifica a los observadores del cambio.
 	 * @throws BasicPlayerException Excepcion lanzada por <code>stop()</code>.
 	 */
 	public void clearList() throws BasicPlayerException {
@@ -229,7 +229,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Abre una cancion.
+	 * Abre una cancion y notifica a los observadores del cambio.
 	 * @param song Archivo de la cancion a abrir.
 	 * @throws BasicPlayerException Error al abrir la cancion.
 	 */
@@ -240,7 +240,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Reproduce la cancion actual abierta.
+	 * Reproduce la cancion actual abierta y notifica a los observadores del cambio.
 	 * @throws BasicPlayerException Error al reproducir la cancion.
 	 */
 	public void play() throws BasicPlayerException {
@@ -250,7 +250,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Pausa la cancion actual abierta.
+	 * Pausa la cancion actual abierta y notifica a los observadores del cambio.
 	 * @throws BasicPlayerException Error al pausar la cancion.
 	 */
 	public void pause() throws BasicPlayerException {
@@ -260,7 +260,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Reanuda la cancion actual abierta y pausada.
+	 * Reanuda la cancion actual abierta y pausada, y notifica a los observadores del cambio.
 	 * @throws BasicPlayerException Error al reanudar la cancion.
 	 */
 	public void resume() throws BasicPlayerException {
@@ -270,7 +270,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Detiene la cancion abierta.
+	 * Detiene la cancion abierta y notifica a los observadores del cambio.
 	 * @throws BasicPlayerException Error al detener la cancion.
 	 */
 	public void stop() throws BasicPlayerException {
