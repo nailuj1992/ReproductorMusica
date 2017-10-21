@@ -34,7 +34,11 @@ public class PlayerController implements Serializable, Observador {
 		definaAcciones();
 		accionarThread();
 	}
-	
+
+	/**
+	 * Declara e inicia el hilo (<code>Thread</code>) encargado de actualizar el estado de la barra de progreso de 
+	 * reproduccion de la cancion.
+	 */
 	private void accionarThread() {
 		Thread progressThread = new Thread() {
 
@@ -58,6 +62,9 @@ public class PlayerController implements Serializable, Observador {
 		progressThread.start();
 	}
 
+	/**
+	 * Definiendo todas las acciones que tendran los componentes de la vista, enlazandolas con el modelo.
+	 */
 	private void definaAcciones() {
 		view.openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 
@@ -141,6 +148,9 @@ public class PlayerController implements Serializable, Observador {
         });
 	}
 
+	/**
+	 * Permite buscar una cancion (formato <b>MP3</b>) en el equipo, para posteriormente abrirla.
+	 */
 	private void accionAbrirCancion() {
 		int seleccion = view.fileChooser.showOpenDialog(view);
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
@@ -168,6 +178,9 @@ public class PlayerController implements Serializable, Observador {
 		}
 	}
 
+	/**
+	 * Permite reproducir la cancion actual.
+	 */
     private void playSong() {
         try {
             model.play();
@@ -177,6 +190,9 @@ public class PlayerController implements Serializable, Observador {
         }
     }
 
+    /**
+     * Permite pausar la cancion actual.
+     */
     private void pauseSong() {
         try {
         	model.pause();
@@ -186,6 +202,9 @@ public class PlayerController implements Serializable, Observador {
         }
     }
 
+    /**
+     * Permite reanudar la cancion pausada actual.
+     */
     private void resumeSong() {
         try {
         	model.resume();
@@ -195,6 +214,9 @@ public class PlayerController implements Serializable, Observador {
         }
     }
 
+    /**
+     * Permite detener la cancion actual.
+     */
     private void stopSong() {
         try {
         	model.stop();
@@ -204,6 +226,9 @@ public class PlayerController implements Serializable, Observador {
         }
     }
 
+    /**
+     * Permite pasar a la siguiente cancion.
+     */
     private void nextSong() {
         try {
         	model.next();
@@ -213,6 +238,9 @@ public class PlayerController implements Serializable, Observador {
         }
     }
 
+    /**
+     * Permite pasar a la cancion anterior.
+     */
     private void previousSong() {
         try {
         	model.previous();
@@ -222,6 +250,9 @@ public class PlayerController implements Serializable, Observador {
         }
     }
 
+    /**
+     * Permite cambiar el volumen al reproductor.
+     */
     private void setVolume() {
         try {
         	model.setVolume((double) view.panel_player.slider_barraVolumen.getValue() / 100);
@@ -231,6 +262,9 @@ public class PlayerController implements Serializable, Observador {
         }
     }
 
+    /**
+     * Permite limpiar toda la lista de reproduccion.
+     */
     private void clearPlaylist() {
         try {
             model.clearList();
@@ -240,6 +274,10 @@ public class PlayerController implements Serializable, Observador {
         }
     }
 
+    /**
+     * Permite abrir una cancion de la lista.
+     * @param selected Cancion seleccionada de la lista.
+     */
     private void openSong(String selected) {
         try {
             Cancion song = model.getSong(selected);
