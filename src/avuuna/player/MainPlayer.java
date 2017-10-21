@@ -7,12 +7,16 @@ import avuuna.player.exception.*;
 import avuuna.player.utils.*;
 
 /**
- *
+ * En esta clase se encuentra el metodo principal.
  * @author Avuuna, la Luz del Alba
  * 
  */
 public class MainPlayer {
 
+	/**
+	 * Metodo principal de la aplicacion.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			Utils.setLookAndFeel(Utils.windowsLookAndFeel);

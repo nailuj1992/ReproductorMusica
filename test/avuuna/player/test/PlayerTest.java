@@ -7,7 +7,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Clase encargada de realizar las pruebas de unidad del reproductor.
  * @author Avuuna, la Luz del Alba
  * 
  */
@@ -17,6 +17,9 @@ public class PlayerTest {
 	private Cancion song1, song2, song3;
 	private int sleep;
 
+	/**
+	 * Inicializa todo antes de cada prueba.
+	 */
 	@Before
 	public void setUp() {
 		player = Reproductor.getInstance();
@@ -28,6 +31,9 @@ public class PlayerTest {
 		sleep = 500;
 	}
 
+	/**
+	 * Limpia todo y lo deja todo listo para la siguiente prueba.
+	 */
 	@After
 	public void tearDown() {
 		try {
@@ -40,6 +46,9 @@ public class PlayerTest {
 		}
 	}
 
+	/**
+	 * Metodo en el que se prueba si se puede reproducir una cancion.
+	 */
 	@Test
 	public void playSingleSong() {
 		try {
@@ -52,6 +61,9 @@ public class PlayerTest {
 		}
 	}
 
+	/**
+	 * Metodo en el que se prueba si se pueden reproducir dos canciones.
+	 */
 	@Test
 	public void playTwoSongs() {
 		try {
@@ -65,6 +77,9 @@ public class PlayerTest {
 		}
 	}
 
+	/**
+	 * Metodo que verifica que no se pueda adicionar una cancion reprtida a la lista.
+	 */
 	@Test
 	public void noAddRepeatedSong() {
 		try {
@@ -76,6 +91,9 @@ public class PlayerTest {
 		}
 	}
 
+	/**
+	 * Metodo que valida si se puede saltar a la siguiente cancion.
+	 */
 	@Test
 	public void playNextSong() {
 		try {
@@ -97,6 +115,9 @@ public class PlayerTest {
 		}
 	}
 
+	/**
+	 * Metodo que valida si se puede saltar a la cancion anterior.
+	 */
 	@Test
 	public void playPreviousSong() {
 		try {
