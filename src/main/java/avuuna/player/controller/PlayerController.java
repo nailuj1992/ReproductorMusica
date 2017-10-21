@@ -35,13 +35,13 @@ public class PlayerController implements Serializable, Observador {
                     if (model.getActual() != null) {
                         view.playerPanel.progressBar.setValue((int) model.getProgressBytes());
                         try {
-                        	view.playerPanel.progressBar.setString(Utils.formatTime(model.getProgressTime()) + " of " + Utils.formatTime(model.getActual().getDuration()));
+                        	view.playerPanel.progressBar.setString(Utils.formatTime(model.getProgressTime()) + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
                         } catch (Exception ex) {
                             Utils.display("Exception found -> " + ex.getMessage());
                         }
                     } else {
                     	view.playerPanel.progressBar.setValue(0);
-                    	view.playerPanel.progressBar.setString("00:00 of 00:00");
+                    	view.playerPanel.progressBar.setString(Strings.TIEMPO_CERO);
                     }
                 }
             }
@@ -240,7 +240,7 @@ public class PlayerController implements Serializable, Observador {
                 case BasicPlayerEvent.OPENED:
                 	view.playerPanel.actualSong.setText(Strings.cancionActual + model.getActual().getName());
                 	view.playerPanel.progressBar.setMaximum((int) model.getActual().getBytesLength());
-                	view.playerPanel.progressBar.setString("00:00 of " + Utils.formatTime(model.getActual().getDuration()));
+                	view.playerPanel.progressBar.setString(Strings.CERO + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
                     if (!running && model.getActual() != null) {
                         playSong();
                     }

@@ -30,7 +30,7 @@ public class GUIPanelPlayer extends JPanel {
 		progressBar.setMinimum(0);
 		progressBar.setMaximum(0);
 		progressBar.setStringPainted(true);
-		progressBar.setString("00:00 of 00:00");
+		progressBar.setString(Strings.TIEMPO_CERO);
 
 		previousButton = new JButton();
 		previousButton.setText(Strings.prev);

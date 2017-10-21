@@ -18,4 +18,7 @@ public class Strings {
 	public static final String borrarLista = "Borrar lista";
 
 	public static final String ACTUAL = "> ";
+	public static final String DE = " de ";
+	public static final String TIEMPO_CERO = "00:00 de 00:00";
+	public static final String CERO = "00:00";
 }
