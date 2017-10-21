@@ -1,8 +1,9 @@
 package avuuna.player.view;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.*;
 
 /**
  * 
@@ -46,7 +47,10 @@ public class GUIPlayer extends View {
 	}
 	
 	private void prepareElementos() {
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos MP3", "mp3");
 		fileChooser = new JFileChooser();
+		fileChooser.setFileFilter(filter);
+		fileChooser.setMultiSelectionEnabled(true);
 		
 		playerPanel = new GUIPanelPlayer();
 		playlistPanel = new GUIPlaylistPanel();

@@ -5,7 +5,6 @@ import java.io.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.filechooser.*;
 
 import avuuna.player.exception.*;
 import avuuna.player.model.*;
@@ -16,8 +15,8 @@ import javazoom.jl.player.basic.*;
 public class PlayerController implements Serializable, Observador {
 	private static final long serialVersionUID = 232492703123683857L;
 
-	private Player model;
-	private GUIPlayer view;
+	public Player model;
+	public GUIPlayer view;
 	
 	private boolean running;
     private final Thread progressThread;
@@ -120,9 +119,6 @@ public class PlayerController implements Serializable, Observador {
 	}
 
 	private void openItemActionPerformed(ActionEvent evt) {
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos MP3", "mp3");
-		view.fileChooser.setFileFilter(filter);
-		view.fileChooser.setMultiSelectionEnabled(true);
 		int seleccion = view.fileChooser.showOpenDialog(view);
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
 			File[] songs = view.fileChooser.getSelectedFiles();
