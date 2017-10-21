@@ -8,7 +8,8 @@ import javax.swing.filechooser.*;
 import avuuna.player.utils.*;
 
 /**
- * 
+ * Esta clase es el controlador, punto clave del patron MVC (Model - View - Controller).<br><br>
+ * Esta clase tambien hace parte del patron <i>Observador-Observado</b>, en donde esta es el <i>Observador</i>.
  * @author Avuuna, la Luz del Alba
  *
  */
@@ -32,6 +33,9 @@ public class GUIPlayer extends View {
 		lastConfig();
 	}
 
+	/**
+	 * Declara y posiciona los elementos del menu.
+	 */
 	private void prepareElementosMenu() {
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -46,6 +50,9 @@ public class GUIPlayer extends View {
 		fileMenu.add(openItem);
 	}
 
+	/**
+	 * Declara y posiciona todos los elementos graficos (excepto del menu).
+	 */
 	private void prepareElementos() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos MP3", "mp3");
 		fileChooser = new JFileChooser();

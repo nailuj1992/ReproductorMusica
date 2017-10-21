@@ -6,6 +6,11 @@ import javax.swing.*;
 
 import avuuna.player.utils.*;
 
+/**
+ * Panel donde se encuentra la lista de reproduccion.
+ * @author Avuunita
+ *
+ */
 public class GUIPanelPlaylist extends JPanel {
 	private static final long serialVersionUID = -6374452046140600636L;
 
@@ -20,6 +25,9 @@ public class GUIPanelPlaylist extends JPanel {
 		posicioneElementos();
 	}
 
+	/**
+	 * Declara todos los elementos graficos.
+	 */
 	private void prepareElementos() {
 		this.dlm_datosLista = new DefaultListModel<String>();
 
@@ -41,6 +49,9 @@ public class GUIPanelPlaylist extends JPanel {
 		btn_borrar.setFocusable(false);
 	}
 
+	/**
+	 * Posicionar todos los elementos dentro del panel.
+	 */
 	private void posicioneElementos() {
 		setBorder(BorderFactory.createTitledBorder(Strings.listaReproduccion));
 		setMinimumSize(new Dimension(100, 100));

@@ -4,6 +4,12 @@ import javax.swing.*;
 
 import avuuna.player.utils.*;
 
+/**
+ * Panel donde se encuentra la informacion de la cancion y los controles principales 
+ * del reproductor.
+ * @author Avuunita
+ *
+ */
 public class GUIPanelPlayer extends JPanel {
 	private static final long serialVersionUID = -4999856825283362164L;
 
@@ -21,6 +27,9 @@ public class GUIPanelPlayer extends JPanel {
 		posicioneElementos();
 	}
 
+	/**
+	 * Declara todos los elementos graficos.
+	 */
 	private void prepareElementos() {
 		lbl_cancionActual = new JLabel();
 		lbl_cancionActual.setText(Strings.cancionActual);
@@ -55,6 +64,9 @@ public class GUIPanelPlayer extends JPanel {
 		slider_barraVolumen.setFocusable(false);
 	}
 
+	/**
+	 * Posicionar todos los elementos dentro del panel.
+	 */
 	private void posicioneElementos() {
 		setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 

@@ -7,6 +7,12 @@ import javax.swing.*;
 
 import avuuna.player.utils.*;
 
+/**
+ * Clase madre de las interfaces graficas, ventana madre donde se alojara todo componente grafico.<br>
+ * Esta clase hace parte del patron MVC (Model - View - Controller).
+ * @author Avuunita
+ *
+ */
 public abstract class View extends JFrame implements Serializable {
 	private static final long serialVersionUID = 8317884983802007076L;
 
@@ -26,6 +32,9 @@ public abstract class View extends JFrame implements Serializable {
 		setSize(ANCHO_PANTALLA / 2, ALTO_PANTALLA * 5 / 12);
 	}
 
+	/**
+	 * Realiza los ultimos ajustes a la ventana.
+	 */
 	protected final void lastConfig() {
 		pack();
 		setVisible(true);
