@@ -1,5 +1,7 @@
 package avuuna.player;
 
+import javax.swing.JOptionPane;
+
 import avuuna.player.controller.*;
 import avuuna.player.exception.*;
 import avuuna.player.utils.*;
@@ -22,6 +24,7 @@ public class MainPlayer {
 		} catch (LookAndFeelException ex) {
 			Utils.display(ex.getClass().getName() + ": " + ex.getMessage());
 			Utils.log(MainPlayer.class.getName(), ex);
+			JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

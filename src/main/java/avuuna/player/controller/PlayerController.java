@@ -147,7 +147,8 @@ public class PlayerController implements Serializable, Observador {
 						} catch (BasicPlayerException | PlayerException ex) {
 							Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
 							if (songs.length == 1) {
-								JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_OPENING_SONG, JOptionPane.ERROR_MESSAGE);
+								Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
+								JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
 							}
 						}
 					}
@@ -160,7 +161,8 @@ public class PlayerController implements Serializable, Observador {
         try {
             model.play();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_PLAYING_SONG, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_PLAYING_SONG, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_PLAYING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -168,7 +170,8 @@ public class PlayerController implements Serializable, Observador {
         try {
         	model.pause();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_PAUSING_SONG, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_PAUSING_SONG, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_PAUSING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -176,7 +179,8 @@ public class PlayerController implements Serializable, Observador {
         try {
         	model.resume();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_RESUMING_SONG, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_RESUMING_SONG, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_RESUMING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -184,7 +188,8 @@ public class PlayerController implements Serializable, Observador {
         try {
         	model.stop();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_STOPPING_SONG, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_STOPPING_SONG, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_STOPPING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -192,7 +197,8 @@ public class PlayerController implements Serializable, Observador {
         try {
         	model.next();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_NEXT_SONG, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_NEXT_SONG, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_NEXT_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -200,7 +206,8 @@ public class PlayerController implements Serializable, Observador {
         try {
         	model.previous();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_PREV_SONG, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_PREV_SONG, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_PREV_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -208,7 +215,8 @@ public class PlayerController implements Serializable, Observador {
         try {
         	model.getPlayer().setGain((double) view.panel_player.slider_barraVolumen.getValue() / 100);
         } catch (BasicPlayerException ex) {
-//            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_VOLUME_SONG, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_VOLUME_SONG, ex);
+//            JOptionPane.showMessageDialog(null, PlayerException.ERROR_VOLUME_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -216,7 +224,8 @@ public class PlayerController implements Serializable, Observador {
         try {
             model.clearList();
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_CLEAR_LIST, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_CLEAR_LIST, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_CLEAR_LIST, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -227,7 +236,8 @@ public class PlayerController implements Serializable, Observador {
             model.stop();
             model.open(song);
         } catch (BasicPlayerException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_OPENING_SONG, JOptionPane.ERROR_MESSAGE);
+			Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 

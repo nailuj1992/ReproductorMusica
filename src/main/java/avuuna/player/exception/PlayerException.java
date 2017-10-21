@@ -6,7 +6,8 @@ package avuuna.player.exception;
  */
 public class PlayerException extends Exception {
 	private static final long serialVersionUID = -6544648361382072128L;
-	
+
+	public static final String ERROR = "Error";
 	public static final String REPEATED_SONG = "Canción repetida en la lista.";
 	public static final String ERROR_OPENING_SONG = "Ha ocurrido un error al momento de abrir la canción.";
 	public static final String ERROR_PLAYING_SONG = "Ha ocurrido un error al momento de reproducir la canción.";
