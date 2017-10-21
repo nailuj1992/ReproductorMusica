@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- *
+ * Esta clase permite trabajar con una cancion.
  * @author Avuuna, la Luz del Alba
  * 
  */

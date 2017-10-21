@@ -1,2 +1,2 @@
-# Reproductor de Musica
-Reproductor básico de música, desarrollado en Java.
+# Reproductor de Música
+Este es un reproductor básico de música, el cual está desarrollado en Java.

@@ -17,6 +17,7 @@ public class PlayerException extends Exception {
 	public static final String ERROR_NEXT_SONG = "Ha ocurrido un error al momento de seguir con la siguiente canción.";
 	public static final String ERROR_PREV_SONG = "Ha ocurrido un error al momento de devolverse a la canción anterior.";
 	public static final String ERROR_VOLUME_SONG = "Ha ocurrido un error al momento de cambiar el volumen.";
+	public static final String ERROR_REMOVE_SONG = "La canción a quitar no existe en la lista.";
 	public static final String ERROR_CLEAR_LIST = "Ha ocurrido un error al momento de borrar la lista de reproducción.";
 
     public PlayerException(String message) {

@@ -19,8 +19,7 @@ public class PlayerTest {
 
 	@Before
 	public void setUp() {
-		BasicPlayer basicPlayer = new BasicPlayer();
-		player = Reproductor.getInstance(basicPlayer);
+		player = Reproductor.getInstance();
 
 		song1 = new Cancion("resources/music/14 - Vale Healing.mp3");
 		song2 = new Cancion("resources/music/06 - Nemesis.mp3");
