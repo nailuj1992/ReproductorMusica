@@ -29,7 +29,9 @@ public class PlayerController implements Serializable, Observador {
 	public PlayerController() {
 		model = Reproductor.getInstance();
 		view = new GUIPlayer();
+
 		running = false;
+		model.addObserver(this);
 
 		definaAcciones();
 		accionarThread();
