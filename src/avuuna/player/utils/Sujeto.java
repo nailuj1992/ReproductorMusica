@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Clase perteneciente al patron <i>Observador-Observado</b>, en donde esta es el <i>Observado</i>.
+ * Clase perteneciente al patron <i>Observador-Observado</i>, en donde esta es el <i>Observado</i>.
  * @author Avuuna, la Luz del Alba
  *
  */

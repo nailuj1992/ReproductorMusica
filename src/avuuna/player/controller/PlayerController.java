@@ -14,7 +14,7 @@ import javazoom.jl.player.basic.*;
 
 /**
  * Esta clase es el controlador, punto clave del patron MVC (Model - View - Controller).<br><br>
- * Esta clase tambien hace parte del patron <i>Observador-Observado</b>, en donde esta es el <i>Observador</i>.
+ * Esta clase tambien hace parte del patron <i>Observador-Observado</i>, en donde esta es el <i>Observador</i>.
  * @author Avuunita
  *
  */

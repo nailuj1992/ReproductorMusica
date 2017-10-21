@@ -9,7 +9,7 @@ import javazoom.jl.player.basic.*;
 
 /**
  * Esta clase provee las funcionalidades necesarias para que el reproductor de musica sea posible.<br><br>
- * Esta clase hace parte del patron <i>Observador-Observado</b>, en donde esta es el <i>Observado</i>.
+ * Esta clase hace parte del patron <i>Observador-Observado</i>, en donde esta es el <i>Observado</i>.
  * @author Avuuna, la Luz del Alba
  * 
  */
