@@ -33,16 +33,20 @@ public class GUIPanelPlayer extends JPanel {
 		progressBar.setString(Strings.TIEMPO_CERO);
 
 		previousButton = new JButton();
-		previousButton.setText(Strings.prev);
+		previousButton.setToolTipText(Strings.prev);
+		previousButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PREV));
 
 		playButton = new JButton();
-		playButton.setText(Strings.play);
+		playButton.setToolTipText(Strings.play);
+		playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
 
 		stopButton = new JButton();
-		stopButton.setText(Strings.stop);
+		stopButton.setToolTipText(Strings.stop);
+		stopButton.setIcon(Imagen.imagenes.get(Imagen.BTN_STOP));
 
 		nextButton = new JButton();
-		nextButton.setText(Strings.next);
+		nextButton.setToolTipText(Strings.next);
+		nextButton.setIcon(Imagen.imagenes.get(Imagen.BTN_NEXT));
 
 		volumeControl = new JSlider();
 	}

@@ -61,7 +61,7 @@ public class PlayerController implements Serializable, Observador {
 		
 		view.playerPanel.playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            	switch (view.playerPanel.playButton.getText()) {
+            	switch (view.playerPanel.playButton.getToolTipText()) {
         		case Strings.play:
         			if (!running && model.getActual() != null) {
         				playSong();
@@ -224,17 +224,21 @@ public class PlayerController implements Serializable, Observador {
 		if (model.getActual() != null) {
             switch (model.getActualEvent()) {
                 case BasicPlayerEvent.RESUMED:
-                    view.playerPanel.playButton.setText(Strings.pause);
+                    view.playerPanel.playButton.setToolTipText(Strings.pause);
+                    view.playerPanel.playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
                     break;
                 case BasicPlayerEvent.PAUSED:
-                	view.playerPanel.playButton.setText(Strings.play);
+                	view.playerPanel.playButton.setToolTipText(Strings.play);
+                	view.playerPanel.playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
                     break;
                 case BasicPlayerEvent.PLAYING:
-                	view.playerPanel.playButton.setText(Strings.pause);
+                	view.playerPanel.playButton.setToolTipText(Strings.pause);
+                	view.playerPanel.playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
                     running = true;
                     break;
                 case BasicPlayerEvent.STOPPED:
-                	view.playerPanel.playButton.setText(Strings.play);
+                	view.playerPanel.playButton.setToolTipText(Strings.play);
+                	view.playerPanel.playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
                     running = false;
                     break;
                 case BasicPlayerEvent.OPENED:
