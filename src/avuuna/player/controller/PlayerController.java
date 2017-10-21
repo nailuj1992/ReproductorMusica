@@ -249,35 +249,37 @@ public class PlayerController implements Serializable, Observador {
 	@Override
 	public void update() {
 		if (model.getActual() != null) {
-            switch (model.getActualEvent()) {
-                case BasicPlayerEvent.RESUMED:
-                    view.panel_player.btn_play.setToolTipText(Strings.pause);
-                    view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
-                    break;
-                case BasicPlayerEvent.PAUSED:
-                	view.panel_player.btn_play.setToolTipText(Strings.play);
-                	view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
-                    break;
-                case BasicPlayerEvent.PLAYING:
-                	view.panel_player.btn_play.setToolTipText(Strings.pause);
-                	view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
-                    running = true;
-                    break;
-                case BasicPlayerEvent.STOPPED:
-                	view.panel_player.btn_play.setToolTipText(Strings.play);
-                	view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
-                    running = false;
-                    break;
-                case BasicPlayerEvent.OPENED:
-                	view.panel_player.lbl_cancionActual.setText(Strings.cancionActual + model.getActual().getName());
-                	view.panel_player.bar_progreso.setMaximum((int) model.getActual().getBytesLength());
-                	view.panel_player.bar_progreso.setString(Strings.CERO + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
-                    if (!running && model.getActual() != null) {
-                        playSong();
-                    }
-                    setVolume();
-                    break;
-            }
+			switch (model.getActualEvent()) {
+			case BasicPlayerEvent.RESUMED:
+				view.panel_player.btn_play.setToolTipText(Strings.pause);
+				view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
+				break;
+			case BasicPlayerEvent.PAUSED:
+				view.panel_player.btn_play.setToolTipText(Strings.play);
+				view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
+				break;
+			case BasicPlayerEvent.PLAYING:
+				view.panel_player.btn_play.setToolTipText(Strings.pause);
+				view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
+				running = true;
+				break;
+			case BasicPlayerEvent.STOPPED:
+				view.panel_player.btn_play.setToolTipText(Strings.play);
+				view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
+				running = false;
+				break;
+			case BasicPlayerEvent.OPENED:
+				view.panel_player.lbl_cancionActual.setText(Strings.cancionActual + model.getActual().getName());
+				view.panel_player.bar_progreso.setMaximum((int) model.getActual().getBytesLength());
+				view.panel_player.bar_progreso.setString(Strings.CERO + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
+				if (!running && model.getActual() != null) {
+					playSong();
+				}
+				setVolume();
+				break;
+			default:
+				break;
+			}
         } else {
         	view.panel_player.lbl_cancionActual.setText(Strings.cancionActual);
         	view.panel_player.bar_progreso.setMaximum(0);
