@@ -4,13 +4,10 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import avuuna.player.utils.*;
+
 public class GUIPlaylistPanel extends JPanel {
 	private static final long serialVersionUID = -6374452046140600636L;
-	
-	public static final String listaReproduccion = "Lista de Reproducción";
-	public static final String borrarLista = "Borrar lista";
-	
-	public static final String ACTUAL = "> ";
 	
 	public JButton clearButton;
 	public JScrollPane jScrollPane1;
@@ -33,11 +30,11 @@ public class GUIPlaylistPanel extends JPanel {
 		jScrollPane1.setViewportView(songList);
         
         clearButton = new JButton();
-        clearButton.setText(borrarLista);
+        clearButton.setText(Strings.borrarLista);
 	}
 	
 	private void posicioneElementos() {
-		setBorder(BorderFactory.createTitledBorder(listaReproduccion));
+		setBorder(BorderFactory.createTitledBorder(Strings.listaReproduccion));
         setMinimumSize(new Dimension(100, 100));
         setPreferredSize(new Dimension(260, 23));
         

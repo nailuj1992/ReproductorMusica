@@ -62,14 +62,14 @@ public class PlayerController implements Serializable, Observador {
 		view.playerPanel.playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	switch (view.playerPanel.playButton.getText()) {
-        		case GUIPanelPlayer.play:
+        		case Strings.play:
         			if (!running && model.getActual() != null) {
         				playSong();
         			} else if (running) {
         				resumeSong();
         			}
         			break;
-        		case GUIPanelPlayer.pause:
+        		case Strings.pause:
         			pauseSong();
         			break;
         		}
@@ -104,7 +104,7 @@ public class PlayerController implements Serializable, Observador {
             public void mouseClicked(MouseEvent evt) {
             	if (evt.getClickCount() == 2) {// Doble clic
                     String selected = (String) view.playlistPanel.songList.getSelectedValue();
-                    if (!selected.contains(GUIPlaylistPanel.ACTUAL)) {
+                    if (!selected.contains(Strings.ACTUAL)) {
                         openSong(selected);
                     }
                 }
@@ -224,21 +224,21 @@ public class PlayerController implements Serializable, Observador {
 		if (model.getActual() != null) {
             switch (model.getActualEvent()) {
                 case BasicPlayerEvent.RESUMED:
-                    view.playerPanel.playButton.setText(GUIPanelPlayer.pause);
+                    view.playerPanel.playButton.setText(Strings.pause);
                     break;
                 case BasicPlayerEvent.PAUSED:
-                	view.playerPanel.playButton.setText(GUIPanelPlayer.play);
+                	view.playerPanel.playButton.setText(Strings.play);
                     break;
                 case BasicPlayerEvent.PLAYING:
-                	view.playerPanel.playButton.setText(GUIPanelPlayer.pause);
+                	view.playerPanel.playButton.setText(Strings.pause);
                     running = true;
                     break;
                 case BasicPlayerEvent.STOPPED:
-                	view.playerPanel.playButton.setText(GUIPanelPlayer.play);
+                	view.playerPanel.playButton.setText(Strings.play);
                     running = false;
                     break;
                 case BasicPlayerEvent.OPENED:
-                	view.playerPanel.actualSong.setText(GUIPanelPlayer.cancionActual + model.getActual().getName());
+                	view.playerPanel.actualSong.setText(Strings.cancionActual + model.getActual().getName());
                 	view.playerPanel.progressBar.setMaximum((int) model.getActual().getBytesLength());
                 	view.playerPanel.progressBar.setString("00:00 of " + Utils.formatTime(model.getActual().getDuration()));
                     if (!running && model.getActual() != null) {
@@ -248,7 +248,7 @@ public class PlayerController implements Serializable, Observador {
                     break;
             }
         } else {
-        	view.playerPanel.actualSong.setText(GUIPanelPlayer.cancionActual);
+        	view.playerPanel.actualSong.setText(Strings.cancionActual);
         	view.playerPanel.progressBar.setMaximum(0);
         }
 		view.playerPanel.repaint();
@@ -257,7 +257,7 @@ public class PlayerController implements Serializable, Observador {
         for (Song song : model.getSongs()) {
             String resp = song.getName();
             if (model.getActual() != null && model.getActual().equals(song)) {
-                resp = GUIPlaylistPanel.ACTUAL + resp;
+                resp = Strings.ACTUAL + resp;
             }
             view.playlistPanel.listModel.addElement(resp);
         }

@@ -2,17 +2,10 @@ package avuuna.player.view;
 
 import javax.swing.*;
 
+import avuuna.player.utils.*;
+
 public class GUIPanelPlayer extends JPanel {
 	private static final long serialVersionUID = -4999856825283362164L;
-	
-	public static final String panelReproduccion = "Panel de Reproducción";
-	public static final String panelVolumen = "Panel de Volumen";
-	public static final String cancionActual = "Canción actual: ";
-	public static final String play = "Play";
-	public static final String pause = "Pause";
-	public static final String stop = "Stop";
-	public static final String next = "Next";
-	public static final String prev = "Prev";
 	
 	public JLabel actualSong;
 	public JPanel detailsPanel;
@@ -31,7 +24,7 @@ public class GUIPanelPlayer extends JPanel {
 	
 	private void prepareElementos() {
 		actualSong = new JLabel();
-		actualSong.setText(cancionActual);
+		actualSong.setText(Strings.cancionActual);
 
 		progressBar = new JProgressBar();
 		progressBar.setMinimum(0);
@@ -40,16 +33,16 @@ public class GUIPanelPlayer extends JPanel {
 		progressBar.setString("00:00 of 00:00");
 
 		previousButton = new JButton();
-		previousButton.setText(prev);
+		previousButton.setText(Strings.prev);
 
 		playButton = new JButton();
-		playButton.setText(play);
+		playButton.setText(Strings.play);
 
 		stopButton = new JButton();
-		stopButton.setText(stop);
+		stopButton.setText(Strings.stop);
 
 		nextButton = new JButton();
-		nextButton.setText(next);
+		nextButton.setText(Strings.next);
 
 		volumeControl = new JSlider();
 	}
@@ -58,7 +51,7 @@ public class GUIPanelPlayer extends JPanel {
 		setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		
 		detailsPanel = new JPanel();
-		detailsPanel.setBorder(BorderFactory.createTitledBorder(panelReproduccion));
+		detailsPanel.setBorder(BorderFactory.createTitledBorder(Strings.panelReproduccion));
 		
 		GroupLayout detailsPanelLayout = new GroupLayout(detailsPanel);
         detailsPanel.setLayout(detailsPanelLayout);
@@ -96,7 +89,7 @@ public class GUIPanelPlayer extends JPanel {
         );
         
         volumePanel = new JPanel();
-        volumePanel.setBorder(BorderFactory.createTitledBorder(panelVolumen));
+        volumePanel.setBorder(BorderFactory.createTitledBorder(Strings.panelVolumen));
         
         GroupLayout volumePanelLayout = new GroupLayout(volumePanel);
         volumePanel.setLayout(volumePanelLayout);

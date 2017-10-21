@@ -5,6 +5,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 
+import avuuna.player.utils.*;
+
 /**
  * 
  * @author Avuuna, la Luz del Alba
@@ -12,9 +14,6 @@ import javax.swing.filechooser.*;
  */
 public class GUIPlayer extends View {
 	private static final long serialVersionUID = 422073346876789713L;
-	
-	public static final String archivo = "Archivo";
-	public static final String abrir = "Abrir";
 
 	public JFileChooser fileChooser;
 	public JMenu fileMenu;
@@ -38,11 +37,11 @@ public class GUIPlayer extends View {
 		setJMenuBar(menuBar);
 
 		fileMenu = new JMenu();
-		fileMenu.setText(archivo);
+		fileMenu.setText(Strings.archivo);
 		menuBar.add(fileMenu);
 
 		openItem = new JMenuItem();
-		openItem.setText(abrir);
+		openItem.setText(Strings.abrir);
 		fileMenu.add(openItem);
 	}
 	
