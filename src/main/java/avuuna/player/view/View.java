@@ -21,10 +21,11 @@ public abstract class View extends JFrame implements Serializable {
 		setTitle(titulo);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		setSize(ANCHO_PANTALLA / 2, ALTO_PANTALLA * 5 / 12);
+//		setSize(ANCHO_PANTALLA / 2, ALTO_PANTALLA * 5 / 12);
 	}
 
 	protected final void lastConfig() {
+		pack();
 		setVisible(true);
 		setResizable(false);
 		setLocationRelativeTo(null);
