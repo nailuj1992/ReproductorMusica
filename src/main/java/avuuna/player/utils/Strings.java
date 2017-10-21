@@ -15,10 +15,14 @@ public class Strings {
 	public static final String prev = "Prev";
 
 	public static final String listaReproduccion = "Lista de Reproducción";
+	public static final String adicionarCancion = "Añadir canciones";
 	public static final String borrarLista = "Borrar lista";
 
 	public static final String ACTUAL = "> ";
 	public static final String DE = " de ";
 	public static final String TIEMPO_CERO = "00:00 de 00:00";
 	public static final String CERO = "00:00";
+	
+	public static final String CONFIRMAR = "Confirmación";
+	public static final String confirmarBorrarLista = "¿Estás seguro de que deseas borrar toda la lista de reproducción?";
 }

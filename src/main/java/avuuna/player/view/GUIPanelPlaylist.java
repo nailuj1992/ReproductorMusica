@@ -9,10 +9,11 @@ import avuuna.player.utils.*;
 public class GUIPanelPlaylist extends JPanel {
 	private static final long serialVersionUID = -6374452046140600636L;
 	
-	public JButton clearButton;
-	public JScrollPane jScrollPane1;
-	public JList<String> songList;
-	public DefaultListModel<String> listModel;
+	public JButton btn_adicionar, btn_borrar;
+	
+	public JScrollPane scroll_lista;
+	public JList<String> list_canciones;
+	public DefaultListModel<String> dlm_datosLista;
 
 	public GUIPanelPlaylist() {
 		prepareElementos();
@@ -20,19 +21,24 @@ public class GUIPanelPlaylist extends JPanel {
 	}
 	
 	private void prepareElementos() {
-		this.listModel = new DefaultListModel<String>();
+		this.dlm_datosLista = new DefaultListModel<String>();
 		
-        songList = new JList<String>();
-        songList.setModel(listModel);
-        songList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list_canciones = new JList<String>();
+        list_canciones.setModel(dlm_datosLista);
+        list_canciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		jScrollPane1 = new JScrollPane();
-		jScrollPane1.setViewportView(songList);
+		scroll_lista = new JScrollPane();
+		scroll_lista.setViewportView(list_canciones);
         
-        clearButton = new JButton();
-        clearButton.setToolTipText(Strings.borrarLista);
-        clearButton.setIcon(Imagen.imagenes.get(Imagen.BTN_CLOSE));
-        clearButton.setFocusable(false);
+		btn_adicionar = new JButton();
+		btn_adicionar.setToolTipText(Strings.adicionarCancion);
+        btn_adicionar.setIcon(Imagen.imagenes.get(Imagen.BTN_PLUS));
+        btn_adicionar.setFocusable(false);
+        
+        btn_borrar = new JButton();
+        btn_borrar.setToolTipText(Strings.borrarLista);
+        btn_borrar.setIcon(Imagen.imagenes.get(Imagen.BTN_CLOSE));
+        btn_borrar.setFocusable(false);
 	}
 	
 	private void posicioneElementos() {
@@ -44,18 +50,26 @@ public class GUIPanelPlaylist extends JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+            .addComponent(scroll_lista, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(clearButton)
+                .addComponent(btn_adicionar)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_borrar)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                .addComponent(scroll_lista, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clearButton))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(btn_adicionar)
+                                .addComponent(btn_borrar))
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap())
         );
 
         getAccessibleContext().setAccessibleParent(this);

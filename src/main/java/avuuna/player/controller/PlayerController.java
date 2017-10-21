@@ -33,15 +33,15 @@ public class PlayerController implements Serializable, Observador {
             public void run() {
                 while (true) {
                     if (model.getActual() != null) {
-                        view.playerPanel.progressBar.setValue((int) model.getProgressBytes());
+                        view.panel_player.bar_progreso.setValue((int) model.getProgressBytes());
                         try {
-                        	view.playerPanel.progressBar.setString(Utils.formatTime(model.getProgressTime()) + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
+                        	view.panel_player.bar_progreso.setString(Utils.formatTime(model.getProgressTime()) + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
                         } catch (Exception ex) {
                             Utils.display("Exception found -> " + ex.getMessage());
                         }
                     } else {
-                    	view.playerPanel.progressBar.setValue(0);
-                    	view.playerPanel.progressBar.setString(Strings.TIEMPO_CERO);
+                    	view.panel_player.bar_progreso.setValue(0);
+                    	view.panel_player.bar_progreso.setString(Strings.TIEMPO_CERO);
                     }
                 }
             }
@@ -59,9 +59,9 @@ public class PlayerController implements Serializable, Observador {
 			}
 		});
 		
-		view.playerPanel.playButton.addActionListener(new ActionListener() {
+		view.panel_player.btn_play.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            	switch (view.playerPanel.playButton.getToolTipText()) {
+            	switch (view.panel_player.btn_play.getToolTipText()) {
         		case Strings.play:
         			if (!running && model.getActual() != null) {
         				playSong();
@@ -76,34 +76,34 @@ public class PlayerController implements Serializable, Observador {
             }
         });
 		
-		view.playerPanel.stopButton.addActionListener(new ActionListener() {
+		view.panel_player.btn_stop.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	stopSong();
             }
         });
 		
-		view.playerPanel.nextButton.addActionListener(new ActionListener() {
+		view.panel_player.btn_next.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 nextSong();
             }
         });
 		
-		view.playerPanel.previousButton.addActionListener(new ActionListener() {
+		view.panel_player.btn_previous.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	previousSong();
             }
         });
 		
-		view.playerPanel.volumeControl.addChangeListener(new ChangeListener() {
+		view.panel_player.slider_barraVolumen.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
             	setVolume();
             }
         });
 		
-		view.playlistPanel.songList.addMouseListener(new MouseAdapter() {
+		view.panel_playlist.list_canciones.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
             	if (evt.getClickCount() == 2) {// Doble clic
-                    String selected = (String) view.playlistPanel.songList.getSelectedValue();
+                    String selected = (String) view.panel_playlist.list_canciones.getSelectedValue();
                     if (!selected.contains(Strings.ACTUAL)) {
                         openSong(selected);
                     }
@@ -111,9 +111,21 @@ public class PlayerController implements Serializable, Observador {
             }
         });
 		
-		view.playlistPanel.clearButton.addActionListener(new ActionListener() {
+		view.panel_playlist.btn_adicionar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            	clearPlaylist();
+            	accionAbrirCancion();
+            }
+		});
+		
+		view.panel_playlist.btn_borrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            	if (!view.panel_playlist.dlm_datosLista.isEmpty()) {
+                	int seleccion = JOptionPane.showConfirmDialog(view, Strings.confirmarBorrarLista, Strings.CONFIRMAR, 
+                			JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+                	if (seleccion == JOptionPane.YES_OPTION) {
+                    	clearPlaylist();
+                	}
+            	}
             }
         });
 	}
@@ -194,7 +206,7 @@ public class PlayerController implements Serializable, Observador {
 
     private void setVolume() {
         try {
-        	model.getPlayer().setGain((double) view.playerPanel.volumeControl.getValue() / 100);
+        	model.getPlayer().setGain((double) view.panel_player.slider_barraVolumen.getValue() / 100);
         } catch (BasicPlayerException ex) {
 //            JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_VOLUME_SONG, JOptionPane.ERROR_MESSAGE);
         }
@@ -224,27 +236,27 @@ public class PlayerController implements Serializable, Observador {
 		if (model.getActual() != null) {
             switch (model.getActualEvent()) {
                 case BasicPlayerEvent.RESUMED:
-                    view.playerPanel.playButton.setToolTipText(Strings.pause);
-                    view.playerPanel.playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
+                    view.panel_player.btn_play.setToolTipText(Strings.pause);
+                    view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
                     break;
                 case BasicPlayerEvent.PAUSED:
-                	view.playerPanel.playButton.setToolTipText(Strings.play);
-                	view.playerPanel.playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
+                	view.panel_player.btn_play.setToolTipText(Strings.play);
+                	view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
                     break;
                 case BasicPlayerEvent.PLAYING:
-                	view.playerPanel.playButton.setToolTipText(Strings.pause);
-                	view.playerPanel.playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
+                	view.panel_player.btn_play.setToolTipText(Strings.pause);
+                	view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
                     running = true;
                     break;
                 case BasicPlayerEvent.STOPPED:
-                	view.playerPanel.playButton.setToolTipText(Strings.play);
-                	view.playerPanel.playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
+                	view.panel_player.btn_play.setToolTipText(Strings.play);
+                	view.panel_player.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
                     running = false;
                     break;
                 case BasicPlayerEvent.OPENED:
-                	view.playerPanel.actualSong.setText(Strings.cancionActual + model.getActual().getName());
-                	view.playerPanel.progressBar.setMaximum((int) model.getActual().getBytesLength());
-                	view.playerPanel.progressBar.setString(Strings.CERO + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
+                	view.panel_player.lbl_cancionActual.setText(Strings.cancionActual + model.getActual().getName());
+                	view.panel_player.bar_progreso.setMaximum((int) model.getActual().getBytesLength());
+                	view.panel_player.bar_progreso.setString(Strings.CERO + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
                     if (!running && model.getActual() != null) {
                         playSong();
                     }
@@ -252,20 +264,20 @@ public class PlayerController implements Serializable, Observador {
                     break;
             }
         } else {
-        	view.playerPanel.actualSong.setText(Strings.cancionActual);
-        	view.playerPanel.progressBar.setMaximum(0);
+        	view.panel_player.lbl_cancionActual.setText(Strings.cancionActual);
+        	view.panel_player.bar_progreso.setMaximum(0);
         }
-		view.playerPanel.repaint();
+		view.panel_player.repaint();
 		
-		view.playlistPanel.listModel.clear();
+		view.panel_playlist.dlm_datosLista.clear();
         for (Song song : model.getSongs()) {
             String resp = song.getName();
             if (model.getActual() != null && model.getActual().equals(song)) {
                 resp = Strings.ACTUAL + resp;
             }
-            view.playlistPanel.listModel.addElement(resp);
+            view.panel_playlist.dlm_datosLista.addElement(resp);
         }
-        view.playlistPanel.repaint();
+        view.panel_playlist.repaint();
 	}
 
 }
