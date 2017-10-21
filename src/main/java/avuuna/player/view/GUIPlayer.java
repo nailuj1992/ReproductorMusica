@@ -21,7 +21,7 @@ public class GUIPlayer extends View {
 	public JMenuItem openItem;
 	
 	public GUIPanelPlayer playerPanel;
-	public GUIPlaylistPanel playlistPanel;
+	public GUIPanelPlaylist playlistPanel;
 
 	public GUIPlayer() {
 		super("Reproductor de Música - by Avuuna, la Luz del Alba");
@@ -52,7 +52,7 @@ public class GUIPlayer extends View {
 		fileChooser.setMultiSelectionEnabled(true);
 		
 		playerPanel = new GUIPanelPlayer();
-		playlistPanel = new GUIPlaylistPanel();
+		playlistPanel = new GUIPanelPlaylist();
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, playerPanel, playlistPanel);
 		splitPane.setEnabled(false);

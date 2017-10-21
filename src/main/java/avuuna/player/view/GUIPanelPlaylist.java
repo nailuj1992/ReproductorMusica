@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import avuuna.player.utils.*;
 
-public class GUIPlaylistPanel extends JPanel {
+public class GUIPanelPlaylist extends JPanel {
 	private static final long serialVersionUID = -6374452046140600636L;
 	
 	public JButton clearButton;
@@ -14,7 +14,7 @@ public class GUIPlaylistPanel extends JPanel {
 	public JList<String> songList;
 	public DefaultListModel<String> listModel;
 
-	public GUIPlaylistPanel() {
+	public GUIPanelPlaylist() {
 		prepareElementos();
 		posicioneElementos();
 	}
