@@ -12,6 +12,12 @@ import avuuna.player.utils.*;
 import avuuna.player.view.*;
 import javazoom.jl.player.basic.*;
 
+/**
+ * Esta clase es el controlador, punto clave del patron MVC (Model - View - Controller).<br><br>
+ * Esta clase tambien hace parte del patron <i>Observador-Observado</b>, en donde esta es el <i>Observador</i>.
+ * @author Avuunita
+ *
+ */
 public class PlayerController implements Serializable, Observador {
 	private static final long serialVersionUID = 232492703123683857L;
 

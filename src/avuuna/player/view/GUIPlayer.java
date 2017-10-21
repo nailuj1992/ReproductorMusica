@@ -8,8 +8,7 @@ import javax.swing.filechooser.*;
 import avuuna.player.utils.*;
 
 /**
- * Esta clase es el controlador, punto clave del patron MVC (Model - View - Controller).<br><br>
- * Esta clase tambien hace parte del patron <i>Observador-Observado</b>, en donde esta es el <i>Observador</i>.
+ * Esta clase es una ventana, objeto de tipo <code>View</code>, asi que por tanto hace parte del patron MVC.
  * @author Avuuna, la Luz del Alba
  *
  */
