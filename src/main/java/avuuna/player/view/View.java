@@ -5,6 +5,8 @@ import java.io.*;
 
 import javax.swing.*;
 
+import avuuna.player.utils.*;
+
 public abstract class View extends JFrame implements Serializable {
 	private static final long serialVersionUID = 8317884983802007076L;
 
@@ -18,7 +20,8 @@ public abstract class View extends JFrame implements Serializable {
 	}
 
 	public View(String titulo) {
-		setTitle(titulo);
+		super(titulo);
+		setIconImage(Imagen.imagenes.get(Imagen.IMG_LOGO).getImage());
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 //		setSize(ANCHO_PANTALLA / 2, ALTO_PANTALLA * 5 / 12);
