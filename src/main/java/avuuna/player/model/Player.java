@@ -142,7 +142,7 @@ public class Player extends Sujeto implements BasicPlayerListener, Serializable 
 
 	@Override
 	public void stateUpdated(BasicPlayerEvent event) {
-		Utils.display("stateUpdated : " + event.toString());
+		// Utils.display("stateUpdated : " + event.toString());
 		if (event.getCode() == BasicPlayerEvent.EOM) {
 			try {
 				int current = songs.indexOf(actual);

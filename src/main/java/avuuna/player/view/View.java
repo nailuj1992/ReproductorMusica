@@ -4,7 +4,7 @@ import java.io.*;
 
 import javax.swing.*;
 
-public class View extends JFrame implements Serializable {
+public abstract class View extends JFrame implements Serializable {
 	private static final long serialVersionUID = 8317884983802007076L;
 
 	public View(String titulo) {

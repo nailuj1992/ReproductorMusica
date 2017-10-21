@@ -55,7 +55,7 @@ public class PlayerController implements Serializable, Observador {
 		view.openItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				openItemActionPerformed(evt);
+				accionAbrirCancion();
 			}
 		});
 		
@@ -118,7 +118,7 @@ public class PlayerController implements Serializable, Observador {
         });
 	}
 
-	private void openItemActionPerformed(ActionEvent evt) {
+	private void accionAbrirCancion() {
 		int seleccion = view.fileChooser.showOpenDialog(view);
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
 			File[] songs = view.fileChooser.getSelectedFiles();
@@ -134,7 +134,9 @@ public class PlayerController implements Serializable, Observador {
 							}
 						} catch (BasicPlayerException | PlayerException ex) {
 							Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
-//							JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_OPENING_SONG, JOptionPane.ERROR_MESSAGE);
+							if (songs.length == 1) {
+								JOptionPane.showMessageDialog(null, ex.getMessage(), PlayerException.ERROR_OPENING_SONG, JOptionPane.ERROR_MESSAGE);
+							}
 						}
 					}
 				}
@@ -249,6 +251,7 @@ public class PlayerController implements Serializable, Observador {
         	view.playerPanel.actualSong.setText(GUIPanelPlayer.cancionActual);
         	view.playerPanel.progressBar.setMaximum(0);
         }
+		view.playerPanel.repaint();
 		
 		view.playlistPanel.listModel.clear();
         for (Song song : model.getSongs()) {
@@ -258,6 +261,7 @@ public class PlayerController implements Serializable, Observador {
             }
             view.playlistPanel.listModel.addElement(resp);
         }
+        view.playlistPanel.repaint();
 	}
 
 }
