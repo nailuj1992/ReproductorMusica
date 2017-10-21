@@ -28,8 +28,6 @@ public class GUIPlayer extends View {
 
 		prepareElementos();
 		prepareElementosMenu();
-
-		lastConfig();
 	}
 
 	/**

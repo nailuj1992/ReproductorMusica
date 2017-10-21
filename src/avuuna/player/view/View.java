@@ -33,9 +33,9 @@ public abstract class View extends JFrame implements Serializable {
 	}
 
 	/**
-	 * Realiza los ultimos ajustes a la ventana.
+	 * Realiza los ultimos ajustes a la ventana, y luego la inicia.
 	 */
-	protected final void lastConfig() {
+	public final void initView() {
 		pack();
 		setVisible(true);
 		setResizable(false);
