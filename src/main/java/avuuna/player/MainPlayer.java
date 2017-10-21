@@ -17,7 +17,6 @@ public class MainPlayer {
 		try {
 			Utils.setLookAndFeel("Nimbus");
 			BasicPlayer basicPlayer = new BasicPlayer();
-			
 			PlayerController controller = new PlayerController(basicPlayer);
 			controller.model.addObserver(controller);
 		} catch (LookAndFeelException ex) {
