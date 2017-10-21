@@ -5,6 +5,11 @@ import java.util.*;
 
 import javax.swing.*;
 
+/**
+ * Clase encargada de la carga y busqueda de imagenes.
+ * @author Avuunita
+ *
+ */
 public class Imagen implements Serializable {
 	private static final long serialVersionUID = -3401165048323259279L;
 

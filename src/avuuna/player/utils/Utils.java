@@ -8,7 +8,7 @@ import javax.swing.*;
 import avuuna.player.exception.*;
 
 /**
- *
+ * Clase que contiene varias funcionalidades basicas e interesantes.
  * @author Avuuna, la Luz del Alba
  * 
  */
@@ -57,11 +57,24 @@ public class Utils {
 		System.out.println(msg);
 	}
 
+	/**
+	 * Recolecta la excepcion y la muestra en el Log.
+	 * @param name Nombre relevante. Generalmente es el nombre de la clase/metodo en la que se capturo la excepcion.
+	 * @param ex Excepcion capturada.
+	 */
 	public static void log(String name, Exception ex) {
 		Logger.getLogger(name).log(Level.SEVERE, null, ex);
 //		System.err.println(getStackTrace(ex));
 	}
 
+	/**
+	 * Cambia la apariencia de toda la aplicacion.<br><br>
+	 * Estilos bastante presentables:
+	 * <li><i>Nimbus</i></li>
+	 * <li><i>Windows</i></li>
+	 * @param lookAndFeel Estilo a implementar.
+	 * @throws LookAndFeelException Error al cambiar la apariencia.
+	 */
 	public static void setLookAndFeel(String lookAndFeel) throws LookAndFeelException {
 		try {
 			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -75,6 +88,11 @@ public class Utils {
 		}
 	}
 
+	/**
+	 * Convierte los milisegundos a formato <b>hh:MM:ss</b>.
+	 * @param miliseconds
+	 * @return Tiempo en el formato descrito antes.
+	 */
 	public static String formatTime(long miliseconds) {
 		int seconds = (int) (miliseconds / 1000000);
 		int minutes = seconds / 60;
@@ -91,6 +109,11 @@ public class Utils {
 		return resp;
 	}
 
+	/**
+	 * Obtiene el <code>stackTrace</code> de una excepcion.
+	 * @param ex Excepcion capturada.
+	 * @return Una cadena con el <code>stackTrace</code> de la excepcion.
+	 */
 	public static String getStackTrace(Exception ex) {
 		StringWriter errors = new StringWriter();
 		ex.printStackTrace(new PrintWriter(errors));
