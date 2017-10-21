@@ -35,18 +35,22 @@ public class GUIPanelPlayer extends JPanel {
 		previousButton = new JButton();
 		previousButton.setToolTipText(Strings.prev);
 		previousButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PREV));
+		previousButton.setFocusable(false);
 
 		playButton = new JButton();
 		playButton.setToolTipText(Strings.play);
 		playButton.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
+		playButton.setFocusable(false);
 
 		stopButton = new JButton();
 		stopButton.setToolTipText(Strings.stop);
 		stopButton.setIcon(Imagen.imagenes.get(Imagen.BTN_STOP));
+		stopButton.setFocusable(false);
 
 		nextButton = new JButton();
 		nextButton.setToolTipText(Strings.next);
 		nextButton.setIcon(Imagen.imagenes.get(Imagen.BTN_NEXT));
+		nextButton.setFocusable(false);
 
 		volumeControl = new JSlider();
 	}

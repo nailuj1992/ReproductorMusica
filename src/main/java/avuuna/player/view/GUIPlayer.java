@@ -42,6 +42,7 @@ public class GUIPlayer extends View {
 
 		openItem = new JMenuItem();
 		openItem.setText(Strings.abrir);
+		openItem.setIcon(Imagen.imagenes.get(Imagen.IMG_OPEN));
 		fileMenu.add(openItem);
 	}
 	

@@ -30,7 +30,9 @@ public class GUIPanelPlaylist extends JPanel {
 		jScrollPane1.setViewportView(songList);
         
         clearButton = new JButton();
-        clearButton.setText(Strings.borrarLista);
+        clearButton.setToolTipText(Strings.borrarLista);
+        clearButton.setIcon(Imagen.imagenes.get(Imagen.BTN_CLOSE));
+        clearButton.setFocusable(false);
 	}
 	
 	private void posicioneElementos() {
