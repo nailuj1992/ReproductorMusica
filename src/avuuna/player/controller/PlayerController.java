@@ -19,34 +19,37 @@ public class PlayerController implements Serializable, Observador {
 	public GUIPlayer view;
 	
 	private boolean running;
-    private final Thread progressThread;
 
 	public PlayerController(BasicPlayer basicPlayer) {
 		model = Player.getInstance(basicPlayer);
 		view = new GUIPlayer();
+		running = false;
 
 		definaAcciones();
-		
-		running = false;
-		progressThread = new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    if (model.getActual() != null) {
-                        view.panel_player.bar_progreso.setValue((int) model.getProgressBytes());
-                        try {
-                        	view.panel_player.bar_progreso.setString(Utils.formatTime(model.getProgressTime()) + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
-                        } catch (Exception ex) {
-                            Utils.display("Exception found -> " + ex.getMessage());
-                        }
-                    } else {
-                    	view.panel_player.bar_progreso.setValue(0);
-                    	view.panel_player.bar_progreso.setString(Strings.TIEMPO_CERO);
-                    }
-                }
-            }
-        };
-        progressThread.start();
+		accionarThread();
+	}
+	
+	private void accionarThread() {
+		Thread progressThread = new Thread() {
+
+			@Override
+			public void run() {
+				while (true) {
+					if (model.getActual() != null) {
+						view.panel_player.bar_progreso.setValue((int) model.getProgressBytes());
+						try {
+							view.panel_player.bar_progreso.setString(Utils.formatTime(model.getProgressTime()) + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
+						} catch (Exception ex) {
+							Utils.display("Exception found -> " + ex.getMessage());
+						}
+					} else {
+						view.panel_player.bar_progreso.setValue(0);
+						view.panel_player.bar_progreso.setString(Strings.TIEMPO_CERO);
+					}
+				}
+			}
+		};
+		progressThread.start();
 	}
 
 	private void definaAcciones() {
@@ -72,6 +75,8 @@ public class PlayerController implements Serializable, Observador {
         		case Strings.pause:
         			pauseSong();
         			break;
+            	default:
+            		break;
         		}
             }
         });
