@@ -13,18 +13,18 @@ import static org.junit.Assert.*;
  */
 public class PlayerTest {
 
-	private Player player;
-	private Song song1, song2, song3;
+	private Reproductor player;
+	private Cancion song1, song2, song3;
 	private int sleep;
 
 	@Before
 	public void setUp() {
 		BasicPlayer basicPlayer = new BasicPlayer();
-		player = Player.getInstance(basicPlayer);
+		player = Reproductor.getInstance(basicPlayer);
 
-		song1 = new Song("resources/music/14 - Vale Healing.mp3");
-		song2 = new Song("resources/music/06 - Nemesis.mp3");
-		song3 = new Song("resources/music/03 - Times Change.mp3");
+		song1 = new Cancion("resources/music/14 - Vale Healing.mp3");
+		song2 = new Cancion("resources/music/06 - Nemesis.mp3");
+		song3 = new Cancion("resources/music/03 - Times Change.mp3");
 
 		sleep = 500;
 	}

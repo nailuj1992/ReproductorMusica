@@ -8,25 +8,25 @@ import java.net.*;
  * @author Avuuna, la Luz del Alba
  * 
  */
-public class Song extends File implements Serializable {
+public class Cancion extends File implements Serializable {
 	private static final long serialVersionUID = 8353266338494775220L;
 
 	private long duration;
 	private double bytesLength;
 
-	public Song(URI uri) {
+	public Cancion(URI uri) {
 		super(uri);
 	}
 
-	public Song(File parent, String child) {
+	public Cancion(File parent, String child) {
 		super(parent, child);
 	}
 
-	public Song(String pathname) {
+	public Cancion(String pathname) {
 		super(pathname);
 	}
 
-	public Song(String parent, String child) {
+	public Cancion(String parent, String child) {
 		super(parent, child);
 	}
 

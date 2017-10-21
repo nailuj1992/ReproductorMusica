@@ -12,28 +12,28 @@ import javazoom.jl.player.basic.*;
  * @author Avuuna, la Luz del Alba
  * 
  */
-public class Player extends Sujeto implements BasicPlayerListener, Serializable {
+public class Reproductor extends Sujeto implements BasicPlayerListener, Serializable {
 	private static final long serialVersionUID = -6648685344329730558L;
 
-	public static Player reproductor = null;
+	public static Reproductor reproductor = null;
 
 	private int actualEvent;
 	private long progressTime;
 	private double progressBytes;
 	private final BasicPlayer player;
-	private Song actual;
-	private List<Song> songs;
+	private Cancion actual;
+	private List<Cancion> songs;
 
-	public static Player getInstance(BasicPlayer player) {
+	public static Reproductor getInstance(BasicPlayer player) {
 		if (reproductor == null) {
-			reproductor = new Player(player);
+			reproductor = new Reproductor(player);
 		}
 		return reproductor;
 	}
 
-	private Player(BasicPlayer player) {
+	private Reproductor(BasicPlayer player) {
 		this.player = player;
-		setSongs(new ArrayList<Song>());
+		setSongs(new ArrayList<Cancion>());
 
 		player.addBasicPlayerListener(this);
 		setController(player);
@@ -43,11 +43,11 @@ public class Player extends Sujeto implements BasicPlayerListener, Serializable 
 		return player;
 	}
 
-	public Song getActual() {
+	public Cancion getActual() {
 		return actual;
 	}
 
-	public void setActual(Song actual) {
+	public void setActual(Cancion actual) {
 		this.actual = actual;
 	}
 
@@ -71,7 +71,7 @@ public class Player extends Sujeto implements BasicPlayerListener, Serializable 
 		this.progressBytes = progressBytes;
 	}
 
-	public void addSong(Song song) throws PlayerException {
+	public void addSong(Cancion song) throws PlayerException {
 		if (isSongInList(song)) {
 			throw new PlayerException(PlayerException.REPEATED_SONG);
 		}
@@ -79,12 +79,12 @@ public class Player extends Sujeto implements BasicPlayerListener, Serializable 
 		notifyObservers();
 	}
 
-	public void removeSong(Song song) {
+	public void removeSong(Cancion song) {
 		songs.remove(song);
 		notifyObservers();
 	}
 
-	public boolean isSongInList(Song song) {
+	public boolean isSongInList(Cancion song) {
 		boolean found = false;
 		for (int i = 0; i < songs.size() && !found; i++) {
 			if (songs.get(i).equals(song)) {
@@ -101,17 +101,17 @@ public class Player extends Sujeto implements BasicPlayerListener, Serializable 
 		notifyObservers();
 	}
 
-	public List<Song> getSongs() {
+	public List<Cancion> getSongs() {
 		return songs;
 	}
 
-	public void setSongs(List<Song> songs) {
+	public void setSongs(List<Cancion> songs) {
 		this.songs = songs;
 	}
 
-	public Song getSong(String name) {
-		Song resp = null;
-		for (Song song : songs) {
+	public Cancion getSong(String name) {
+		Cancion resp = null;
+		for (Cancion song : songs) {
 			if (name.equals(song.getName())) {
 				resp = song;
 				break;
@@ -156,12 +156,12 @@ public class Player extends Sujeto implements BasicPlayerListener, Serializable 
 					play();
 				}
 			} catch (BasicPlayerException ex) {
-				Utils.log(Player.class.getName(), ex);
+				Utils.log(Reproductor.class.getName(), ex);
 			}
 		}
 	}
 
-	public void open(Song song) throws BasicPlayerException {
+	public void open(Cancion song) throws BasicPlayerException {
 		player.open(song);
 		actualEvent = BasicPlayerEvent.OPENED;
 		notifyObservers();

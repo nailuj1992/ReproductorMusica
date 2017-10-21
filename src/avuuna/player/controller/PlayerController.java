@@ -15,13 +15,13 @@ import javazoom.jl.player.basic.*;
 public class PlayerController implements Serializable, Observador {
 	private static final long serialVersionUID = 232492703123683857L;
 
-	public Player model;
+	public Reproductor model;
 	public GUIPlayer view;
 	
 	private boolean running;
 
 	public PlayerController(BasicPlayer basicPlayer) {
-		model = Player.getInstance(basicPlayer);
+		model = Reproductor.getInstance(basicPlayer);
 		view = new GUIPlayer();
 		running = false;
 
@@ -143,7 +143,7 @@ public class PlayerController implements Serializable, Observador {
 				for (File s : songs) {
 					if (s.getAbsolutePath().endsWith(".mp3")) {
 						try {
-							Song song = new Song(s.getAbsolutePath());
+							Cancion song = new Cancion(s.getAbsolutePath());
 							model.addSong(song);
 							if (model.getActual() == null) {
 								model.setActual(song);
@@ -236,7 +236,7 @@ public class PlayerController implements Serializable, Observador {
 
     private void openSong(String selected) {
         try {
-            Song song = model.getSong(selected);
+            Cancion song = model.getSong(selected);
             model.setActual(song);
             model.stop();
             model.open(song);
@@ -287,7 +287,7 @@ public class PlayerController implements Serializable, Observador {
 		view.panel_player.repaint();
 		
 		view.panel_playlist.dlm_datosLista.clear();
-        for (Song song : model.getSongs()) {
+        for (Cancion song : model.getSongs()) {
             String resp = song.getName();
             if (model.getActual() != null && model.getActual().equals(song)) {
                 resp = Strings.ACTUAL + resp;
