@@ -1,6 +1,6 @@
 package avuuna.player;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import avuuna.player.controller.*;
 import avuuna.player.exception.*;
