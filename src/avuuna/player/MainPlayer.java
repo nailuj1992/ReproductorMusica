@@ -17,7 +17,7 @@ public class MainPlayer {
 
 	public static void main(String[] args) {
 		try {
-			Utils.setLookAndFeel("Nimbus");
+			Utils.setLookAndFeel(Utils.windowsLookAndFeel);
 			BasicPlayer basicPlayer = new BasicPlayer();
 			PlayerController controller = new PlayerController(basicPlayer);
 			controller.model.addObserver(controller);

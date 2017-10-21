@@ -14,6 +14,9 @@ import avuuna.player.exception.*;
  */
 public class Utils {
 
+	public static final String nimbusLookAndFeel = "Nimbus";
+	public static final String windowsLookAndFeel = "Windows";
+
 	public static void display() {
 		System.out.println();
 	}

@@ -19,7 +19,7 @@ public class GUIPlayer extends View {
 	public JMenu fileMenu;
 	public JMenuBar menuBar;
 	public JMenuItem openItem;
-	
+
 	public GUIPanelPlayer panel_player;
 	public GUIPanelPlaylist panel_playlist;
 
@@ -45,16 +45,16 @@ public class GUIPlayer extends View {
 		openItem.setIcon(Imagen.imagenes.get(Imagen.IMG_OPEN));
 		fileMenu.add(openItem);
 	}
-	
+
 	private void prepareElementos() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos MP3", "mp3");
 		fileChooser = new JFileChooser();
 		fileChooser.setFileFilter(filter);
 		fileChooser.setMultiSelectionEnabled(true);
-		
+
 		panel_player = new GUIPanelPlayer();
 		panel_playlist = new GUIPanelPlaylist();
-		
+
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panel_player, panel_playlist);
 		splitPane.setEnabled(false);
 		this.add(splitPane, BorderLayout.CENTER);
