@@ -326,6 +326,10 @@ public class PlayerController implements Serializable, Observador {
         }
     }
     
+    /**
+     * Permite quitar una cancion de la lista.
+     * @param selected Cancion seleccionada de la lista.
+     */
     private void removeSong(String selected) {
     	try {
     		Cancion song = model.getSong(selected);
