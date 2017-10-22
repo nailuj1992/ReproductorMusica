@@ -293,7 +293,7 @@ public class PlayerController implements Serializable, Observador {
         try {
         	model.setVolume((double) view.panel_player.slider_barraVolumen.getValue() / 100);
         } catch (BasicPlayerException ex) {
-			Utils.log(PlayerException.ERROR_VOLUME_SONG, ex);
+//			Utils.log(PlayerException.ERROR_VOLUME_SONG, ex);
 //            JOptionPane.showMessageDialog(null, PlayerException.ERROR_VOLUME_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
