@@ -24,6 +24,7 @@ public class Imagen implements Serializable {
 	public static final String BTN_NEXT = "Skip-forward64.png";
 	public static final String BTN_STOP = "Stop64.png";
 	public static final String BTN_PLUS = "Plus16.png";
+	public static final String BTN_LESS = "Less16.png";
 	public static final String BTN_CLOSE = "Close16.png";
 
 	public static final Map<String, ImageIcon> imagenes;
@@ -39,6 +40,7 @@ public class Imagen implements Serializable {
 		ImageIcon btn_next = createImageIcon(rutaImagenes + BTN_NEXT);
 		ImageIcon btn_stop = createImageIcon(rutaImagenes + BTN_STOP);
 		ImageIcon btn_plus = createImageIcon(rutaImagenes + BTN_PLUS);
+		ImageIcon btn_less = createImageIcon(rutaImagenes + BTN_LESS);
 		ImageIcon btn_close = createImageIcon(rutaImagenes + BTN_CLOSE);
 
 		imagenes.put(IMG_LOGO, img_logo);
@@ -49,6 +51,7 @@ public class Imagen implements Serializable {
 		imagenes.put(BTN_NEXT, btn_next);
 		imagenes.put(BTN_STOP, btn_stop);
 		imagenes.put(BTN_PLUS, btn_plus);
+		imagenes.put(BTN_LESS, btn_less);
 		imagenes.put(BTN_CLOSE, btn_close);
 	}
 

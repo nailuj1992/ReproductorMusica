@@ -16,6 +16,7 @@ public class Strings {
 
 	public static final String listaReproduccion = "Lista de Reproducción";
 	public static final String adicionarCancion = "Añadir canciones";
+	public static final String quitarCancion = "Quitar canción";
 	public static final String borrarLista = "Borrar lista";
 
 	public static final String ACTUAL = "> ";
@@ -24,5 +25,6 @@ public class Strings {
 	public static final String CERO = "00:00";
 	
 	public static final String CONFIRMAR = "Confirmación";
+	public static final String confirmarQuitarCancion = "¿Estás seguro de que deseas quitar la canción seleccionada?";
 	public static final String confirmarBorrarLista = "¿Estás seguro de que deseas borrar toda la lista de reproducción?";
 }

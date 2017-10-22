@@ -18,6 +18,9 @@ public class PlayerException extends Exception {
 	public static final String ERROR_PREV_SONG = "Ha ocurrido un error al momento de devolverse a la canción anterior.";
 	public static final String ERROR_VOLUME_SONG = "Ha ocurrido un error al momento de cambiar el volumen.";
 	public static final String ERROR_REMOVE_SONG = "La canción a quitar no existe en la lista.";
+	public static final String ERROR_REMOVE_SONG_NO_EXISTS = "La canción a quitar no existe en la lista.";
+	public static final String ERROR_NO_SONG_SELECTED = "No hay una canción seleccionada.";
+	public static final String ERROR_NO_SONGS_LIST = "No hay canciones cargadas en la lista.";
 	public static final String ERROR_CLEAR_LIST = "Ha ocurrido un error al momento de borrar la lista de reproducción.";
 
     public PlayerException(String message) {

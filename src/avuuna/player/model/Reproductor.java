@@ -124,13 +124,22 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	 * Quita una cancion del reproductor y notifica a los observadores del cambio.
 	 * @param song Archivo de la cancion a quitar.
 	 * @throws PlayerException Cuando la cancion a quitar no existe en la lista.
+	 * @throws BasicPlayerException Excepcion lanzada por <code>stop()</code> y <code>next()</code>.
 	 */
-	public void removeSong(Cancion song) throws PlayerException {
+	public void removeSong(Cancion song) throws PlayerException, BasicPlayerException {
 		boolean quito = songs.remove(song);
-		notifyObservers();
 		if (!quito) {
-			throw new PlayerException(PlayerException.ERROR_REMOVE_SONG);
+			throw new PlayerException(PlayerException.ERROR_REMOVE_SONG_NO_EXISTS);
 		}
+		if (actual == song) {
+			if (songs.size() > 0) {
+				next();
+			} else {
+				stop();
+				setActual(null);
+			}
+		}
+		notifyObservers();
 	}
 
 	/**
@@ -282,7 +291,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Busca la cancion siguiente de la lista y la abre. Si es la ultima cancion, abre la primera.
+	 * Detiene la cancion actual, busca la cancion siguiente de la lista y la abre. Si es la ultima cancion, abre la primera.
 	 * @throws BasicPlayerException Excepcion lanzada por <code>open()</code>.
 	 */
 	public void next() throws BasicPlayerException {
@@ -299,7 +308,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	/**
-	 * Busca la cancion anterior de la lista y la abre. Si es la primera cancion, abre la ultima.
+	 * Detiene la cancion actual, busca la cancion anterior de la lista y la abre. Si es la primera cancion, abre la ultima.
 	 * @throws BasicPlayerException Excepcion lanzada por <code>open()</code>.
 	 */
 	public void previous() throws BasicPlayerException {

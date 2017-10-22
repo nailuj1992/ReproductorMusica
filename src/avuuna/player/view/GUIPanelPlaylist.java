@@ -14,7 +14,7 @@ import avuuna.player.utils.*;
 public class GUIPanelPlaylist extends JPanel {
 	private static final long serialVersionUID = -6374452046140600636L;
 
-	public JButton btn_adicionar, btn_borrar;
+	public JButton btn_adicionar, btn_quitarUno, btn_borrar;
 
 	public JScrollPane scroll_lista;
 	public JList<String> list_canciones;
@@ -43,6 +43,11 @@ public class GUIPanelPlaylist extends JPanel {
 		btn_adicionar.setIcon(Imagen.imagenes.get(Imagen.BTN_PLUS));
 		btn_adicionar.setFocusable(false);
 
+		btn_quitarUno = new JButton();
+		btn_quitarUno.setToolTipText(Strings.quitarCancion);
+		btn_quitarUno.setIcon(Imagen.imagenes.get(Imagen.BTN_LESS));
+		btn_quitarUno.setFocusable(false);
+
 		btn_borrar = new JButton();
 		btn_borrar.setToolTipText(Strings.borrarLista);
 		btn_borrar.setIcon(Imagen.imagenes.get(Imagen.BTN_CLOSE));
@@ -61,19 +66,19 @@ public class GUIPanelPlaylist extends JPanel {
 		this.setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addComponent(scroll_lista, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-				.addGroup(layout.createSequentialGroup().addGap(80, 80, 80).addComponent(btn_adicionar)
+				.addGroup(layout.createSequentialGroup().addGap(50, 50, 50).addComponent(btn_adicionar)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btn_quitarUno)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btn_borrar)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(scroll_lista, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(layout.createSequentialGroup()
-										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(btn_adicionar).addComponent(btn_borrar))
-										.addGap(0, 0, Short.MAX_VALUE)))
-						.addContainerGap()));
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
+				.createSequentialGroup().addComponent(scroll_lista, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
+						.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(btn_adicionar)
+								.addComponent(btn_quitarUno).addComponent(btn_borrar))
+						.addGap(0, 0, Short.MAX_VALUE)))
+				.addContainerGap()));
 
 		getAccessibleContext().setAccessibleParent(this);
 	}

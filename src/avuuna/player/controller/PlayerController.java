@@ -142,17 +142,46 @@ public class PlayerController implements Serializable, Observador {
             }
 		});
 		
+		view.panel_playlist.btn_quitarUno.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (model.getSongs().size() > 0) {
+					String selected = view.panel_playlist.list_canciones.getSelectedValue();
+					if (selected != null) {
+						int seleccion = JOptionPane.showConfirmDialog(view, Strings.confirmarQuitarCancion,
+								Strings.CONFIRMAR, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+						if (seleccion == JOptionPane.YES_OPTION) {
+							selected = selected.replace(Strings.ACTUAL, "");
+							removeSong(selected);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
+								PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONGS_LIST, PlayerException.ERROR,
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
 		view.panel_playlist.btn_borrar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-            	if (!view.panel_playlist.dlm_datosLista.isEmpty()) {
-                	int seleccion = JOptionPane.showConfirmDialog(view, Strings.confirmarBorrarLista, Strings.CONFIRMAR, 
-                			JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
-                	if (seleccion == JOptionPane.YES_OPTION) {
-                    	clearPlaylist();
-                	}
-            	}
-            }
-        });
+			public void actionPerformed(ActionEvent evt) {
+				if (model.getSongs().size() > 0) {
+					if (!view.panel_playlist.dlm_datosLista.isEmpty()) {
+						int seleccion = JOptionPane.showConfirmDialog(view, Strings.confirmarBorrarLista,
+								Strings.CONFIRMAR, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+						if (seleccion == JOptionPane.YES_OPTION) {
+							clearPlaylist();
+						}
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONGS_LIST, PlayerException.ERROR,
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 	}
 
 	/**
@@ -295,6 +324,19 @@ public class PlayerController implements Serializable, Observador {
 			Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
             JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    private void removeSong(String selected) {
+    	try {
+    		Cancion song = model.getSong(selected);
+    		model.removeSong(song);
+        } catch (BasicPlayerException ex) {
+			Utils.log(PlayerException.ERROR_REMOVE_SONG, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_REMOVE_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+        } catch (PlayerException ex) {
+			Utils.log(PlayerException.ERROR_REMOVE_SONG_NO_EXISTS, ex);
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_REMOVE_SONG_NO_EXISTS, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+		}
     }
 
 	@Override
