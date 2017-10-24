@@ -78,6 +78,8 @@ public class GUIPlayer extends View {
 		fileChooser = new JFileChooser();
 		fileChooser.setFileFilter(filter);
 		fileChooser.setMultiSelectionEnabled(true);
+		fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 		panel_player = new JPanel();
 		panel_playlist = new JPanel();
@@ -87,9 +89,6 @@ public class GUIPlayer extends View {
 
 		prepareElementosPanelLista();
 		posicioneElementosPanelLista();
-		
-//		panel_player = new GUIPanelPlayer();
-//		panel_playlist = new GUIPanelPlaylist();
 
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panel_player, panel_playlist);
 		splitPane.setEnabled(false);
