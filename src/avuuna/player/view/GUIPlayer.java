@@ -28,7 +28,7 @@ public class GUIPlayer extends View {
 	public JLabel lbl_cancionActual;
 	public JButton btn_play, btn_stop;
 	public JButton btn_previous, btn_next;
-	public JButton btn_repeat;
+	public JButton btn_repeat, btn_random;
 	public JProgressBar bar_progreso;
 
 	//// Panel de Volumen
@@ -134,6 +134,12 @@ public class GUIPlayer extends View {
 		// btn_repeat.setIcon(Imagen.imagenes.get(Imagen.BTN_));
 		btn_repeat.setFocusable(false);
 
+		btn_random = new JButton();
+		btn_random.setToolTipText(Strings.randomOff);
+		btn_random.setText("Rand OFF");
+		// btn_random.setIcon(Imagen.imagenes.get(Imagen.BTN_));
+		btn_random.setFocusable(false);
+
 		slider_barraVolumen = new JSlider();
 		slider_barraVolumen.setFocusable(false);
 	}
@@ -161,6 +167,8 @@ public class GUIPlayer extends View {
 						.addComponent(btn_next, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addComponent(btn_repeat, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(btn_random, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(80, Short.MAX_VALUE))
 				.addComponent(bar_progreso, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 		detailsPanelLayout.setVerticalGroup(detailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -180,6 +188,8 @@ public class GUIPlayer extends View {
 												.addComponent(btn_next, GroupLayout.PREFERRED_SIZE, 65,
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(btn_repeat, GroupLayout.PREFERRED_SIZE, 65,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btn_random, GroupLayout.PREFERRED_SIZE, 65,
 														GroupLayout.PREFERRED_SIZE))
 										.addGap(7, 7, Short.MAX_VALUE)))
 						.addContainerGap()));

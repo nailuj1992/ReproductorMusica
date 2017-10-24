@@ -27,11 +27,18 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 
 	/**
 	 * Permite cambiar el modo de repeticion.
-	 * <li><b>true</b> Si corresponde a repetir toda la lista de reproduccion.<br>
-	 * <li><b>false</b> Si corresponde a repetir SOLO la cancion actual.<br>
-	 * <li><b>null</b> Si no hay ningun tipo de repeticion.
+	 * <li><b>true</b> si corresponde a repetir toda la lista de reproduccion.<br>
+	 * <li><b>false</b> si corresponde a repetir SOLO la cancion actual.<br>
+	 * <li><b>null</b> si no hay ningun tipo de repeticion.
 	 */
 	public Boolean repeatMode;
+
+	/**
+	 * Permite cambiar el modo aleatorio.
+	 * <li><b>true</b> para activar el modo aleatorio.<br>
+	 * <li><b>false</b> para desactivar el modo aleatorio.<br>
+	 */
+	public boolean randomMode;
 
 	/**
 	 * Obtiene el reproductor actual.
@@ -49,6 +56,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 		this.player = player;
 		setSongs(new ArrayList<Cancion>());
 		repeatMode = null;
+		randomMode = false;
 
 		player.addBasicPlayerListener(this);
 		setController(player);
@@ -236,16 +244,23 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 					nextSelf();
 				} else {
 					int current = songs.indexOf(actual);
-					if (current == songs.size() - 1) {
-						if (repeatMode != null && repeatMode) {
-							next();
-						} else {
-							nextAndStop();
-						}
-					} else if (current < songs.size() - 1) {
-						actual = songs.get(current + 1);
+					if (randomMode) {
+						int random = Utils.getRandomWithExclusion(0, songs.size() - 1, current);
+						actual = songs.get(random);
 						open(actual);
 						play();
+					} else {
+						if (current == songs.size() - 1) {
+							if (repeatMode != null && repeatMode) {
+								next();
+							} else {
+								nextAndStop();
+							}
+						} else if (current < songs.size() - 1) {
+							actual = songs.get(current + 1);
+							open(actual);
+							play();
+						}
 					}
 				}
 			} catch (BasicPlayerException ex) {

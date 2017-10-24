@@ -158,6 +158,31 @@ public class PlayerController implements Serializable, Observador {
 			}
 		});
 		
+		view.btn_random.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String modoRandom = view.btn_random.getToolTipText().trim();
+				boolean modo;
+				
+				switch (modoRandom) {
+				case Strings.randomOff:
+					view.btn_random.setToolTipText(Strings.randomOn);
+					view.btn_random.setText("Rand ON");
+					modo = true;
+					break;
+				case Strings.randomOn:
+				default:
+					view.btn_random.setToolTipText(Strings.randomOff);
+					view.btn_random.setText("Rand OFF");
+					modo = false;
+					break;
+				}
+				
+				model.randomMode = modo;
+			}
+		});
+		
 		view.slider_barraVolumen.addChangeListener(new ChangeListener() {
 
 			@Override

@@ -18,6 +18,9 @@ public class Strings {
 	public static final String repeatOne = "Repetir uno";
 	public static final String noRepeat = "No repetir";
 
+	public static final String randomOn = "Modo Aleatorio Activado";
+	public static final String randomOff = "Modo Aleatorio Desactivado";
+
 	public static final String listaReproduccion = "Lista de Reproducción";
 	public static final String adicionarCancion = "Añadir canciones";
 	public static final String quitarCancion = "Quitar canción";

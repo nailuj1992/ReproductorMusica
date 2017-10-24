@@ -1,6 +1,7 @@
 package avuuna.player.utils;
 
 import java.io.*;
+import java.util.*;
 import java.util.logging.*;
 
 import javax.swing.*;
@@ -119,4 +120,24 @@ public class Utils {
 		ex.printStackTrace(new PrintWriter(errors));
 		return errors.toString();
 	}
+	
+	/**
+	 * Obtiene un numero aleatorio entre el intervalo cerrado ingresado.
+	 * @param start es el extremo inferior del intervalo.
+	 * @param end es el extremo superior del intervalo.
+	 * @param exclude son las cantidades a excluir, dentro del calculo del numero aleatorio.
+	 * @return
+	 */
+	public static int getRandomWithExclusion(int start, int end, int... exclude) {
+		Random rnd = new Random();
+		int random = start + rnd.nextInt(end - start + 1 - exclude.length);
+		for (int ex : exclude) {
+			if (random < ex) {
+				break;
+			}
+			random++;
+		}
+		return random;
+	}
+
 }
