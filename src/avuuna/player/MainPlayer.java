@@ -20,7 +20,7 @@ public class MainPlayer {
 	public static void main(String[] args) {
 		try {
 			Utils.setLookAndFeel(Utils.windowsLookAndFeel);
-			PlayerController controller = new PlayerController();
+			PlayerController controller = PlayerController.getInstance();
 			controller.iniciar();
 		} catch (LookAndFeelException ex) {
 			Utils.display(ex.getClass().getName() + ": " + ex.getMessage());
