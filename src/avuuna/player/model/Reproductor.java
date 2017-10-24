@@ -42,7 +42,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 
 	/**
 	 * Obtiene el reproductor actual.
-	 * @return Obtiene una unica instancia del reproductor (<b>Patron Singleton</b>).
+	 * @return Obtiene la unica instancia del reproductor (<b>Patron Singleton</b>).
 	 */
 	public static Reproductor getInstance() {
 		if (reproductor == null) {
