@@ -251,7 +251,6 @@ public class PlayerController implements Serializable, Observador {
 						} catch (BasicPlayerException | PlayerException ex) {
 							Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
 							if (songs.length == 1) {
-								Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
 								JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
 							}
 						}
