@@ -90,7 +90,7 @@ public class Utils {
 	}
 
 	/**
-	 * Convierte los milisegundos a formato <b>hh:MM:ss</b>.
+	 * Convierte los milisegundos a formato <b>HH:mm:ss</b>.
 	 * @param miliseconds
 	 * @return Tiempo en el formato descrito antes.
 	 */
