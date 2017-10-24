@@ -104,11 +104,11 @@ public class PlayerTest {
 			player.open(player.getActual());
 			player.play();// 1
 			Thread.sleep(sleep);
-			player.next();// 2
+			player.next(true);// 2
 			Thread.sleep(sleep);
-			player.next();// 3
+			player.next(true);// 3
 			Thread.sleep(sleep);
-			player.next();// 1
+			player.next(true);// 1
 			Thread.sleep(sleep);
 		} catch (PlayerException | BasicPlayerException | InterruptedException ex) {
 			fail(ex.getMessage());
@@ -128,11 +128,11 @@ public class PlayerTest {
 			player.open(player.getActual());
 			player.play();// 1
 			Thread.sleep(sleep);
-			player.previous();// 3
+			player.previous(true);// 3
 			Thread.sleep(sleep);
-			player.previous();// 2
+			player.previous(true);// 2
 			Thread.sleep(sleep);
-			player.previous();// 1
+			player.previous(true);// 1
 			Thread.sleep(sleep);
 		} catch (PlayerException | BasicPlayerException | InterruptedException ex) {
 			fail(ex.getMessage());

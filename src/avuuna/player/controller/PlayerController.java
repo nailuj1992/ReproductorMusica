@@ -188,7 +188,7 @@ public class PlayerController implements Serializable, Observador {
 					break;
 				}
 				
-				model.randomMode = modo;
+				model.setRandomMode(modo);
 			}
 		});
 		
@@ -347,7 +347,7 @@ public class PlayerController implements Serializable, Observador {
      */
     private void nextSong() {
         try {
-        	model.next();
+        	model.next(true);
         } catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_NEXT_SONG, ex);
             JOptionPane.showMessageDialog(null, PlayerException.ERROR_NEXT_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
@@ -359,7 +359,7 @@ public class PlayerController implements Serializable, Observador {
      */
     private void previousSong() {
         try {
-        	model.previous();
+        	model.previous(true);
         } catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_PREV_SONG, ex);
             JOptionPane.showMessageDialog(null, PlayerException.ERROR_PREV_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
