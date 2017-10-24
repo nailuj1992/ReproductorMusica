@@ -21,7 +21,7 @@ import javazoom.jl.player.basic.*;
 public class PlayerController implements Serializable, Observador {
 	private static final long serialVersionUID = 232492703123683857L;
 
-	public static PlayerController controller = null;
+	private static PlayerController controller = null;
 
 	public Reproductor model;
 	public GUIPlayer view;
