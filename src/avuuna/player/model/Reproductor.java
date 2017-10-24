@@ -26,6 +26,14 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	private List<Cancion> songs;
 
 	/**
+	 * Permite cambiar el modo de repeticion.
+	 * <li><b>true</b> Si corresponde a repetir toda la lista de reproduccion.<br>
+	 * <li><b>false</b> Si corresponde a repetir SOLO la cancion actual.<br>
+	 * <li><b>null</b> Si no hay ningun tipo de repeticion.
+	 */
+	public Boolean repeatMode;
+
+	/**
 	 * Obtiene el reproductor actual.
 	 * @return Obtiene una unica instancia del reproductor (<b>Patron Singleton</b>).
 	 */
@@ -40,6 +48,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	private Reproductor(BasicPlayer player) {
 		this.player = player;
 		setSongs(new ArrayList<Cancion>());
+		repeatMode = null;
 
 		player.addBasicPlayerListener(this);
 		setController(player);
@@ -223,13 +232,21 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 		// Utils.display("stateUpdated : " + event.toString());
 		if (event.getCode() == BasicPlayerEvent.EOM) {
 			try {
-				int current = songs.indexOf(actual);
-				if (current == songs.size() - 1) {
-					stop();
-				} else if (current < songs.size() - 1) {
-					actual = songs.get(current + 1);
-					open(actual);
-					play();
+				if (repeatMode != null && !repeatMode) {
+					nextSelf();
+				} else {
+					int current = songs.indexOf(actual);
+					if (current == songs.size() - 1) {
+						if (repeatMode != null && repeatMode) {
+							next();
+						} else {
+							nextAndStop();
+						}
+					} else if (current < songs.size() - 1) {
+						actual = songs.get(current + 1);
+						open(actual);
+						play();
+					}
 				}
 			} catch (BasicPlayerException ex) {
 				Utils.log(Reproductor.class.getName(), ex);
@@ -305,6 +322,24 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 			}
 			open(actual);
 		}
+	}
+	
+	/**
+	 * Obtiene la siguiente cancion y la detiene.
+	 * @throws BasicPlayerException Excepcion lanzada por <code>next()</code> y <code>stop()</code>.
+	 */
+	public void nextAndStop() throws BasicPlayerException {
+		next();
+		stop();
+	}
+	
+	/**
+	 * Detiene y vuelve a abrir la cancion actual (en otras palabras, la repite).
+	 * @throws BasicPlayerException BasicPlayerException Excepcion lanzada por <code>stop()</code> y <code>open()</code>.
+	 */
+	public void nextSelf() throws BasicPlayerException {
+		stop();
+		open(actual);
 	}
 
 	/**

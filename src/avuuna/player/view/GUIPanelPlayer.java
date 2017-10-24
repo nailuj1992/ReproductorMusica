@@ -17,6 +17,7 @@ public class GUIPanelPlayer extends JPanel {
 	public JLabel lbl_cancionActual;
 	public JButton btn_play, btn_stop;
 	public JButton btn_previous, btn_next;
+	public JButton btn_repeat;
 	public JProgressBar bar_progreso;
 
 	public JPanel panel_volumen;
@@ -59,6 +60,12 @@ public class GUIPanelPlayer extends JPanel {
 		btn_next.setToolTipText(Strings.next);
 		btn_next.setIcon(Imagen.imagenes.get(Imagen.BTN_NEXT));
 		btn_next.setFocusable(false);
+		
+		btn_repeat = new JButton();
+		btn_repeat.setToolTipText(Strings.noRepeat);
+		btn_repeat.setText("R No");
+//		btn_repeat.setIcon(Imagen.imagenes.get(Imagen.BTN_NEXT));
+		btn_repeat.setFocusable(false);
 
 		slider_barraVolumen = new JSlider();
 		slider_barraVolumen.setFocusable(false);
@@ -85,6 +92,8 @@ public class GUIPanelPlayer extends JPanel {
 						.addComponent(btn_stop, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addComponent(btn_next, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(btn_repeat, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(80, Short.MAX_VALUE))
 				.addComponent(bar_progreso, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 		detailsPanelLayout.setVerticalGroup(detailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -102,6 +111,8 @@ public class GUIPanelPlayer extends JPanel {
 												.addComponent(btn_previous, GroupLayout.PREFERRED_SIZE, 65,
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(btn_next, GroupLayout.PREFERRED_SIZE, 65,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btn_repeat, GroupLayout.PREFERRED_SIZE, 65,
 														GroupLayout.PREFERRED_SIZE))
 										.addGap(7, 7, Short.MAX_VALUE)))
 						.addContainerGap()));

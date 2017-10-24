@@ -76,6 +76,7 @@ public class PlayerController implements Serializable, Observador {
 		view.openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 
 		view.openItem.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				accionAbrirCancion();
@@ -83,6 +84,8 @@ public class PlayerController implements Serializable, Observador {
 		});
 		
 		view.panel_player.btn_play.addActionListener(new ActionListener() {
+
+			@Override
             public void actionPerformed(ActionEvent evt) {
             	switch (view.panel_player.btn_play.getToolTipText()) {
         		case Strings.play:
@@ -102,30 +105,70 @@ public class PlayerController implements Serializable, Observador {
         });
 		
 		view.panel_player.btn_stop.addActionListener(new ActionListener() {
+
+			@Override
             public void actionPerformed(ActionEvent evt) {
             	stopSong();
             }
         });
 		
 		view.panel_player.btn_next.addActionListener(new ActionListener() {
+
+			@Override
             public void actionPerformed(ActionEvent evt) {
                 nextSong();
             }
         });
 		
 		view.panel_player.btn_previous.addActionListener(new ActionListener() {
+
+			@Override
             public void actionPerformed(ActionEvent evt) {
             	previousSong();
             }
         });
 		
+		view.panel_player.btn_repeat.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String modoRepeticion = view.panel_player.btn_repeat.getToolTipText().trim();
+				Boolean modo;
+
+				switch (modoRepeticion) {
+				case Strings.noRepeat:
+					view.panel_player.btn_repeat.setToolTipText(Strings.repeatAll);
+					view.panel_player.btn_repeat.setText("R All");
+					modo = true;
+					break;
+				case Strings.repeatAll:
+					view.panel_player.btn_repeat.setToolTipText(Strings.repeatOne);
+					view.panel_player.btn_repeat.setText("R 1");
+					modo = false;
+					break;
+				case Strings.repeatOne:
+				default:
+					view.panel_player.btn_repeat.setToolTipText(Strings.noRepeat);
+					view.panel_player.btn_repeat.setText("R No");
+					modo = null;
+					break;
+				}
+
+				model.repeatMode = modo;
+			}
+		});
+		
 		view.panel_player.slider_barraVolumen.addChangeListener(new ChangeListener() {
+
+			@Override
             public void stateChanged(ChangeEvent evt) {
             	setVolume();
             }
         });
 		
 		view.panel_playlist.list_canciones.addMouseListener(new MouseAdapter() {
+
+			@Override
             public void mouseClicked(MouseEvent evt) {
             	if (evt.getClickCount() == 2) {// Doble clic
                     String selected = (String) view.panel_playlist.list_canciones.getSelectedValue();
@@ -137,6 +180,8 @@ public class PlayerController implements Serializable, Observador {
         });
 		
 		view.panel_playlist.btn_adicionar.addActionListener(new ActionListener() {
+
+			@Override
             public void actionPerformed(ActionEvent evt) {
             	accionAbrirCancion();
             }
@@ -167,6 +212,8 @@ public class PlayerController implements Serializable, Observador {
 		});
 		
 		view.panel_playlist.btn_borrar.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent evt) {
 				if (model.getSongs().size() > 0) {
 					if (!view.panel_playlist.dlm_datosLista.isEmpty()) {
