@@ -1,44 +1,26 @@
 package avuuna.player.utils;
 
-import java.io.*;
-import java.util.*;
-
 /**
  * Clase perteneciente al patron <i>Observador-Observado</i>, en donde esta es el <i>Observado</i>.
  * @author Avuuna, la Luz del Alba
  *
  */
-public abstract class Sujeto implements Serializable {
-	private static final long serialVersionUID = 6373917034012716471L;
-
-	private final ArrayList<Observador> observers;
-
-	protected Sujeto() {
-		observers = new ArrayList<Observador>();
-	}
+public interface Sujeto {
 
 	/**
 	 * Adiciona un observador.
 	 * @param o
 	 */
-	public void addObserver(Observador o) {
-		observers.add(o);
-	}
+	public void addObserver(Observador o);
 
 	/**
 	 * Quita un observador.
 	 * @param o
 	 */
-	public void removeObserver(Observador o) {
-		observers.remove(o);
-	}
+	public void removeObserver(Observador o);
 
 	/**
 	 * Notifica a todos los observadores de los ultimos cambios.
 	 */
-	public void notifyObservers() {
-		for (Observador o : observers) {
-			o.update();
-		}
-	}
+	public void notifyObservers();
 }

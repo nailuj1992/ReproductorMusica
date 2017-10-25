@@ -13,10 +13,12 @@ import javazoom.jl.player.basic.*;
  * @author Avuuna, la Luz del Alba
  * 
  */
-public class Reproductor extends Sujeto implements BasicPlayerListener, Serializable {
+public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	private static final long serialVersionUID = -6648685344329730558L;
 
 	private static Reproductor reproductor = null;
+
+	private final ArrayList<Observador> observers;
 
 	private int actualEvent;
 	private long progressTime;
@@ -63,6 +65,8 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 
 		player.addBasicPlayerListener(this);
 		setController(player);
+
+		observers = new ArrayList<Observador>();
 	}
 
 	/**
@@ -253,7 +257,6 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	@Override
 	public void opened(Object stream, @SuppressWarnings("rawtypes") Map properties) {
 		// Utils.display("opened : " + properties.toString());
-
 		if (properties.containsKey("duration")) {
 			actual.setDuration(Long.parseLong(properties.get("duration").toString()));
 		}
@@ -266,7 +269,6 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	public void progress(int bytesread, long microseconds, byte[] pcmdata,
 			@SuppressWarnings("rawtypes") Map properties) {
 		// Utils.display("progress : " + properties.toString());
-		
 		if (properties.containsKey("mp3.position.microseconds")) {
 			this.setProgressTime(Long.parseLong(properties.get("mp3.position.microseconds").toString()));
 		}
@@ -278,7 +280,6 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	@Override
 	public void stateUpdated(BasicPlayerEvent event) {
 		// Utils.display("stateUpdated : " + event.toString());
-
 		if (event.getCode() == BasicPlayerEvent.EOM) {
 			try {
 				if (repeatMode != null && !repeatMode) {
@@ -480,7 +481,23 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	@Override
 	public void setController(BasicController controller) {
 		// Utils.display("setController : " + controller);
-
 		return;
+	}
+
+	@Override
+	public void addObserver(Observador o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void removeObserver(Observador o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (Observador o : observers) {
+			o.update();
+		}
 	}
 }
