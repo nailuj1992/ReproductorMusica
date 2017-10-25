@@ -208,6 +208,7 @@ public class PlayerController implements Serializable, Observador {
                     String selected = (String) view.list_canciones.getSelectedValue();
                     if (selected != null && !selected.contains(Strings.ACTUAL)) {
                         openSong(selected);
+                        model.clearRandomList();
                     }
                 }
             }

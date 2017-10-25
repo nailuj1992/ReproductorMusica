@@ -208,6 +208,15 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 	
 	/**
+	 * Limpia toda la lista de canciones aleatorias reproducidas, SOLO si esta en modo aleatorio.
+	 */
+	public void clearRandomList() {
+		if (randomMode) {
+			songsRandom.clear();
+		}
+	}
+	
+	/**
 	 * Obtiene la cantidad de canciones que hay en la lista.
 	 * @return
 	 */
