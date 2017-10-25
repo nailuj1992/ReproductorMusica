@@ -253,6 +253,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	@Override
 	public void opened(Object stream, @SuppressWarnings("rawtypes") Map properties) {
 		// Utils.display("opened : " + properties.toString());
+
 		if (properties.containsKey("duration")) {
 			actual.setDuration(Long.parseLong(properties.get("duration").toString()));
 		}
@@ -262,8 +263,10 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	}
 
 	@Override
-	public void progress(int bytesread, long microseconds, byte[] pcmdata, @SuppressWarnings("rawtypes") Map properties) {
+	public void progress(int bytesread, long microseconds, byte[] pcmdata,
+			@SuppressWarnings("rawtypes") Map properties) {
 		// Utils.display("progress : " + properties.toString());
+		
 		if (properties.containsKey("mp3.position.microseconds")) {
 			this.setProgressTime(Long.parseLong(properties.get("mp3.position.microseconds").toString()));
 		}
@@ -275,6 +278,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	@Override
 	public void stateUpdated(BasicPlayerEvent event) {
 		// Utils.display("stateUpdated : " + event.toString());
+
 		if (event.getCode() == BasicPlayerEvent.EOM) {
 			try {
 				if (repeatMode != null && !repeatMode) {
@@ -290,7 +294,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 							for (int i = 0; i < songsRandom.size(); i++) {
 								excludes[i] = songs.indexOf(songsRandom.get(i));
 							}
-							
+
 							int random = Utils.getRandomWithExclusion(0, songs.size() - 1, excludes);
 							actual = songs.get(random);
 							open(actual);
@@ -475,6 +479,8 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 
 	@Override
 	public void setController(BasicController controller) {
-		Utils.display("setController : " + controller);
+		// Utils.display("setController : " + controller);
+
+		return;
 	}
 }

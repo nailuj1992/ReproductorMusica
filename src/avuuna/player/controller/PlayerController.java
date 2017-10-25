@@ -64,7 +64,8 @@ public class PlayerController implements Serializable, Observador {
 					if (model.getActual() != null) {
 						view.bar_progreso.setValue((int) model.getProgressBytes());
 						try {
-							view.bar_progreso.setString(Utils.formatTime(model.getProgressTime()) + Strings.DE + Utils.formatTime(model.getActual().getDuration()));
+							view.bar_progreso.setString(Utils.formatTime(model.getProgressTime()) + Strings.DE
+									+ Utils.formatTime(model.getActual().getDuration()));
 						} catch (Exception ex) {
 							Utils.display("Exception found -> " + ex.getMessage());
 						}
@@ -91,52 +92,52 @@ public class PlayerController implements Serializable, Observador {
 				accionAbrirCancion();
 			}
 		});
-		
+
 		view.btn_play.addActionListener(new ActionListener() {
 
 			@Override
-            public void actionPerformed(ActionEvent evt) {
-            	switch (view.btn_play.getToolTipText()) {
-        		case Strings.play:
-        			if (!running && model.getActual() != null) {
-        				playSong();
-        			} else if (running) {
-        				resumeSong();
-        			}
-        			break;
-        		case Strings.pause:
-        			pauseSong();
-        			break;
-            	default:
-            		break;
-        		}
-            }
-        });
-		
+			public void actionPerformed(ActionEvent evt) {
+				switch (view.btn_play.getToolTipText()) {
+				case Strings.play:
+					if (!running && model.getActual() != null) {
+						playSong();
+					} else if (running) {
+						resumeSong();
+					}
+					break;
+				case Strings.pause:
+					pauseSong();
+					break;
+				default:
+					break;
+				}
+			}
+		});
+
 		view.btn_stop.addActionListener(new ActionListener() {
 
 			@Override
-            public void actionPerformed(ActionEvent evt) {
-            	stopSong();
-            }
-        });
-		
+			public void actionPerformed(ActionEvent evt) {
+				stopSong();
+			}
+		});
+
 		view.btn_next.addActionListener(new ActionListener() {
 
 			@Override
-            public void actionPerformed(ActionEvent evt) {
-                nextSong();
-            }
-        });
-		
+			public void actionPerformed(ActionEvent evt) {
+				nextSong();
+			}
+		});
+
 		view.btn_previous.addActionListener(new ActionListener() {
 
 			@Override
-            public void actionPerformed(ActionEvent evt) {
-            	previousSong();
-            }
-        });
-		
+			public void actionPerformed(ActionEvent evt) {
+				previousSong();
+			}
+		});
+
 		view.btn_repeat.addActionListener(new ActionListener() {
 
 			@Override
@@ -166,14 +167,14 @@ public class PlayerController implements Serializable, Observador {
 				model.repeatMode = modo;
 			}
 		});
-		
+
 		view.btn_random.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String modoRandom = view.btn_random.getToolTipText().trim();
 				boolean modo;
-				
+
 				switch (modoRandom) {
 				case Strings.randomOff:
 					view.btn_random.setToolTipText(Strings.randomOn);
@@ -187,45 +188,45 @@ public class PlayerController implements Serializable, Observador {
 					modo = false;
 					break;
 				}
-				
+
 				model.setRandomMode(modo);
 			}
 		});
-		
+
 		view.slider_barraVolumen.addChangeListener(new ChangeListener() {
 
 			@Override
-            public void stateChanged(ChangeEvent evt) {
-            	setVolume();
-            }
-        });
-		
+			public void stateChanged(ChangeEvent evt) {
+				setVolume();
+			}
+		});
+
 		view.list_canciones.addMouseListener(new MouseAdapter() {
 
 			@Override
-            public void mouseClicked(MouseEvent evt) {
-            	if (evt.getClickCount() == 2) {// Doble clic
-                    String selected = (String) view.list_canciones.getSelectedValue();
-                    if (selected != null && !selected.contains(Strings.ACTUAL)) {
-                    	int sel = view.list_canciones.getSelectedIndex();
-                        openSong(selected);
-                        model.clearRandomList();
-                        view.list_canciones.setSelectedIndex(sel);
-                    }
-                }
-            }
-        });
-		
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount() == 2) {// Doble clic
+					String selected = (String) view.list_canciones.getSelectedValue();
+					if (selected != null && !selected.contains(Strings.ACTUAL)) {
+						int sel = view.list_canciones.getSelectedIndex();
+						openSong(selected);
+						model.clearRandomList();
+						view.list_canciones.setSelectedIndex(sel);
+					}
+				}
+			}
+		});
+
 		view.btn_adicionar.addActionListener(new ActionListener() {
 
 			@Override
-            public void actionPerformed(ActionEvent evt) {
-            	accionAbrirCancion();
-            }
+			public void actionPerformed(ActionEvent evt) {
+				accionAbrirCancion();
+			}
 		});
-		
+
 		view.btn_quitarUno.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (model.getNumberSongs() > 0) {
@@ -237,7 +238,7 @@ public class PlayerController implements Serializable, Observador {
 							selected = selected.replace(Strings.ACTUAL, "");
 							int sel = view.list_canciones.getSelectedIndex();
 							removeSong(selected);
-	                        view.list_canciones.setSelectedIndex(sel);
+							view.list_canciones.setSelectedIndex(sel);
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
@@ -249,7 +250,7 @@ public class PlayerController implements Serializable, Observador {
 				}
 			}
 		});
-		
+
 		view.btn_borrar.addActionListener(new ActionListener() {
 
 			@Override
@@ -268,9 +269,9 @@ public class PlayerController implements Serializable, Observador {
 				}
 			}
 		});
-		
+
 		view.btn_moverArriba.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (model.getNumberSongs() > 0) {
@@ -286,9 +287,9 @@ public class PlayerController implements Serializable, Observador {
 				}
 			}
 		});
-		
+
 		view.btn_moverAbajo.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (model.getNumberSongs() > 0) {
@@ -327,7 +328,8 @@ public class PlayerController implements Serializable, Observador {
 						} catch (BasicPlayerException | PlayerException ex) {
 							Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
 							if (songs.length == 1) {
-								JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG,
+										PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
 							}
 						}
 					}
@@ -339,131 +341,142 @@ public class PlayerController implements Serializable, Observador {
 	/**
 	 * Permite reproducir la cancion actual.
 	 */
-    private void playSong() {
-        try {
-            model.play();
-        } catch (BasicPlayerException ex) {
+	private void playSong() {
+		try {
+			model.play();
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_PLAYING_SONG, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_PLAYING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_PLAYING_SONG, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * Permite pausar la cancion actual.
      */
-    private void pauseSong() {
-        try {
-        	model.pause();
-        } catch (BasicPlayerException ex) {
+	private void pauseSong() {
+		try {
+			model.pause();
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_PAUSING_SONG, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_PAUSING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_PAUSING_SONG, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * Permite reanudar la cancion pausada actual.
      */
-    private void resumeSong() {
-        try {
-        	model.resume();
-        } catch (BasicPlayerException ex) {
+	private void resumeSong() {
+		try {
+			model.resume();
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_RESUMING_SONG, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_RESUMING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_RESUMING_SONG, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * Permite detener la cancion actual.
      */
-    private void stopSong() {
-        try {
-        	model.stop();
-        } catch (BasicPlayerException ex) {
+	private void stopSong() {
+		try {
+			model.stop();
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_STOPPING_SONG, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_STOPPING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_STOPPING_SONG, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * Permite pasar a la siguiente cancion.
      */
-    private void nextSong() {
-        try {
-        	model.next(true);
-        } catch (BasicPlayerException ex) {
+	private void nextSong() {
+		try {
+			model.next(true);
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_NEXT_SONG, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_NEXT_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_NEXT_SONG, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * Permite pasar a la cancion anterior.
      */
-    private void previousSong() {
-        try {
-        	model.previous(true);
-        } catch (BasicPlayerException ex) {
+	private void previousSong() {
+		try {
+			model.previous(true);
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_PREV_SONG, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_PREV_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_PREV_SONG, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * Permite cambiar el volumen al reproductor.
      */
-    private void setVolume() {
-        try {
-        	model.setVolume((double) view.slider_barraVolumen.getValue() / 100);
-        } catch (BasicPlayerException ex) {
+	private void setVolume() {
+		try {
+			model.setVolume((double) view.slider_barraVolumen.getValue() / 100);
+		} catch (BasicPlayerException ex) {
 //			Utils.log(PlayerException.ERROR_VOLUME_SONG, ex);
-//            JOptionPane.showMessageDialog(null, PlayerException.ERROR_VOLUME_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+//			JOptionPane.showMessageDialog(null, PlayerException.ERROR_VOLUME_SONG, PlayerException.ERROR,
+//					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * Permite limpiar toda la lista de reproduccion.
      */
-    private void clearPlaylist() {
-        try {
-            model.clearList();
-        } catch (BasicPlayerException ex) {
+	private void clearPlaylist() {
+		try {
+			model.clearList();
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_CLEAR_LIST, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_CLEAR_LIST, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_CLEAR_LIST, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * Permite abrir una cancion de la lista.
      * @param selected Cancion seleccionada de la lista.
      */
-    private void openSong(String selected) {
-        try {
-            Cancion song = model.getSong(selected);
-            model.setActual(song);
-            model.stop();
-            model.open(song);
-        } catch (BasicPlayerException ex) {
+	private void openSong(String selected) {
+		try {
+			Cancion song = model.getSong(selected);
+			model.setActual(song);
+			model.stop();
+			model.open(song);
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_OPENING_SONG, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
     
     /**
      * Permite quitar una cancion de la lista.
      * @param selected Cancion seleccionada de la lista.
      */
-    private void removeSong(String selected) {
-    	try {
-    		Cancion song = model.getSong(selected);
-    		model.removeSong(song);
-        } catch (BasicPlayerException ex) {
+	private void removeSong(String selected) {
+		try {
+			Cancion song = model.getSong(selected);
+			model.removeSong(song);
+		} catch (BasicPlayerException ex) {
 			Utils.log(PlayerException.ERROR_REMOVE_SONG, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_REMOVE_SONG, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-        } catch (PlayerException ex) {
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_REMOVE_SONG, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
+		} catch (PlayerException ex) {
 			Utils.log(PlayerException.ERROR_REMOVE_SONG_NO_EXISTS, ex);
-            JOptionPane.showMessageDialog(null, PlayerException.ERROR_REMOVE_SONG_NO_EXISTS, PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, PlayerException.ERROR_REMOVE_SONG_NO_EXISTS, PlayerException.ERROR,
+					JOptionPane.ERROR_MESSAGE);
 		}
-    }
+	}
 
 	@Override
 	public void update() {
@@ -499,22 +512,22 @@ public class PlayerController implements Serializable, Observador {
 			default:
 				break;
 			}
-        } else {
-        	view.lbl_cancionActual.setText(Strings.cancionActual);
-        	view.bar_progreso.setMaximum(0);
-        }
+		} else {
+			view.lbl_cancionActual.setText(Strings.cancionActual);
+			view.bar_progreso.setMaximum(0);
+		}
 		view.repaint();
-		
+
 		view.dlm_datosLista.clear();
-        for (int i = 0; i < model.getNumberSongs(); i++) {
-        	Cancion song = model.getSong(i);
-            String resp = song.getName();
-            if (model.getActual() != null && model.getActual().equals(song)) {
-                resp = Strings.ACTUAL + resp;
-            }
-            view.dlm_datosLista.addElement(resp);
-        }
-        view.repaint();
+		for (int i = 0; i < model.getNumberSongs(); i++) {
+			Cancion song = model.getSong(i);
+			String resp = song.getName();
+			if (model.getActual() != null && model.getActual().equals(song)) {
+				resp = Strings.ACTUAL + resp;
+			}
+			view.dlm_datosLista.addElement(resp);
+		}
+		view.repaint();
 	}
 
 }
