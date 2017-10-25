@@ -32,27 +32,16 @@ public class Imagen implements Serializable {
 	static {
 		imagenes = new HashMap<String, ImageIcon>();
 
-		ImageIcon img_logo = createImageIcon(rutaImagenes + IMG_LOGO);
-		ImageIcon img_open = createImageIcon(rutaImagenes + IMG_OPEN);
-		ImageIcon btn_pause = createImageIcon(rutaImagenes + BTN_PAUSE);
-		ImageIcon btn_play = createImageIcon(rutaImagenes + BTN_PLAY);
-		ImageIcon btn_prev = createImageIcon(rutaImagenes + BTN_PREV);
-		ImageIcon btn_next = createImageIcon(rutaImagenes + BTN_NEXT);
-		ImageIcon btn_stop = createImageIcon(rutaImagenes + BTN_STOP);
-		ImageIcon btn_plus = createImageIcon(rutaImagenes + BTN_PLUS);
-		ImageIcon btn_less = createImageIcon(rutaImagenes + BTN_LESS);
-		ImageIcon btn_close = createImageIcon(rutaImagenes + BTN_CLOSE);
-
-		imagenes.put(IMG_LOGO, img_logo);
-		imagenes.put(IMG_OPEN, img_open);
-		imagenes.put(BTN_PAUSE, btn_pause);
-		imagenes.put(BTN_PLAY, btn_play);
-		imagenes.put(BTN_PREV, btn_prev);
-		imagenes.put(BTN_NEXT, btn_next);
-		imagenes.put(BTN_STOP, btn_stop);
-		imagenes.put(BTN_PLUS, btn_plus);
-		imagenes.put(BTN_LESS, btn_less);
-		imagenes.put(BTN_CLOSE, btn_close);
+		imagenes.put(IMG_LOGO, createImageIcon(rutaImagenes + IMG_LOGO));
+		imagenes.put(IMG_OPEN, createImageIcon(rutaImagenes + IMG_OPEN));
+		imagenes.put(BTN_PAUSE, createImageIcon(rutaImagenes + BTN_PAUSE));
+		imagenes.put(BTN_PLAY, createImageIcon(rutaImagenes + BTN_PLAY));
+		imagenes.put(BTN_PREV, createImageIcon(rutaImagenes + BTN_PREV));
+		imagenes.put(BTN_NEXT, createImageIcon(rutaImagenes + BTN_NEXT));
+		imagenes.put(BTN_STOP, createImageIcon(rutaImagenes + BTN_STOP));
+		imagenes.put(BTN_PLUS, createImageIcon(rutaImagenes + BTN_PLUS));
+		imagenes.put(BTN_LESS, createImageIcon(rutaImagenes + BTN_LESS));
+		imagenes.put(BTN_CLOSE, createImageIcon(rutaImagenes + BTN_CLOSE));
 	}
 
 	private static ImageIcon createImageIcon(String path) {
