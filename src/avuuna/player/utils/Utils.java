@@ -129,15 +129,20 @@ public class Utils {
 	 * @return
 	 */
 	public static int getRandomWithExclusion(int start, int end, int... exclude) {
-		Random rnd = new Random();
-		int random = start + rnd.nextInt(end - start + 1 - exclude.length);
+		Random rand = new Random();
+	    int range = end - start + 1;
+
+		List<Integer> excludes = new ArrayList<Integer>();
 		for (int ex : exclude) {
-			if (random < ex) {
-				break;
-			}
-			random++;
+			excludes.add(ex);
 		}
-		return random;
+
+	    int random = rand.nextInt(range);
+	    while(excludes.contains(random)) {
+	        random = rand.nextInt(range);
+	    }
+
+	    return random;
 	}
 
 }

@@ -225,7 +225,7 @@ public class PlayerController implements Serializable, Observador {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (model.getSongs().size() > 0) {
+				if (model.getNumberSongs() > 0) {
 					String selected = view.list_canciones.getSelectedValue();
 					if (selected != null) {
 						int seleccion = JOptionPane.showConfirmDialog(view, Strings.confirmarQuitarCancion,
@@ -249,7 +249,7 @@ public class PlayerController implements Serializable, Observador {
 
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				if (model.getSongs().size() > 0) {
+				if (model.getNumberSongs() > 0) {
 					if (!view.dlm_datosLista.isEmpty()) {
 						int seleccion = JOptionPane.showConfirmDialog(view, Strings.confirmarBorrarLista,
 								Strings.CONFIRMAR, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
@@ -464,7 +464,8 @@ public class PlayerController implements Serializable, Observador {
 		view.repaint();
 		
 		view.dlm_datosLista.clear();
-        for (Cancion song : model.getSongs()) {
+        for (int i = 0; i < model.getNumberSongs(); i++) {
+        	Cancion song = model.getSong(i);
             String resp = song.getName();
             if (model.getActual() != null && model.getActual().equals(song)) {
                 resp = Strings.ACTUAL + resp;

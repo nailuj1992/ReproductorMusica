@@ -56,7 +56,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 
 	private Reproductor(BasicPlayer player) {
 		this.player = player;
-		setSongs(new ArrayList<Cancion>());
+		this.songs = new ArrayList<Cancion>();
 		repeatMode = null;
 		randomMode = false;
 		songsRandom = new ArrayList<Cancion>();
@@ -206,17 +206,22 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 		setActual(null);
 		notifyObservers();
 	}
-
+	
 	/**
-	 * Obtiene la lista de reproduccion.
-	 * @return Una lista con todas las canciones que se van a reproducir.
+	 * Obtiene la cantidad de canciones que hay en la lista.
+	 * @return
 	 */
-	public List<Cancion> getSongs() {
-		return songs;
+	public int getNumberSongs() {
+		return songs.size();
 	}
-
-	private void setSongs(List<Cancion> songs) {
-		this.songs = songs;
+	
+	/**
+	 * Obtiene la cancion que esta en la posicion de la lista.
+	 * @param pos Posicion de la cancion en la lista.
+	 * @return
+	 */
+	public Cancion getSong(int pos) {
+		return songs.get(pos);
 	}
 
 	/**
@@ -267,7 +272,10 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 				} else {
 					int current = songs.indexOf(actual);
 					if (randomMode) {
-						if (songsRandom.size() < songs.size()) {
+						if (songsRandom.size() < songs.size() - 1) {
+							if (randomMode && !songsRandom.contains(actual)) {
+								songsRandom.add(actual);
+							}
 							int[] excludes = new int[songsRandom.size()];
 							for (int i = 0; i < songsRandom.size(); i++) {
 								excludes[i] = songs.indexOf(songsRandom.get(i));
@@ -316,9 +324,6 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	public void open(Cancion song) throws BasicPlayerException {
 		player.open(song);
 		actualEvent = BasicPlayerEvent.OPENED;
-		if (randomMode && !songsRandom.contains(actual)) {
-			songsRandom.add(actual);
-		}
 		notifyObservers();
 	}
 

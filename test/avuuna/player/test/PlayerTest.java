@@ -69,7 +69,7 @@ public class PlayerTest {
 		try {
 			player.addSong(song1);
 			player.addSong(song2);
-			player.setActual(player.getSongs().get(0));
+			player.setActual(player.getSong(0));
 			player.open(player.getActual());
 			player.play();
 		} catch (PlayerException | BasicPlayerException ex) {
@@ -100,7 +100,7 @@ public class PlayerTest {
 			player.addSong(song1);
 			player.addSong(song2);
 			player.addSong(song3);
-			player.setActual(player.getSongs().get(0));
+			player.setActual(player.getSong(0));
 			player.open(player.getActual());
 			player.play();// 1
 			Thread.sleep(sleep);
@@ -124,7 +124,7 @@ public class PlayerTest {
 			player.addSong(song1);
 			player.addSong(song2);
 			player.addSong(song3);
-			player.setActual(player.getSongs().get(0));
+			player.setActual(player.getSong(0));
 			player.open(player.getActual());
 			player.play();// 1
 			Thread.sleep(sleep);
