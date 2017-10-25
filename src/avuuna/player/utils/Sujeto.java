@@ -1,7 +1,7 @@
 package avuuna.player.utils;
 
 /**
- * Clase perteneciente al patron <i>Observador-Observado</i>, en donde esta es el <i>Observado</i>.
+ * Interface perteneciente al patron <i>Observador-Observado</i>, en donde esta es el <i>Observado</i>.
  * @author Avuuna, la Luz del Alba
  *
  */
