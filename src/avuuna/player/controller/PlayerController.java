@@ -264,6 +264,42 @@ public class PlayerController implements Serializable, Observador {
 				}
 			}
 		});
+		
+		view.btn_moverArriba.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (model.getNumberSongs() > 0) {
+					int selected = view.list_canciones.getSelectedIndex();
+					if (selected != -1) {
+						int change = selected - 1;
+						model.swapElements(selected, change);
+						view.list_canciones.setSelectedIndex(change);
+					} else {
+						JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
+								PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
+		
+		view.btn_moverAbajo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (model.getNumberSongs() > 0) {
+					int selected = view.list_canciones.getSelectedIndex();
+					if (selected != -1) {
+						int change = selected + 1;
+						model.swapElements(selected, change);
+						view.list_canciones.setSelectedIndex(change);
+					} else {
+						JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
+								PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
 	}
 
 	/**

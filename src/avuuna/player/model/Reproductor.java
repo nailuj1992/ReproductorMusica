@@ -444,6 +444,21 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	public void setVolume(double volume) throws BasicPlayerException {
 		player.setGain(volume);
 	}
+	
+	/**
+	 * Intercambia los elementos de la lista de reproduccion y notifica a los observadores del cambio.
+	 * @param index1 Indice de la cancion seleccionada.
+	 * @param index2 Indice de la cancion a intercambiar.
+	 */
+	public void swapElements(int index1, int index2) {
+		if ((index1 > index2 && index1 > 0) || (index1 < index2 && index1 < songs.size() - 1)) {
+			Cancion cancion1 = songs.get(index1);
+			Cancion cancion2 = songs.get(index2);
+			songs.set(index1, cancion2);
+			songs.set(index2, cancion1);
+			notifyObservers();
+		}
+	}
 
 	@Override
 	public void setController(BasicController controller) {

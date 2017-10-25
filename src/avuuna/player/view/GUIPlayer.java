@@ -44,7 +44,7 @@ public class GUIPlayer extends View {
 	public DefaultListModel<String> dlm_datosLista;
 
 	//// Botones de la Lista
-	public JButton btn_adicionar, btn_quitarUno, btn_borrar;
+	public JButton btn_adicionar, btn_quitarUno, btn_borrar, btn_moverArriba, btn_moverAbajo;
 
 	public GUIPlayer() {
 		super("Reproductor de Música - by Avuuna, la Luz del Alba");
@@ -246,6 +246,18 @@ public class GUIPlayer extends View {
 		btn_borrar.setToolTipText(Strings.borrarLista);
 		btn_borrar.setIcon(Imagen.imagenes.get(Imagen.BTN_CLOSE));
 		btn_borrar.setFocusable(false);
+
+		btn_moverArriba = new JButton();
+		btn_moverArriba.setToolTipText(Strings.moverArriba);
+		btn_moverArriba.setText("↑");
+//		btn_moverArriba.setIcon(Imagen.imagenes.get(Imagen.BTN_));
+		btn_moverArriba.setFocusable(false);
+
+		btn_moverAbajo = new JButton();
+		btn_moverAbajo.setToolTipText(Strings.moverAbajo);
+		btn_moverAbajo.setText("↓");
+//		btn_moverAbajo.setIcon(Imagen.imagenes.get(Imagen.BTN_));
+		btn_moverAbajo.setFocusable(false);
 	}
 
 	/**
@@ -254,15 +266,17 @@ public class GUIPlayer extends View {
 	private void posicioneElementosPanelLista() {
 		panel_playlist.setBorder(BorderFactory.createTitledBorder(Strings.listaReproduccion));
 		panel_playlist.setMinimumSize(new Dimension(100, 100));
-		panel_playlist.setPreferredSize(new Dimension(260, 23));
+		panel_playlist.setPreferredSize(new Dimension(285, 23));
 
 		GroupLayout layout = new GroupLayout(panel_playlist);
 		panel_playlist.setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addComponent(scroll_lista, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-				.addGroup(layout.createSequentialGroup().addGap(50, 50, 50).addComponent(btn_adicionar)
+				.addGroup(layout.createSequentialGroup().addGap(10, 10, 10).addComponent(btn_adicionar)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btn_quitarUno)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btn_borrar)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btn_moverArriba)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btn_moverAbajo)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
 				.createSequentialGroup().addComponent(scroll_lista, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
@@ -270,7 +284,8 @@ public class GUIPlayer extends View {
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
 						.createSequentialGroup()
 						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(btn_adicionar)
-								.addComponent(btn_quitarUno).addComponent(btn_borrar))
+								.addComponent(btn_quitarUno).addComponent(btn_borrar).addComponent(btn_moverArriba)
+								.addComponent(btn_moverAbajo))
 						.addGap(0, 0, Short.MAX_VALUE)))
 				.addContainerGap()));
 

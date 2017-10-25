@@ -25,6 +25,8 @@ public class Strings {
 	public static final String adicionarCancion = "Añadir canciones";
 	public static final String quitarCancion = "Quitar canción";
 	public static final String borrarLista = "Borrar lista";
+	public static final String moverArriba = "Mover arriba";
+	public static final String moverAbajo = "Mover abajo";
 
 	public static final String ACTUAL = "> ";
 	public static final String DE = " de ";
