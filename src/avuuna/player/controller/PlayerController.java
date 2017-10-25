@@ -207,8 +207,10 @@ public class PlayerController implements Serializable, Observador {
             	if (evt.getClickCount() == 2) {// Doble clic
                     String selected = (String) view.list_canciones.getSelectedValue();
                     if (selected != null && !selected.contains(Strings.ACTUAL)) {
+                    	int sel = view.list_canciones.getSelectedIndex();
                         openSong(selected);
                         model.clearRandomList();
+                        view.list_canciones.setSelectedIndex(sel);
                     }
                 }
             }
@@ -233,7 +235,9 @@ public class PlayerController implements Serializable, Observador {
 								Strings.CONFIRMAR, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
 						if (seleccion == JOptionPane.YES_OPTION) {
 							selected = selected.replace(Strings.ACTUAL, "");
+							int sel = view.list_canciones.getSelectedIndex();
 							removeSong(selected);
+	                        view.list_canciones.setSelectedIndex(sel);
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
@@ -318,6 +322,7 @@ public class PlayerController implements Serializable, Observador {
 							if (model.getActual() == null) {
 								model.setActual(song);
 								model.open(model.getActual());
+								view.list_canciones.setSelectedIndex(model.getNumberSongs() - 1);
 							}
 						} catch (BasicPlayerException | PlayerException ex) {
 							Utils.log(PlayerException.ERROR_OPENING_SONG, ex);

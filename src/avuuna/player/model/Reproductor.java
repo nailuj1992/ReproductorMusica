@@ -163,6 +163,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 	 * @throws BasicPlayerException Excepcion lanzada por <code>stop()</code> y <code>next()</code>.
 	 */
 	public void removeSong(Cancion song) throws PlayerException, BasicPlayerException {
+		int index = songs.indexOf(song);
 		boolean quito = songs.remove(song);
 		if (!quito) {
 			throw new PlayerException(PlayerException.ERROR_REMOVE_SONG_NO_EXISTS);
@@ -172,7 +173,7 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 				if (songsRandom.contains(actual)) {
 					songsRandom.remove(actual);
 				}
-				next(false);
+				nextSong(--index, false);
 			} else {
 				stop();
 				setActual(null);
@@ -380,12 +381,24 @@ public class Reproductor extends Sujeto implements BasicPlayerListener, Serializ
 
 	/**
 	 * Detiene la cancion actual, busca la cancion siguiente de la lista y la abre. Si es la ultima cancion, abre la primera.
+	 * @param deleteRandom
 	 * @throws BasicPlayerException Excepcion lanzada por <code>open()</code>.
 	 */
 	public void next(boolean deleteRandom) throws BasicPlayerException {
+		int index = songs.indexOf(actual);
+		nextSong(index, deleteRandom);
+	}
+	
+	/**
+	 * Detiene la cancion actual, busca la cancion siguiente a la ingresada y la abre. 
+	 * Si la siguiente es la ultima cancion, abre la primera.
+	 * @param index
+	 * @param deleteRandom
+	 * @throws BasicPlayerException BasicPlayerException Excepcion lanzada por <code>open()</code>.
+	 */
+	public void nextSong(int index, boolean deleteRandom) throws BasicPlayerException {
 		if (songs.size() > 0 && actual != null) {
 			stop();
-			int index = songs.indexOf(actual);
 			if (index == songs.size() - 1) {
 				actual = songs.get(0);
 			} else {
