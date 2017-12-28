@@ -484,20 +484,20 @@ public class PlayerController implements Serializable, Observador {
 			switch (model.getActualEvent()) {
 			case BasicPlayerEvent.RESUMED:
 				view.btn_play.setToolTipText(Strings.pause);
-				view.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
+				view.btn_play.setIcon(Imagen.getImageIcon(Imagen.BTN_PAUSE));
 				break;
 			case BasicPlayerEvent.PAUSED:
 				view.btn_play.setToolTipText(Strings.play);
-				view.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
+				view.btn_play.setIcon(Imagen.getImageIcon(Imagen.BTN_PLAY));
 				break;
 			case BasicPlayerEvent.PLAYING:
 				view.btn_play.setToolTipText(Strings.pause);
-				view.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PAUSE));
+				view.btn_play.setIcon(Imagen.getImageIcon(Imagen.BTN_PAUSE));
 				running = true;
 				break;
 			case BasicPlayerEvent.STOPPED:
 				view.btn_play.setToolTipText(Strings.play);
-				view.btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
+				view.btn_play.setIcon(Imagen.getImageIcon(Imagen.BTN_PLAY));
 				running = false;
 				break;
 			case BasicPlayerEvent.OPENED:

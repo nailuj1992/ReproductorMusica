@@ -30,7 +30,7 @@ public abstract class View extends JFrame implements Serializable {
 	public View(String titulo) {
 		super(titulo);
 
-		setIconImage(Imagen.imagenes.get(Imagen.IMG_LOGO).getImage());
+		setIconImage(Imagen.getImageIcon(Imagen.IMG_LOGO).getImage());
 		setSize(ANCHO_PANTALLA / 2, ALTO_PANTALLA * 5 / 12);
 
 //		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -66,7 +66,7 @@ public class GUIPlayer extends View {
 
 		openItem = new JMenuItem();
 		openItem.setText(Strings.abrir);
-		openItem.setIcon(Imagen.imagenes.get(Imagen.IMG_OPEN));
+		openItem.setIcon(Imagen.getImageIcon(Imagen.IMG_OPEN));
 		fileMenu.add(openItem);
 	}
 
@@ -110,34 +110,34 @@ public class GUIPlayer extends View {
 
 		btn_previous = new JButton();
 		btn_previous.setToolTipText(Strings.prev);
-		btn_previous.setIcon(Imagen.imagenes.get(Imagen.BTN_PREV));
+		btn_previous.setIcon(Imagen.getImageIcon(Imagen.BTN_PREV));
 		btn_previous.setFocusable(false);
 
 		btn_play = new JButton();
 		btn_play.setToolTipText(Strings.play);
-		btn_play.setIcon(Imagen.imagenes.get(Imagen.BTN_PLAY));
+		btn_play.setIcon(Imagen.getImageIcon(Imagen.BTN_PLAY));
 		btn_play.setFocusable(false);
 
 		btn_stop = new JButton();
 		btn_stop.setToolTipText(Strings.stop);
-		btn_stop.setIcon(Imagen.imagenes.get(Imagen.BTN_STOP));
+		btn_stop.setIcon(Imagen.getImageIcon(Imagen.BTN_STOP));
 		btn_stop.setFocusable(false);
 
 		btn_next = new JButton();
 		btn_next.setToolTipText(Strings.next);
-		btn_next.setIcon(Imagen.imagenes.get(Imagen.BTN_NEXT));
+		btn_next.setIcon(Imagen.getImageIcon(Imagen.BTN_NEXT));
 		btn_next.setFocusable(false);
 
 		btn_repeat = new JButton();
 		btn_repeat.setToolTipText(Strings.noRepeat);
 		btn_repeat.setText("R No");
-		// btn_repeat.setIcon(Imagen.imagenes.get(Imagen.BTN_));
+		// btn_repeat.setIcon(Imagen.getImageIcon(Imagen.BTN_));
 		btn_repeat.setFocusable(false);
 
 		btn_random = new JButton();
 		btn_random.setToolTipText(Strings.randomOff);
 		btn_random.setText("Rand OFF");
-		// btn_random.setIcon(Imagen.imagenes.get(Imagen.BTN_));
+		// btn_random.setIcon(Imagen.getImageIcon(Imagen.BTN_));
 		btn_random.setFocusable(false);
 
 		slider_barraVolumen = new JSlider();
@@ -234,29 +234,29 @@ public class GUIPlayer extends View {
 
 		btn_adicionar = new JButton();
 		btn_adicionar.setToolTipText(Strings.adicionarCancion);
-		btn_adicionar.setIcon(Imagen.imagenes.get(Imagen.BTN_PLUS));
+		btn_adicionar.setIcon(Imagen.getImageIcon(Imagen.BTN_PLUS));
 		btn_adicionar.setFocusable(false);
 
 		btn_quitarUno = new JButton();
 		btn_quitarUno.setToolTipText(Strings.quitarCancion);
-		btn_quitarUno.setIcon(Imagen.imagenes.get(Imagen.BTN_LESS));
+		btn_quitarUno.setIcon(Imagen.getImageIcon(Imagen.BTN_LESS));
 		btn_quitarUno.setFocusable(false);
 
 		btn_borrar = new JButton();
 		btn_borrar.setToolTipText(Strings.borrarLista);
-		btn_borrar.setIcon(Imagen.imagenes.get(Imagen.BTN_CLOSE));
+		btn_borrar.setIcon(Imagen.getImageIcon(Imagen.BTN_CLOSE));
 		btn_borrar.setFocusable(false);
 
 		btn_moverArriba = new JButton();
 		btn_moverArriba.setToolTipText(Strings.moverArriba);
 		btn_moverArriba.setText("↑");
-//		btn_moverArriba.setIcon(Imagen.imagenes.get(Imagen.BTN_));
+//		btn_moverArriba.setIcon(Imagen.getImageIcon(Imagen.BTN_));
 		btn_moverArriba.setFocusable(false);
 
 		btn_moverAbajo = new JButton();
 		btn_moverAbajo.setToolTipText(Strings.moverAbajo);
 		btn_moverAbajo.setText("↓");
-//		btn_moverAbajo.setIcon(Imagen.imagenes.get(Imagen.BTN_));
+//		btn_moverAbajo.setIcon(Imagen.getImageIcon(Imagen.BTN_));
 		btn_moverAbajo.setFocusable(false);
 	}
 

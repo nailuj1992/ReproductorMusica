@@ -17,7 +17,7 @@ public class Imagen implements Serializable {
 
 	public static final String IMG_LOGO = "logo.png";
 	public static final String IMG_OPEN = "Open16.png";
-	
+
 	public static final String BTN_PAUSE = "Pause64.png";
 	public static final String BTN_PLAY = "Play64.png";
 	public static final String BTN_PREV = "Skip-backward64.png";
@@ -27,7 +27,7 @@ public class Imagen implements Serializable {
 	public static final String BTN_LESS = "Less16.png";
 	public static final String BTN_CLOSE = "Close16.png";
 
-	public static final Map<String, ImageIcon> imagenes;
+	private static final Map<String, ImageIcon> imagenes;
 
 	static {
 		imagenes = new HashMap<String, ImageIcon>();
@@ -53,6 +53,10 @@ public class Imagen implements Serializable {
 			icono = null;
 		}
 		return icono;
+	}
+
+	public static ImageIcon getImageIcon(String path) {
+		return imagenes.get(path);
 	}
 
 }
