@@ -12,12 +12,22 @@ import avuuna.player.utils.*;
  * 
  */
 public class MainPlayer {
+	
+	public static final Control control = Control.getInstance("resources\\images\\player");
 
 	/**
 	 * Metodo principal de la aplicacion.
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		if (control.comprobar()) {
+			main();
+		} else {
+			System.exit(0);
+		}
+	}
+
+	private static void main() {
 		try {
 			Utils.setLookAndFeel(Utils.windowsLookAndFeel);
 			PlayerController controller = PlayerController.getInstance();

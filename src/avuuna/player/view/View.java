@@ -1,10 +1,12 @@
 package avuuna.player.view;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 
 import javax.swing.*;
 
+import avuuna.player.MainPlayer;
 import avuuna.player.utils.*;
 
 /**
@@ -27,9 +29,19 @@ public abstract class View extends JFrame implements Serializable {
 
 	public View(String titulo) {
 		super(titulo);
+
 		setIconImage(Imagen.imagenes.get(Imagen.IMG_LOGO).getImage());
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(ANCHO_PANTALLA / 2, ALTO_PANTALLA * 5 / 12);
+
+//		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				MainPlayer.control.cerrarApp();
+			}
+		});
 	}
 
 	/**
