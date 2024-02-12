@@ -8,8 +8,12 @@ import java.util.*;
 import javazoom.jl.player.basic.*;
 
 /**
- * Esta clase provee las funcionalidades necesarias para que el reproductor de musica sea posible.<br><br>
- * Esta clase hace parte del patron <i>Observador-Observado</i>, en donde esta es el <i>Observado</i>.
+ * Esta clase provee las funcionalidades necesarias para que el reproductor de
+ * musica sea posible.<br>
+ * <br>
+ * Esta clase hace parte del patron <i>Observador-Observado</i>, en donde esta
+ * es el <i>Observado</i>.
+ * 
  * @author Avuuna, la Luz del Alba
  * 
  */
@@ -26,6 +30,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	private final BasicPlayer player;
 	private Cancion actual;
 	private List<Cancion> songs;
+	private double volume;
 
 	/**
 	 * Permite cambiar el modo de repeticion.
@@ -46,6 +51,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Obtiene el reproductor actual.
+	 * 
 	 * @return Obtiene la unica instancia del reproductor (<b>Patron Singleton</b>).
 	 */
 	public static Reproductor getInstance() {
@@ -65,6 +71,8 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 		player.addBasicPlayerListener(this);
 		setController(player);
+
+		volume = 0.5d;
 
 		observers = new ArrayList<Observador>();
 	}
@@ -87,6 +95,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Obtiene la cancion que se esta reproduciendo.
+	 * 
 	 * @return
 	 */
 	public Cancion getActual() {
@@ -95,6 +104,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Cambia la cancion que se esta reproduciendo.
+	 * 
 	 * @param actual
 	 */
 	public void setActual(Cancion actual) {
@@ -102,8 +112,9 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	}
 
 	/**
-	 * Obtiene el estado actual del reproductor, es decir si está reproduciendo, pausado, 
-	 * detenido, terminado o abierto una cancion.<br><br>
+	 * Obtiene el estado actual del reproductor, es decir si está reproduciendo,
+	 * pausado, detenido, terminado o abierto una cancion.<br>
+	 * <br>
 	 * Estados posibles:
 	 * <li><code>BasicPlayerEvent.UNKNOWN</code> -> Desconocido</li>
 	 * <li><code>BasicPlayerEvent.OPENING</code> -> Abriendo</li>
@@ -117,6 +128,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	 * <li><code>BasicPlayerEvent.EOM</code> -> Fin de Musica</li>
 	 * <li><code>BasicPlayerEvent.PAN</code> -> Equalizador</li>
 	 * <li><code>BasicPlayerEvent.GAIN</code> -> Volumen</li>
+	 * 
 	 * @return
 	 */
 	public int getActualEvent() {
@@ -125,6 +137,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Obtiene el tiempo que lleva la cancion reproduciendose.
+	 * 
 	 * @return
 	 */
 	public long getProgressTime() {
@@ -136,7 +149,9 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	}
 
 	/**
-	 * Obtiene los bytes que han transcurrido mientras la cancion se ha estado reproduciendo.
+	 * Obtiene los bytes que han transcurrido mientras la cancion se ha estado
+	 * reproduciendo.
+	 * 
 	 * @return
 	 */
 	public double getProgressBytes() {
@@ -149,6 +164,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Adiciona una cancion al reproductor y notifica a los observadores del cambio.
+	 * 
 	 * @param song Archivo de la cancion a adicionar.
 	 * @throws PlayerException Cuando ya existe la cancion en la lista.
 	 */
@@ -162,9 +178,12 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Quita una cancion del reproductor y notifica a los observadores del cambio.
+	 * 
 	 * @param song Archivo de la cancion a quitar.
-	 * @throws PlayerException Cuando la cancion a quitar no existe en la lista.
-	 * @throws BasicPlayerException Excepcion lanzada por <code>stop()</code> y <code>next()</code>.
+	 * @throws PlayerException      Cuando la cancion a quitar no existe en la
+	 *                              lista.
+	 * @throws BasicPlayerException Excepcion lanzada por <code>stop()</code> y
+	 *                              <code>next()</code>.
 	 */
 	public void removeSong(Cancion song) throws PlayerException, BasicPlayerException {
 		int index = songs.indexOf(song);
@@ -188,8 +207,10 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Verifica si una cancion esta en la lista de reproduccion.
+	 * 
 	 * @param song Archivo de la cancion.
-	 * @return Devuelve <b>true</b> si la cancion existe dentro de la lista. <b>false</b> D.L.C.
+	 * @return Devuelve <b>true</b> si la cancion existe dentro de la lista.
+	 *         <b>false</b> D.L.C.
 	 */
 	public boolean isSongInList(Cancion song) {
 		boolean found = false;
@@ -202,7 +223,9 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	}
 
 	/**
-	 * Detiene la musica, limpia toda la lista de reproduccion y notifica a los observadores del cambio.
+	 * Detiene la musica, limpia toda la lista de reproduccion y notifica a los
+	 * observadores del cambio.
+	 * 
 	 * @throws BasicPlayerException Excepcion lanzada por <code>stop()</code>.
 	 */
 	public void clearList() throws BasicPlayerException {
@@ -211,26 +234,29 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 		setActual(null);
 		notifyObservers();
 	}
-	
+
 	/**
-	 * Limpia toda la lista de canciones aleatorias reproducidas, SOLO si esta en modo aleatorio.
+	 * Limpia toda la lista de canciones aleatorias reproducidas, SOLO si esta en
+	 * modo aleatorio.
 	 */
 	public void clearRandomList() {
 		if (randomMode) {
 			songsRandom.clear();
 		}
 	}
-	
+
 	/**
 	 * Obtiene la cantidad de canciones que hay en la lista.
+	 * 
 	 * @return
 	 */
 	public int getNumberSongs() {
 		return songs.size();
 	}
-	
+
 	/**
 	 * Obtiene la cancion que esta en la posicion de la lista.
+	 * 
 	 * @param pos Posicion de la cancion en la lista.
 	 * @return
 	 */
@@ -240,8 +266,10 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Obtiene una cancion de la lista, dado su nombre.
+	 * 
 	 * @param name Nombre de la cancion.
-	 * @return La cancion <b>SI</b> esta en la lista. Devuelve <b>null</b> si no la encontro.
+	 * @return La cancion <b>SI</b> esta en la lista. Devuelve <b>null</b> si no la
+	 *         encontro.
 	 */
 	public Cancion getSong(String name) {
 		Cancion resp = null;
@@ -333,6 +361,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Abre una cancion y notifica a los observadores del cambio.
+	 * 
 	 * @param song Archivo de la cancion a abrir.
 	 * @throws BasicPlayerException Error al abrir la cancion.
 	 */
@@ -344,16 +373,19 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Reproduce la cancion actual abierta y notifica a los observadores del cambio.
+	 * 
 	 * @throws BasicPlayerException Error al reproducir la cancion.
 	 */
 	public void play() throws BasicPlayerException {
 		player.play();
+		player.setGain(volume);
 		actualEvent = BasicPlayerEvent.PLAYING;
 		notifyObservers();
 	}
 
 	/**
 	 * Pausa la cancion actual abierta y notifica a los observadores del cambio.
+	 * 
 	 * @throws BasicPlayerException Error al pausar la cancion.
 	 */
 	public void pause() throws BasicPlayerException {
@@ -363,7 +395,9 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	}
 
 	/**
-	 * Reanuda la cancion actual abierta y pausada, y notifica a los observadores del cambio.
+	 * Reanuda la cancion actual abierta y pausada, y notifica a los observadores
+	 * del cambio.
+	 * 
 	 * @throws BasicPlayerException Error al reanudar la cancion.
 	 */
 	public void resume() throws BasicPlayerException {
@@ -374,6 +408,7 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Detiene la cancion abierta y notifica a los observadores del cambio.
+	 * 
 	 * @throws BasicPlayerException Error al detener la cancion.
 	 */
 	public void stop() throws BasicPlayerException {
@@ -385,7 +420,9 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	}
 
 	/**
-	 * Detiene la cancion actual, busca la cancion siguiente de la lista y la abre. Si es la ultima cancion, abre la primera.
+	 * Detiene la cancion actual, busca la cancion siguiente de la lista y la abre.
+	 * Si es la ultima cancion, abre la primera.
+	 * 
 	 * @param deleteRandom
 	 * @throws BasicPlayerException Excepcion lanzada por <code>open()</code>.
 	 */
@@ -393,13 +430,15 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 		int index = songs.indexOf(actual);
 		nextSong(index, deleteRandom);
 	}
-	
+
 	/**
-	 * Detiene la cancion actual, busca la cancion siguiente a la ingresada y la abre. 
-	 * Si la siguiente es la ultima cancion, abre la primera.
+	 * Detiene la cancion actual, busca la cancion siguiente a la ingresada y la
+	 * abre. Si la siguiente es la ultima cancion, abre la primera.
+	 * 
 	 * @param index
 	 * @param deleteRandom
-	 * @throws BasicPlayerException BasicPlayerException Excepcion lanzada por <code>open()</code>.
+	 * @throws BasicPlayerException BasicPlayerException Excepcion lanzada por
+	 *                              <code>open()</code>.
 	 */
 	public void nextSong(int index, boolean deleteRandom) throws BasicPlayerException {
 		if (songs.size() > 0 && actual != null) {
@@ -415,19 +454,23 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 			open(actual);
 		}
 	}
-	
+
 	/**
 	 * Obtiene la siguiente cancion y la detiene.
-	 * @throws BasicPlayerException Excepcion lanzada por <code>next()</code> y <code>stop()</code>.
+	 * 
+	 * @throws BasicPlayerException Excepcion lanzada por <code>next()</code> y
+	 *                              <code>stop()</code>.
 	 */
 	public void nextAndStop(boolean deleteRandom) throws BasicPlayerException {
 		next(deleteRandom);
 		stop();
 	}
-	
+
 	/**
 	 * Detiene y vuelve a abrir la cancion actual (en otras palabras, la repite).
-	 * @throws BasicPlayerException BasicPlayerException Excepcion lanzada por <code>stop()</code> y <code>open()</code>.
+	 * 
+	 * @throws BasicPlayerException BasicPlayerException Excepcion lanzada por
+	 *                              <code>stop()</code> y <code>open()</code>.
 	 */
 	public void nextSelf() throws BasicPlayerException {
 		stop();
@@ -435,7 +478,9 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 	}
 
 	/**
-	 * Detiene la cancion actual, busca la cancion anterior de la lista y la abre. Si es la primera cancion, abre la ultima.
+	 * Detiene la cancion actual, busca la cancion anterior de la lista y la abre.
+	 * Si es la primera cancion, abre la ultima.
+	 * 
 	 * @throws BasicPlayerException Excepcion lanzada por <code>open()</code>.
 	 */
 	public void previous(boolean deleteRandom) throws BasicPlayerException {
@@ -456,15 +501,19 @@ public class Reproductor implements BasicPlayerListener, Sujeto, Serializable {
 
 	/**
 	 * Cambia el volumen al reproductor.
+	 * 
 	 * @param volume Volumen a cambiar.
 	 * @throws BasicPlayerException Error al cambiar el volumen.
 	 */
 	public void setVolume(double volume) throws BasicPlayerException {
+		this.volume = volume;
 		player.setGain(volume);
 	}
-	
+
 	/**
-	 * Intercambia los elementos de la lista de reproduccion y notifica a los observadores del cambio.
+	 * Intercambia los elementos de la lista de reproduccion y notifica a los
+	 * observadores del cambio.
+	 * 
 	 * @param index1 Indice de la cancion seleccionada.
 	 * @param index2 Indice de la cancion a intercambiar.
 	 */
