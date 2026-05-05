@@ -10,7 +10,10 @@ import javazoom.jl.player.basic.BasicPlayerEvent;
 import javazoom.jl.player.basic.BasicPlayerException;
 import javazoom.jl.player.basic.BasicPlayerListener;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -299,8 +302,31 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
         if (properties.containsKey("duration")) {
             currentSong.setDuration(Long.parseLong(properties.get("duration").toString()));
         }
-        if (properties.containsKey("audio.length.bytes")) {
+        // mp3spi reports mp3.length.bytes as the WHOLE file size (including ID3v2),
+        // but mp3.position.byte during playback only accumulates real MP3 frame bytes.
+        // Compute the audio-data length by stripping the ID3v2 tag so the progress bar
+        // reaches 100% at end-of-song and the seek byte ratio matches the audio ratio.
+        long audioBytes = audioDataLength(currentSong);
+        if (audioBytes > 0) {
+            currentSong.setBytesLength(audioBytes);
+        } else if (properties.containsKey("audio.length.bytes")) {
             currentSong.setBytesLength(Double.parseDouble(properties.get("audio.length.bytes").toString()));
+        }
+    }
+
+    private static long audioDataLength(java.io.File file) {
+        long fileSize = file.length();
+        try (InputStream in = Files.newInputStream(file.toPath())) {
+            byte[] h = new byte[10];
+            if (in.read(h) != 10) return fileSize;
+            if (h[0] != 'I' || h[1] != 'D' || h[2] != '3') return fileSize; // no ID3v2
+            // synchsafe 28-bit big-endian size, excluding the 10-byte header
+            long tagSize = ((h[6] & 0x7F) << 21) | ((h[7] & 0x7F) << 14)
+                         | ((h[8] & 0x7F) <<  7) |  (h[9] & 0x7F);
+            boolean hasFooter = (h[5] & 0x10) != 0;
+            return fileSize - 10 - tagSize - (hasFooter ? 10 : 0);
+        } catch (IOException e) {
+            return fileSize;
         }
     }
 
