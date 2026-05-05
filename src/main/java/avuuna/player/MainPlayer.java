@@ -9,21 +9,21 @@ import javax.swing.*;
 
 public class MainPlayer {
 
-    public static final Control control = Control.getInstance("avuuna-player");
+    private static final InstanceLock lock = new InstanceLock();
 
     public static void main(String[] args) {
-        if (control.check()) {
-            launch();
-        } else {
+        if (!lock.tryAcquire()) {
+            JOptionPane.showMessageDialog(null, "Application is already running.");
             System.exit(0);
         }
+        launch();
     }
 
     private static void launch() {
         try {
             Utils.setLookAndFeel(Utils.WINDOWS_LOOK_AND_FEEL);
             PlayerController controller = PlayerController.getInstance();
-            controller.start(control::shutdown);
+            controller.start(lock::release);
         } catch (LookAndFeelException ex) {
             Utils.display(ex.getClass().getName() + ": " + ex.getMessage());
             Utils.log(MainPlayer.class.getName(), ex);
