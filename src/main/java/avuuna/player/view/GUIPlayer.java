@@ -288,6 +288,7 @@ public class GUIPlayer extends View {
     private void buildPlayerComponents() {
         currentSongLabel = new JLabel();
         currentSongLabel.setText(Strings.CURRENT_SONG_LABEL);
+        currentSongLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         progressBar = new JProgressBar();
         progressBar.setMinimum(0);
@@ -336,63 +337,68 @@ public class GUIPlayer extends View {
         detailsPanel = new JPanel();
         detailsPanel.setBorder(BorderFactory.createTitledBorder(Strings.PLAYER_PANEL_TITLE));
 
-        GroupLayout detailsLayout = new GroupLayout(detailsPanel);
-        detailsPanel.setLayout(detailsLayout);
-        detailsLayout.setHorizontalGroup(detailsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(currentSongLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(detailsLayout.createSequentialGroup().addGap(80, 80, 80)
-                        .addComponent(prevButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(playButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(stopButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nextButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(repeatButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(shuffleButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(80, Short.MAX_VALUE))
-                .addComponent(progressBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-        detailsLayout.setVerticalGroup(detailsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(detailsLayout.createSequentialGroup().addGap(7, 7, 7).addComponent(currentSongLabel)
-                        .addGap(5, 5, 5)
-                        .addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addGroup(detailsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(detailsLayout.createSequentialGroup()
-                                        .addGroup(detailsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(playButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(stopButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(prevButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(nextButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(repeatButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(shuffleButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-                                        .addGap(7, 7, Short.MAX_VALUE)))
-                        .addContainerGap()));
+        GroupLayout dl = new GroupLayout(detailsPanel);
+        detailsPanel.setLayout(dl);
+
+        dl.setHorizontalGroup(dl.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(dl.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(currentSongLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                .addGroup(dl.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(progressBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                .addGroup(dl.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(prevButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(playButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stopButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nextButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(repeatButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(shuffleButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)));
+
+        dl.setVerticalGroup(dl.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(currentSongLabel)
+                .addGap(5, 5, 5)
+                .addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(dl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(prevButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(playButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stopButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nextButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(repeatButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(shuffleButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         volumePanel = new JPanel();
         volumePanel.setBorder(BorderFactory.createTitledBorder(Strings.VOLUME_PANEL_TITLE));
 
-        GroupLayout volumeLayout = new GroupLayout(volumePanel);
-        volumePanel.setLayout(volumeLayout);
-        volumeLayout.setHorizontalGroup(
-                volumeLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(volumeSlider,
-                        GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-        volumeLayout.setVerticalGroup(
-                volumeLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(volumeSlider,
-                        GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE));
+        GroupLayout vl = new GroupLayout(volumePanel);
+        volumePanel.setLayout(vl);
+        vl.setHorizontalGroup(vl.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(vl.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(volumeSlider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()));
+        vl.setVerticalGroup(vl.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(volumeSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         GroupLayout layout = new GroupLayout(playerPanel);
         playerPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(volumePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(detailsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(detailsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(volumePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
+                .addComponent(detailsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(volumePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addComponent(detailsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(volumePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE));
     }
 
     private void buildPlaylistComponents() {
@@ -422,40 +428,45 @@ public class GUIPlayer extends View {
 
         moveUpButton = new JButton();
         moveUpButton.setToolTipText(Strings.MOVE_UP_TOOLTIP);
-        moveUpButton.setText("↑");
+        moveUpButton.setIcon(Images.getImageIcon(Images.BTN_MOVE_UP));
         moveUpButton.setFocusable(false);
 
         moveDownButton = new JButton();
         moveDownButton.setToolTipText(Strings.MOVE_DOWN_TOOLTIP);
-        moveDownButton.setText("↓");
+        moveDownButton.setIcon(Images.getImageIcon(Images.BTN_MOVE_DOWN));
         moveDownButton.setFocusable(false);
     }
 
     private void layoutPlaylistPanel() {
         playlistPanel.setBorder(BorderFactory.createTitledBorder(Strings.PLAYLIST_TITLE));
         playlistPanel.setMinimumSize(new Dimension(100, 100));
-        playlistPanel.setPreferredSize(new Dimension(285, 23));
 
         GroupLayout layout = new GroupLayout(playlistPanel);
         playlistPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(listScroll, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                .addGroup(layout.createSequentialGroup().addGap(10, 10, 10).addComponent(addButton)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(removeButton)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(clearButton)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(moveUpButton)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(moveDownButton)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-                .createSequentialGroup().addComponent(listScroll, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addComponent(listScroll, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(addButton)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeButton)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clearButton)
+                        .addGap(20, 20, 20)
+                        .addComponent(moveUpButton)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moveDownButton)
+                        .addGap(0, 0, Short.MAX_VALUE)));
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addComponent(listScroll, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-                        .createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(addButton).addComponent(removeButton).addComponent(clearButton)
-                                .addComponent(moveUpButton).addComponent(moveDownButton))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap()));
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(addButton)
+                        .addComponent(removeButton)
+                        .addComponent(clearButton)
+                        .addComponent(moveUpButton)
+                        .addComponent(moveDownButton))
+                .addContainerGap());
 
         playlistPanel.getAccessibleContext().setAccessibleParent(playlistPanel);
     }

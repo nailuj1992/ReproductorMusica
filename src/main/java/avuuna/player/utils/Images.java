@@ -18,26 +18,29 @@ public class Images implements Serializable {
     public static final String IMG_LOGO = "logo.png";
     public static final String IMG_OPEN = "Open16.png";
 
-    public static final String BTN_PAUSE = "Pause64.png";
-    public static final String BTN_PLAY = "Play64.png";
-    public static final String BTN_PREV = "Skip-backward64.png";
-    public static final String BTN_NEXT = "Skip-forward64.png";
-    public static final String BTN_STOP = "Stop64.png";
-    public static final String BTN_PLUS = "Plus16.png";
-    public static final String BTN_LESS = "Less16.png";
-    public static final String BTN_CLOSE = "Close16.png";
+    public static final String BTN_PAUSE = "btn-pause";
+    public static final String BTN_PLAY  = "btn-play";
+    public static final String BTN_PREV  = "btn-prev";
+    public static final String BTN_NEXT  = "btn-next";
+    public static final String BTN_STOP  = "btn-stop";
+    public static final String BTN_PLUS  = "btn-plus";
+    public static final String BTN_LESS  = "btn-less";
+    public static final String BTN_CLOSE = "btn-close";
 
     public static final String BTN_REPEAT_NONE = "btn-repeat-none";
-    public static final String BTN_REPEAT_ALL  = "btn-repeat-all";
-    public static final String BTN_REPEAT_ONE  = "btn-repeat-one";
+    public static final String BTN_REPEAT_ALL = "btn-repeat-all";
+    public static final String BTN_REPEAT_ONE = "btn-repeat-one";
     public static final String BTN_SHUFFLE_OFF = "btn-shuffle-off";
-    public static final String BTN_SHUFFLE_ON  = "btn-shuffle-on";
+    public static final String BTN_SHUFFLE_ON = "btn-shuffle-on";
+    public static final String BTN_MOVE_UP   = "btn-move-up";
+    public static final String BTN_MOVE_DOWN = "btn-move-down";
 
-    private static final Color ICON_ACTIVE   = new Color(30, 120, 215);
+    private static final Color ICON_ACTIVE = new Color(30, 120, 215);
     private static final Color ICON_INACTIVE = new Color(150, 150, 150);
     private static final Color ICON_PLAYBACK = new Color(60, 60, 60);
-    private static final int   SYMBOL_SIZE   = 40;
-    private static final int   PLAYBACK_SIZE = 48;
+    private static final int SYMBOL_SIZE   = 40;
+    private static final int PLAYBACK_SIZE = 48;
+    private static final int PLAYLIST_SIZE = 16;
 
     private static final Map<String, ImageIcon> imageCache;
 
@@ -46,20 +49,22 @@ public class Images implements Serializable {
 
         imageCache.put(IMG_LOGO, createImageIcon(IMG_LOGO));
         imageCache.put(IMG_OPEN, createImageIcon(IMG_OPEN));
-        imageCache.put(BTN_PLAY,  createSymbolIcon("▶",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
-        imageCache.put(BTN_PAUSE, createSymbolIcon("⏸",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
-        imageCache.put(BTN_STOP,  createSymbolIcon("■",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
-        imageCache.put(BTN_PREV,  createSymbolIcon("⏮",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
-        imageCache.put(BTN_NEXT,  createSymbolIcon("⏭",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
-        imageCache.put(BTN_PLUS, createImageIcon(BTN_PLUS));
-        imageCache.put(BTN_LESS, createImageIcon(BTN_LESS));
-        imageCache.put(BTN_CLOSE, createImageIcon(BTN_CLOSE));
+        imageCache.put(BTN_PLAY, createSymbolIcon("▶", ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_PAUSE, createSymbolIcon("⏸", ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_STOP, createSymbolIcon("■", ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_PREV, createSymbolIcon("⏮", ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_NEXT, createSymbolIcon("⏭", ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_PLUS,  createSymbolIcon("+", ICON_PLAYBACK, PLAYLIST_SIZE, false));
+        imageCache.put(BTN_LESS,  createSymbolIcon("−", ICON_PLAYBACK, PLAYLIST_SIZE, false));
+        imageCache.put(BTN_CLOSE, createSymbolIcon("×", ICON_PLAYBACK, PLAYLIST_SIZE, false));
 
         imageCache.put(BTN_REPEAT_NONE, createSymbolIcon("↻", ICON_INACTIVE, SYMBOL_SIZE, false));
-        imageCache.put(BTN_REPEAT_ALL,  createSymbolIcon("↻", ICON_ACTIVE,   SYMBOL_SIZE, false));
-        imageCache.put(BTN_REPEAT_ONE,  createSymbolIcon("↻", ICON_ACTIVE,   SYMBOL_SIZE, true));
+        imageCache.put(BTN_REPEAT_ALL, createSymbolIcon("↻", ICON_ACTIVE, SYMBOL_SIZE, false));
+        imageCache.put(BTN_REPEAT_ONE, createSymbolIcon("↻", ICON_ACTIVE, SYMBOL_SIZE, true));
         imageCache.put(BTN_SHUFFLE_OFF, createSymbolIcon("⇄", ICON_INACTIVE, SYMBOL_SIZE, false));
-        imageCache.put(BTN_SHUFFLE_ON,  createSymbolIcon("⇄", ICON_ACTIVE,   SYMBOL_SIZE, false));
+        imageCache.put(BTN_SHUFFLE_ON, createSymbolIcon("⇄", ICON_ACTIVE, SYMBOL_SIZE, false));
+        imageCache.put(BTN_MOVE_UP,   createSymbolIcon("↑", ICON_PLAYBACK, PLAYLIST_SIZE, false));
+        imageCache.put(BTN_MOVE_DOWN, createSymbolIcon("↓", ICON_PLAYBACK, PLAYLIST_SIZE, false));
     }
 
     private static ImageIcon createSymbolIcon(String symbol, Color color, int size, boolean badgeOne) {
