@@ -1,16 +1,26 @@
 package avuuna.player.controller;
 
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
+import avuuna.player.exception.PlayerException;
+import avuuna.player.model.MusicPlayer;
+import avuuna.player.model.Song;
+import avuuna.player.utils.ModelObserver;
+import avuuna.player.utils.Strings;
+import avuuna.player.utils.Utils;
+import avuuna.player.view.GUIPlayer;
+import javazoom.jl.player.basic.BasicPlayerEvent;
+import javazoom.jl.player.basic.BasicPlayerException;
 
 import javax.swing.*;
-
-import avuuna.player.exception.*;
-import avuuna.player.model.*;
-import avuuna.player.utils.*;
-import avuuna.player.view.*;
-import javazoom.jl.player.basic.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MVC Controller. Wires user actions from the view to the model and reflects
@@ -99,7 +109,8 @@ public class PlayerController implements Serializable, ModelObserver {
 
         view.addRepeatListener(e -> {
             Boolean current = model.getRepeatMode();
-            Boolean next = (current == null) ? Boolean.TRUE : (current ? Boolean.FALSE : null);
+            Boolean nextValidation = current ? Boolean.FALSE : null;
+            Boolean next = (current == null) ? Boolean.TRUE : nextValidation;
             model.setRepeatMode(next);
         });
 
@@ -193,32 +204,32 @@ public class PlayerController implements Serializable, ModelObserver {
     public void update() {
         if (model.getCurrentSong() != null) {
             switch (model.getCurrentEvent()) {
-            case BasicPlayerEvent.RESUMED:
-                view.setPlayingState(true);
-                break;
-            case BasicPlayerEvent.PAUSED:
-                view.setPlayingState(false);
-                break;
-            case BasicPlayerEvent.PLAYING:
-                view.setPlayingState(true);
-                running = true;
-                break;
-            case BasicPlayerEvent.STOPPED:
-                view.setPlayingState(false);
-                running = false;
-                break;
-            case BasicPlayerEvent.OPENED:
-                view.setSongLabel(model.getCurrentSong().getName());
-                view.setProgressMax((int) model.getCurrentSong().getBytesLength());
-                view.setProgressText(Strings.ZERO + Strings.OF
-                        + Utils.formatTime(model.getCurrentSong().getDuration()));
-                if (!running) {
-                    playSong();
-                }
-                setVolume();
-                break;
-            default:
-                break;
+                case BasicPlayerEvent.RESUMED:
+                    view.setPlayingState(true);
+                    break;
+                case BasicPlayerEvent.PAUSED:
+                    view.setPlayingState(false);
+                    break;
+                case BasicPlayerEvent.PLAYING:
+                    view.setPlayingState(true);
+                    running = true;
+                    break;
+                case BasicPlayerEvent.STOPPED:
+                    view.setPlayingState(false);
+                    running = false;
+                    break;
+                case BasicPlayerEvent.OPENED:
+                    view.setSongLabel(model.getCurrentSong().getName());
+                    view.setProgressMax((int) model.getCurrentSong().getBytesLength());
+                    view.setProgressText(Strings.ZERO + Strings.OF
+                            + Utils.formatTime(model.getCurrentSong().getDuration()));
+                    if (!running) {
+                        playSong();
+                    }
+                    setVolume();
+                    break;
+                default:
+                    break;
             }
         } else {
             view.setSongLabel(null);

@@ -1,13 +1,20 @@
 package avuuna.player;
 
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.*;
-
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Prevents multiple simultaneous instances of the application by using a temp file as a lock.
+ *
  * @see <a href="http://www.jc-mouse.net/java/evitar-ejecutar-un-programa-java-mas-de-una-vez">Original reference</a>
  */
 public class Control {
@@ -30,7 +37,9 @@ public class Control {
         tmpFile = new File(System.getProperty("java.io.tmpdir"), projectName + ".tmp");
     }
 
-    /** Returns {@code true} if the app may start; {@code false} if another instance is already running. */
+    /**
+     * Returns {@code true} if the app may start; {@code false} if another instance is already running.
+     */
     public boolean check() {
         if (tmpFile.exists()) {
             long timestamp = readTimestamp();
@@ -60,7 +69,7 @@ public class Control {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        return Long.valueOf(line).longValue();
+        return Long.parseLong(line);
     }
 
     public void scheduleTask() {
@@ -80,7 +89,9 @@ public class Control {
         }
     }
 
-    /** Returns elapsed time in seconds since {@code timestamp} (in milliseconds). */
+    /**
+     * Returns elapsed time in seconds since {@code timestamp} (in milliseconds).
+     */
     public long elapsedSeconds(long timestamp) {
         long currentTime = new Date().getTime();
         return (currentTime - timestamp) / 1000;

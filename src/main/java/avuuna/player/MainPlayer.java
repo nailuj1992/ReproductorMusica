@@ -1,10 +1,11 @@
 package avuuna.player;
 
-import javax.swing.*;
+import avuuna.player.controller.PlayerController;
+import avuuna.player.exception.LookAndFeelException;
+import avuuna.player.exception.PlayerException;
+import avuuna.player.utils.Utils;
 
-import avuuna.player.controller.*;
-import avuuna.player.exception.*;
-import avuuna.player.utils.*;
+import javax.swing.*;
 
 public class MainPlayer {
 
@@ -22,7 +23,7 @@ public class MainPlayer {
         try {
             Utils.setLookAndFeel(Utils.WINDOWS_LOOK_AND_FEEL);
             PlayerController controller = PlayerController.getInstance();
-            controller.start(() -> control.shutdown());
+            controller.start(control::shutdown);
         } catch (LookAndFeelException ex) {
             Utils.display(ex.getClass().getName() + ": " + ex.getMessage());
             Utils.log(MainPlayer.class.getName(), ex);

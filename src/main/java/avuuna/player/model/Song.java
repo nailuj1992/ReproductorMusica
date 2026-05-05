@@ -1,7 +1,8 @@
 package avuuna.player.model;
 
-import java.io.*;
-import java.net.*;
+import java.io.File;
+import java.io.Serializable;
+import java.net.URI;
 
 /**
  * Represents a single audio track, extending {@link File} with playback metadata.

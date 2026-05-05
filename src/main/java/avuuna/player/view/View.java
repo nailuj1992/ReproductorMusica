@@ -1,11 +1,10 @@
 package avuuna.player.view;
 
-import java.awt.*;
-import java.io.*;
+import avuuna.player.utils.Images;
 
 import javax.swing.*;
-
-import avuuna.player.utils.*;
+import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Base class for all application windows.
@@ -19,7 +18,7 @@ public abstract class View extends JFrame implements Serializable {
 
     static {
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        SCREEN_WIDTH  = (int) screen.getWidth();
+        SCREEN_WIDTH = (int) screen.getWidth();
         SCREEN_HEIGHT = (int) screen.getHeight() - 35;
     }
 
@@ -31,7 +30,9 @@ public abstract class View extends JFrame implements Serializable {
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
 
-    /** Finalizes window setup and makes it visible. */
+    /**
+     * Finalizes window setup and makes it visible.
+     */
     public final void initView() {
         pack();
         setVisible(true);

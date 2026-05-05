@@ -1,15 +1,16 @@
 package avuuna.player.view;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.List;
+import avuuna.player.utils.Images;
+import avuuna.player.utils.Strings;
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.filechooser.*;
-
-import avuuna.player.utils.*;
+import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.util.List;
 
 /**
  * Main application window. Declares and lays out all UI components.
@@ -27,9 +28,12 @@ public class GUIPlayer extends View {
 
     private JPanel detailsPanel;
     private JLabel currentSongLabel;
-    private JButton playButton, stopButton;
-    private JButton prevButton, nextButton;
-    private JButton repeatButton, shuffleButton;
+    private JButton playButton;
+    private JButton stopButton;
+    private JButton prevButton;
+    private JButton nextButton;
+    private JButton repeatButton;
+    private JButton shuffleButton;
     private JProgressBar progressBar;
 
     private JPanel volumePanel;
@@ -41,7 +45,11 @@ public class GUIPlayer extends View {
     private JList<String> songList;
     private DefaultListModel<String> listModel;
 
-    private JButton addButton, removeButton, clearButton, moveUpButton, moveDownButton;
+    private JButton addButton;
+    private JButton removeButton;
+    private JButton clearButton;
+    private JButton moveUpButton;
+    private JButton moveDownButton;
 
     public GUIPlayer() {
         super("Music Player - by Avuuna, la Luz del Alba");
@@ -53,21 +61,65 @@ public class GUIPlayer extends View {
     // Listener registration
     // -------------------------------------------------------------------------
 
-    public void addOpenMenuListener(ActionListener l)      { openItem.addActionListener(l); }
-    public void setOpenMenuAccelerator(KeyStroke ks)       { openItem.setAccelerator(ks); }
-    public void addPlayListener(ActionListener l)          { playButton.addActionListener(l); }
-    public void addStopListener(ActionListener l)          { stopButton.addActionListener(l); }
-    public void addNextListener(ActionListener l)          { nextButton.addActionListener(l); }
-    public void addPrevListener(ActionListener l)          { prevButton.addActionListener(l); }
-    public void addRepeatListener(ActionListener l)        { repeatButton.addActionListener(l); }
-    public void addShuffleListener(ActionListener l)       { shuffleButton.addActionListener(l); }
-    public void addVolumeChangeListener(ChangeListener l)  { volumeSlider.addChangeListener(l); }
-    public void addSongListMouseListener(MouseListener l)  { songList.addMouseListener(l); }
-    public void addAddSongListener(ActionListener l)       { addButton.addActionListener(l); }
-    public void addRemoveSongListener(ActionListener l)    { removeButton.addActionListener(l); }
-    public void addClearPlaylistListener(ActionListener l) { clearButton.addActionListener(l); }
-    public void addMoveUpListener(ActionListener l)        { moveUpButton.addActionListener(l); }
-    public void addMoveDownListener(ActionListener l)      { moveDownButton.addActionListener(l); }
+    public void addOpenMenuListener(ActionListener l) {
+        openItem.addActionListener(l);
+    }
+
+    public void setOpenMenuAccelerator(KeyStroke ks) {
+        openItem.setAccelerator(ks);
+    }
+
+    public void addPlayListener(ActionListener l) {
+        playButton.addActionListener(l);
+    }
+
+    public void addStopListener(ActionListener l) {
+        stopButton.addActionListener(l);
+    }
+
+    public void addNextListener(ActionListener l) {
+        nextButton.addActionListener(l);
+    }
+
+    public void addPrevListener(ActionListener l) {
+        prevButton.addActionListener(l);
+    }
+
+    public void addRepeatListener(ActionListener l) {
+        repeatButton.addActionListener(l);
+    }
+
+    public void addShuffleListener(ActionListener l) {
+        shuffleButton.addActionListener(l);
+    }
+
+    public void addVolumeChangeListener(ChangeListener l) {
+        volumeSlider.addChangeListener(l);
+    }
+
+    public void addSongListMouseListener(MouseListener l) {
+        songList.addMouseListener(l);
+    }
+
+    public void addAddSongListener(ActionListener l) {
+        addButton.addActionListener(l);
+    }
+
+    public void addRemoveSongListener(ActionListener l) {
+        removeButton.addActionListener(l);
+    }
+
+    public void addClearPlaylistListener(ActionListener l) {
+        clearButton.addActionListener(l);
+    }
+
+    public void addMoveUpListener(ActionListener l) {
+        moveUpButton.addActionListener(l);
+    }
+
+    public void addMoveDownListener(ActionListener l) {
+        moveDownButton.addActionListener(l);
+    }
 
     // -------------------------------------------------------------------------
     // State update methods
@@ -315,9 +367,9 @@ public class GUIPlayer extends View {
     }
 
     private void buildPlaylistComponents() {
-        listModel = new DefaultListModel<String>();
+        listModel = new DefaultListModel<>();
 
-        songList = new JList<String>();
+        songList = new JList<>();
         songList.setModel(listModel);
         songList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

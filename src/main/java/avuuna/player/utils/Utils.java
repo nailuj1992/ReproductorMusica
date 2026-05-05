@@ -1,16 +1,19 @@
 package avuuna.player.utils;
 
-import java.io.*;
-import java.util.*;
-import java.util.logging.*;
+import avuuna.player.exception.LookAndFeelException;
 
 import javax.swing.*;
-
-import avuuna.player.exception.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Utils {
 
-    public static final String NIMBUS_LOOK_AND_FEEL  = "Nimbus";
+    public static final String NIMBUS_LOOK_AND_FEEL = "Nimbus";
     public static final String WINDOWS_LOOK_AND_FEEL = "Windows";
 
     public static void display() {
@@ -66,12 +69,14 @@ public class Utils {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                | UnsupportedLookAndFeelException ex) {
+                 | UnsupportedLookAndFeelException ex) {
             throw new LookAndFeelException(ex.getMessage());
         }
     }
 
-    /** Converts microseconds to {@code mm:ss} format. */
+    /**
+     * Converts microseconds to {@code mm:ss} format.
+     */
     public static String formatTime(long microseconds) {
         int seconds = (int) (microseconds / 1_000_000);
         int minutes = seconds / 60;

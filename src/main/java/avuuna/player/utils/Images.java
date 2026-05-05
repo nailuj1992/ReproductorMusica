@@ -1,9 +1,9 @@
 package avuuna.player.utils;
 
-import java.io.*;
-import java.util.*;
-
 import javax.swing.*;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Loads and caches application images on startup.
@@ -30,15 +30,15 @@ public class Images implements Serializable {
     static {
         imageCache = new HashMap<String, ImageIcon>();
 
-        imageCache.put(IMG_LOGO,  createImageIcon(IMG_LOGO));
-        imageCache.put(IMG_OPEN,  createImageIcon(IMG_OPEN));
+        imageCache.put(IMG_LOGO, createImageIcon(IMG_LOGO));
+        imageCache.put(IMG_OPEN, createImageIcon(IMG_OPEN));
         imageCache.put(BTN_PAUSE, createImageIcon(BTN_PAUSE));
-        imageCache.put(BTN_PLAY,  createImageIcon(BTN_PLAY));
-        imageCache.put(BTN_PREV,  createImageIcon(BTN_PREV));
-        imageCache.put(BTN_NEXT,  createImageIcon(BTN_NEXT));
-        imageCache.put(BTN_STOP,  createImageIcon(BTN_STOP));
-        imageCache.put(BTN_PLUS,  createImageIcon(BTN_PLUS));
-        imageCache.put(BTN_LESS,  createImageIcon(BTN_LESS));
+        imageCache.put(BTN_PLAY, createImageIcon(BTN_PLAY));
+        imageCache.put(BTN_PREV, createImageIcon(BTN_PREV));
+        imageCache.put(BTN_NEXT, createImageIcon(BTN_NEXT));
+        imageCache.put(BTN_STOP, createImageIcon(BTN_STOP));
+        imageCache.put(BTN_PLUS, createImageIcon(BTN_PLUS));
+        imageCache.put(BTN_LESS, createImageIcon(BTN_LESS));
         imageCache.put(BTN_CLOSE, createImageIcon(BTN_CLOSE));
     }
 

@@ -1,11 +1,19 @@
 package avuuna.player.model;
 
-import avuuna.player.exception.*;
-import avuuna.player.utils.*;
+import avuuna.player.exception.PlayerException;
+import avuuna.player.utils.ModelObserver;
+import avuuna.player.utils.ModelSubject;
+import avuuna.player.utils.Utils;
+import javazoom.jl.player.basic.BasicController;
+import javazoom.jl.player.basic.BasicPlayer;
+import javazoom.jl.player.basic.BasicPlayerEvent;
+import javazoom.jl.player.basic.BasicPlayerException;
+import javazoom.jl.player.basic.BasicPlayerListener;
 
-import java.io.*;
-import java.util.*;
-import javazoom.jl.player.basic.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Core playback model. Manages the playlist, player state, and repeat/shuffle logic.<br>
@@ -28,7 +36,9 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
     private List<Song> playlist;
     private double volume;
 
-    /** {@code true} = repeat all, {@code false} = repeat one, {@code null} = no repeat. */
+    /**
+     * {@code true} = repeat all, {@code false} = repeat one, {@code null} = no repeat.
+     */
     private Boolean repeatMode;
 
     private boolean randomMode;
@@ -44,16 +54,16 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
 
     private MusicPlayer(BasicPlayer player) {
         this.player = player;
-        this.playlist = new ArrayList<Song>();
+        this.playlist = new ArrayList<>();
         repeatMode = null;
         randomMode = false;
-        shuffleHistory = new ArrayList<Song>();
+        shuffleHistory = new ArrayList<>();
 
         player.addBasicPlayerListener(this);
         setController(player);
 
         volume = 0.5d;
-        observers = new ArrayList<ModelObserver>();
+        observers = new ArrayList<>();
     }
 
     // -------------------------------------------------------------------------
@@ -136,10 +146,8 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
             throw new PlayerException(PlayerException.ERROR_REMOVE_SONG_NO_EXISTS);
         }
         if (currentSong == song) {
-            if (playlist.size() > 0) {
-                if (shuffleHistory.contains(currentSong)) {
-                    shuffleHistory.remove(currentSong);
-                }
+            if (!playlist.isEmpty()) {
+                shuffleHistory.remove(currentSong);
                 nextFrom(--index, false);
             } else {
                 stop();
@@ -241,9 +249,9 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
     }
 
     public void nextFrom(int index, boolean clearShuffleHistory) throws BasicPlayerException {
-        if (playlist.size() > 0 && currentSong != null) {
+        if (!playlist.isEmpty() && currentSong != null) {
             stop();
-            currentSong = (index == playlist.size() - 1) ? playlist.get(0) : playlist.get(index + 1);
+            currentSong = (index == playlist.size() - 1) ? playlist.getFirst() : playlist.get(index + 1);
             if (clearShuffleHistory) {
                 this.shuffleHistory.clear();
             }
@@ -262,10 +270,10 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
     }
 
     public void previous(boolean clearShuffleHistory) throws BasicPlayerException {
-        if (playlist.size() > 0 && currentSong != null) {
+        if (!playlist.isEmpty() && currentSong != null) {
             stop();
             int index = playlist.indexOf(currentSong);
-            currentSong = (index == 0) ? playlist.get(playlist.size() - 1) : playlist.get(index - 1);
+            currentSong = (index == 0) ? playlist.getLast() : playlist.get(index - 1);
             if (clearShuffleHistory) {
                 this.shuffleHistory.clear();
             }
@@ -294,7 +302,7 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
 
     @Override
     public void progress(int bytesread, long microseconds, byte[] pcmdata,
-            @SuppressWarnings("rawtypes") Map properties) {
+                         @SuppressWarnings("rawtypes") Map properties) {
         if (properties.containsKey("mp3.position.microseconds")) {
             setProgressTime(Long.parseLong(properties.get("mp3.position.microseconds").toString()));
         }
@@ -326,7 +334,7 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
                             play();
                         } else {
                             shuffleHistory.clear();
-                            if (repeatMode != null && repeatMode) {
+                            if (Boolean.TRUE.equals(repeatMode)) {
                                 int random = Utils.getRandomWithExclusion(0, playlist.size() - 1, current);
                                 currentSong = playlist.get(random);
                                 open(currentSong);
@@ -337,7 +345,7 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
                         }
                     } else {
                         if (current == playlist.size() - 1) {
-                            if (repeatMode != null && repeatMode) {
+                            if (Boolean.TRUE.equals(repeatMode)) {
                                 next(false);
                             } else {
                                 advanceAndStop(false);
@@ -378,6 +386,6 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
 
     @Override
     public void setController(BasicController controller) {
-        return;
+        Utils.display("No controller available");
     }
 }
