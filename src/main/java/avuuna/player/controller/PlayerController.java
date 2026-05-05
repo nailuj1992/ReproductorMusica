@@ -109,7 +109,7 @@ public class PlayerController implements Serializable, ModelObserver {
 
         view.addRepeatListener(e -> {
             Boolean current = model.getRepeatMode();
-            Boolean nextValidation = current ? Boolean.FALSE : null;
+            Boolean nextValidation = Boolean.TRUE.equals(current) ? Boolean.FALSE : null;
             Boolean next = (current == null) ? Boolean.TRUE : nextValidation;
             model.setRepeatMode(next);
         });
@@ -117,6 +117,20 @@ public class PlayerController implements Serializable, ModelObserver {
         view.addShuffleListener(e -> model.setRandomMode(!model.isRandomMode()));
 
         view.addVolumeChangeListener(e -> setVolume());
+
+        view.addProgressClickListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (model.getCurrentSong() == null) return;
+                double ratio = (double) e.getX() / e.getComponent().getWidth();
+                long targetBytes = (long) (ratio * model.getCurrentSong().getBytesLength());
+                try {
+                    model.seek(targetBytes);
+                } catch (BasicPlayerException ex) {
+                    Utils.display("Seek error: " + ex.getMessage());
+                }
+            }
+        });
 
         view.addSongListMouseListener(new MouseAdapter() {
             @Override

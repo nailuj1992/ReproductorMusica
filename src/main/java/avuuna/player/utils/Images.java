@@ -1,6 +1,8 @@
 package avuuna.player.utils;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,21 +27,66 @@ public class Images implements Serializable {
     public static final String BTN_LESS = "Less16.png";
     public static final String BTN_CLOSE = "Close16.png";
 
+    public static final String BTN_REPEAT_NONE = "btn-repeat-none";
+    public static final String BTN_REPEAT_ALL  = "btn-repeat-all";
+    public static final String BTN_REPEAT_ONE  = "btn-repeat-one";
+    public static final String BTN_SHUFFLE_OFF = "btn-shuffle-off";
+    public static final String BTN_SHUFFLE_ON  = "btn-shuffle-on";
+
+    private static final Color ICON_ACTIVE   = new Color(30, 120, 215);
+    private static final Color ICON_INACTIVE = new Color(150, 150, 150);
+    private static final Color ICON_PLAYBACK = new Color(60, 60, 60);
+    private static final int   SYMBOL_SIZE   = 40;
+    private static final int   PLAYBACK_SIZE = 48;
+
     private static final Map<String, ImageIcon> imageCache;
 
     static {
-        imageCache = new HashMap<String, ImageIcon>();
+        imageCache = new HashMap<>();
 
         imageCache.put(IMG_LOGO, createImageIcon(IMG_LOGO));
         imageCache.put(IMG_OPEN, createImageIcon(IMG_OPEN));
-        imageCache.put(BTN_PAUSE, createImageIcon(BTN_PAUSE));
-        imageCache.put(BTN_PLAY, createImageIcon(BTN_PLAY));
-        imageCache.put(BTN_PREV, createImageIcon(BTN_PREV));
-        imageCache.put(BTN_NEXT, createImageIcon(BTN_NEXT));
-        imageCache.put(BTN_STOP, createImageIcon(BTN_STOP));
+        imageCache.put(BTN_PLAY,  createSymbolIcon("▶",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_PAUSE, createSymbolIcon("⏸",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_STOP,  createSymbolIcon("■",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_PREV,  createSymbolIcon("⏮",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
+        imageCache.put(BTN_NEXT,  createSymbolIcon("⏭",  ICON_PLAYBACK, PLAYBACK_SIZE, false));
         imageCache.put(BTN_PLUS, createImageIcon(BTN_PLUS));
         imageCache.put(BTN_LESS, createImageIcon(BTN_LESS));
         imageCache.put(BTN_CLOSE, createImageIcon(BTN_CLOSE));
+
+        imageCache.put(BTN_REPEAT_NONE, createSymbolIcon("↻", ICON_INACTIVE, SYMBOL_SIZE, false));
+        imageCache.put(BTN_REPEAT_ALL,  createSymbolIcon("↻", ICON_ACTIVE,   SYMBOL_SIZE, false));
+        imageCache.put(BTN_REPEAT_ONE,  createSymbolIcon("↻", ICON_ACTIVE,   SYMBOL_SIZE, true));
+        imageCache.put(BTN_SHUFFLE_OFF, createSymbolIcon("⇄", ICON_INACTIVE, SYMBOL_SIZE, false));
+        imageCache.put(BTN_SHUFFLE_ON,  createSymbolIcon("⇄", ICON_ACTIVE,   SYMBOL_SIZE, false));
+    }
+
+    private static ImageIcon createSymbolIcon(String symbol, Color color, int size, boolean badgeOne) {
+        BufferedImage img = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = img.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g.setColor(color);
+
+        Font font = new Font("Segoe UI Symbol", Font.PLAIN, (int) (size * 0.72));
+        g.setFont(font);
+        FontMetrics fm = g.getFontMetrics();
+        int x = (size - fm.stringWidth(symbol)) / 2;
+        int y = (size + fm.getAscent() - fm.getDescent()) / 2;
+        g.drawString(symbol, x, y);
+
+        if (badgeOne) {
+            Font badgeFont = new Font(Font.SANS_SERIF, Font.BOLD, (int) (size * 0.28));
+            g.setFont(badgeFont);
+            FontMetrics bfm = g.getFontMetrics();
+            int bx = size - bfm.stringWidth("1") - 1;
+            int by = bfm.getAscent();
+            g.drawString("1", bx, by);
+        }
+
+        g.dispose();
+        return new ImageIcon(img);
     }
 
     private static ImageIcon createImageIcon(String name) {

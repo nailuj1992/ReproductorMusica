@@ -154,6 +154,10 @@ public class GUIPlayer extends View {
         progressBar.setString(text);
     }
 
+    public void addProgressClickListener(MouseListener l) {
+        progressBar.addMouseListener(l);
+    }
+
     public void refreshPlaylist(List<String> items) {
         listModel.clear();
         for (String item : items) {
@@ -168,23 +172,23 @@ public class GUIPlayer extends View {
     public void setRepeatButtonState(Boolean repeatMode) {
         if (repeatMode == null) {
             repeatButton.setToolTipText(Strings.NO_REPEAT);
-            repeatButton.setText("R No");
+            repeatButton.setIcon(Images.getImageIcon(Images.BTN_REPEAT_NONE));
         } else if (repeatMode) {
             repeatButton.setToolTipText(Strings.REPEAT_ALL);
-            repeatButton.setText("R All");
+            repeatButton.setIcon(Images.getImageIcon(Images.BTN_REPEAT_ALL));
         } else {
             repeatButton.setToolTipText(Strings.REPEAT_ONE);
-            repeatButton.setText("R 1");
+            repeatButton.setIcon(Images.getImageIcon(Images.BTN_REPEAT_ONE));
         }
     }
 
     public void setShuffleButtonState(boolean shuffle) {
         if (shuffle) {
             shuffleButton.setToolTipText(Strings.SHUFFLE_ON);
-            shuffleButton.setText("Shuffle ON");
+            shuffleButton.setIcon(Images.getImageIcon(Images.BTN_SHUFFLE_ON));
         } else {
             shuffleButton.setToolTipText(Strings.SHUFFLE_OFF);
-            shuffleButton.setText("Shuffle OFF");
+            shuffleButton.setIcon(Images.getImageIcon(Images.BTN_SHUFFLE_OFF));
         }
     }
 
@@ -290,6 +294,7 @@ public class GUIPlayer extends View {
         progressBar.setMaximum(0);
         progressBar.setStringPainted(true);
         progressBar.setString(Strings.ZERO_TIME);
+        progressBar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         prevButton = new JButton();
         prevButton.setToolTipText(Strings.PREV);
@@ -313,12 +318,12 @@ public class GUIPlayer extends View {
 
         repeatButton = new JButton();
         repeatButton.setToolTipText(Strings.NO_REPEAT);
-        repeatButton.setText("R No");
+        repeatButton.setIcon(Images.getImageIcon(Images.BTN_REPEAT_NONE));
         repeatButton.setFocusable(false);
 
         shuffleButton = new JButton();
         shuffleButton.setToolTipText(Strings.SHUFFLE_OFF);
-        shuffleButton.setText("Shuffle OFF");
+        shuffleButton.setIcon(Images.getImageIcon(Images.BTN_SHUFFLE_OFF));
         shuffleButton.setFocusable(false);
 
         volumeSlider = new JSlider();

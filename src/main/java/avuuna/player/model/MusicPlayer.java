@@ -127,6 +127,10 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
         this.progressBytes = progressBytes;
     }
 
+    public void seek(long bytes) throws BasicPlayerException {
+        player.seek(bytes);
+    }
+
     // -------------------------------------------------------------------------
     // Playlist management
     // -------------------------------------------------------------------------
