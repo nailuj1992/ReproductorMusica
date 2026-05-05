@@ -28,7 +28,9 @@ jobs:
         run: echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
 
       - name: Build JAR
-        run: mvn -B clean package
+        # Skip tests: PlayerTest opens an audio line, which fails on
+        # GitHub-hosted runners that have no sound device.
+        run: mvn -B -DskipTests clean package
 
       - name: Collect dependencies + main JAR
         shell: bash
