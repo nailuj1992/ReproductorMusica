@@ -208,6 +208,18 @@ public class GUIPlayer extends View {
         songList.setSelectedIndex(index);
     }
 
+    public int[] getSelectedIndices() {
+        return songList.getSelectedIndices();
+    }
+
+    public List<String> getSelectedValues() {
+        return songList.getSelectedValuesList();
+    }
+
+    public void setSelectedIndices(int[] indices) {
+        songList.setSelectedIndices(indices);
+    }
+
     public int getVolumeValue() {
         return volumeSlider.getValue();
     }
@@ -406,7 +418,7 @@ public class GUIPlayer extends View {
 
         songList = new JList<>();
         songList.setModel(listModel);
-        songList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        songList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         listScroll = new JScrollPane();
         listScroll.setViewportView(songList);

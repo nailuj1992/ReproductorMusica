@@ -20,7 +20,10 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * MVC Controller. Wires user actions from the view to the model and reflects
@@ -148,23 +151,28 @@ public class PlayerController implements Serializable, ModelObserver {
         });
 
         view.addRemoveSongListener(e -> {
-            if (model.getSongCount() > 0) {
-                String selected = view.getSelectedValue();
-                if (selected != null) {
-                    int confirmed = JOptionPane.showConfirmDialog(view, Strings.CONFIRM_REMOVE_MSG,
-                            Strings.CONFIRM_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
-                    if (confirmed == JOptionPane.YES_OPTION) {
-                        int sel = view.getSelectedIndex();
-                        removeSong(selected.replace(Strings.CURRENT_MARKER, ""));
-                        view.setSelectedIndex(sel);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
-                            PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
+            if (model.getSongCount() == 0) {
                 JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONGS_LIST,
                         PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            List<String> selected = view.getSelectedValues();
+            if (selected.isEmpty()) {
+                JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
+                        PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int confirmed = JOptionPane.showConfirmDialog(view, Strings.CONFIRM_REMOVE_MSG,
+                    Strings.CONFIRM_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+            if (confirmed == JOptionPane.YES_OPTION) {
+                int firstIdx = view.getSelectedIndices()[0];
+                for (String name : selected) {
+                    removeSong(name.replace(Strings.CURRENT_MARKER, ""));
+                }
+                int remaining = model.getSongCount();
+                if (remaining > 0) {
+                    view.setSelectedIndex(Math.min(firstIdx, remaining - 1));
+                }
             }
         });
 
@@ -183,31 +191,8 @@ public class PlayerController implements Serializable, ModelObserver {
             }
         });
 
-        view.addMoveUpListener(e -> {
-            if (model.getSongCount() > 0) {
-                int selected = view.getSelectedIndex();
-                if (selected != -1) {
-                    model.swapSongs(selected, selected - 1);
-                    view.setSelectedIndex(selected - 1);
-                } else {
-                    JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
-                            PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        view.addMoveDownListener(e -> {
-            if (model.getSongCount() > 0) {
-                int selected = view.getSelectedIndex();
-                if (selected != -1) {
-                    model.swapSongs(selected, selected + 1);
-                    view.setSelectedIndex(selected + 1);
-                } else {
-                    JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
-                            PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
+        view.addMoveUpListener(e -> moveSelection(-1));
+        view.addMoveDownListener(e -> moveSelection(+1));
     }
 
     // -------------------------------------------------------------------------
@@ -388,6 +373,40 @@ public class PlayerController implements Serializable, ModelObserver {
             JOptionPane.showMessageDialog(null, PlayerException.ERROR_OPENING_SONG,
                     PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void moveSelection(int direction) {
+        if (model.getSongCount() == 0) return;
+        int[] indices = view.getSelectedIndices();
+        if (indices.length == 0) {
+            JOptionPane.showMessageDialog(null, PlayerException.ERROR_NO_SONG_SELECTED,
+                    PlayerException.ERROR, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Arrays.sort(indices);
+        Set<Integer> selected = new HashSet<>();
+        for (int idx : indices) selected.add(idx);
+
+        int size = model.getSongCount();
+        int[] result = new int[indices.length];
+        int start = direction < 0 ? 0 : indices.length - 1;
+        int end   = direction < 0 ? indices.length : -1;
+        int step  = direction < 0 ? 1 : -1;
+
+        for (int i = start; i != end; i += step) {
+            int idx = indices[i];
+            int target = idx + direction;
+            boolean inBounds = target >= 0 && target < size;
+            if (inBounds && !selected.contains(target)) {
+                model.swapSongs(idx, target);
+                result[i] = target;
+                selected.remove(idx);
+                selected.add(target);
+            } else {
+                result[i] = idx;
+            }
+        }
+        view.setSelectedIndices(result);
     }
 
     private void removeSong(String name) {

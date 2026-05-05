@@ -46,7 +46,7 @@ public class MusicPlayer implements BasicPlayerListener, ModelSubject, Serializa
 
     public static MusicPlayer getInstance() {
         if (instance == null) {
-            BasicPlayer basicPlayer = new BasicPlayer();
+            BasicPlayer basicPlayer = new BufferedBasicPlayer();
             instance = new MusicPlayer(basicPlayer);
         }
         return instance;
