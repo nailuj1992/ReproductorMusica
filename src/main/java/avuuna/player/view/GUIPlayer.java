@@ -5,11 +5,11 @@ import avuuna.player.utils.Strings;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,7 +19,6 @@ import java.util.List;
 public class GUIPlayer extends View {
     private static final long serialVersionUID = 422073346876789713L;
 
-    private JFileChooser fileChooser;
     private JMenu fileMenu;
     private JMenuBar menuBar;
     private JMenuItem openItem;
@@ -210,11 +209,42 @@ public class GUIPlayer extends View {
     }
 
     public File[] showOpenDialog() {
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            return fileChooser.getSelectedFiles();
+        try {
+            String script =
+                "Add-Type -AssemblyName System.Windows.Forms; " +
+                "$d = New-Object System.Windows.Forms.OpenFileDialog; " +
+                "$d.Filter = 'MP3 Files (*.mp3)|*.mp3'; " +
+                "$d.Multiselect = $true; " +
+                "$d.Title = 'Open'; " +
+                "if ($d.ShowDialog() -eq 'OK') { $d.FileNames -join [System.Environment]::NewLine }";
+
+            Process process = new ProcessBuilder("powershell", "-NoProfile", "-STA", "-Command", script)
+                .start();
+
+            String output = new String(process.getInputStream().readAllBytes()).trim();
+            int exitCode = process.waitFor();
+
+            if (exitCode != 0) {
+                return showLegacyOpenDialog();
+            }
+            if (!output.isEmpty()) {
+                return Arrays.stream(output.split("\\r?\\n"))
+                    .map(File::new)
+                    .toArray(File[]::new);
+            }
+            return null; // user cancelled
+        } catch (Exception ignored) {
+            return showLegacyOpenDialog();
         }
-        return null;
+    }
+
+    private File[] showLegacyOpenDialog() {
+        FileDialog dialog = new FileDialog(this, Strings.OPEN_ITEM, FileDialog.LOAD);
+        dialog.setMultipleMode(true);
+        dialog.setFilenameFilter((dir, name) -> name.toLowerCase().endsWith(".mp3"));
+        dialog.setVisible(true);
+        File[] files = dialog.getFiles();
+        return files.length > 0 ? files : null;
     }
 
     // -------------------------------------------------------------------------
@@ -236,12 +266,6 @@ public class GUIPlayer extends View {
     }
 
     private void buildComponents() {
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3");
-        fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(filter);
-        fileChooser.setMultiSelectionEnabled(true);
-        fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
         playerPanel = new JPanel();
         playlistPanel = new JPanel();
